@@ -50,3 +50,7 @@ Route::post('/editSchedule','ScheduleController@Edit');
 Route::post('/viewClassSchedule','ScheduleController@ViewByClass');
 Route::get('/connect','connectionController@isConnect');
 //Route::get();
+
+Route::get('/check',function(){
+
+});
