@@ -1,3 +1,6 @@
+@extends('master')
+
+@section('content')
 <?php
 function get_classes()
 {
@@ -34,15 +37,16 @@ function get_subjects()
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Form</title>
-</head>
-<body>
-<form action="{{url('/addAttendance')}}" method="post">
-    {{csrf_field()}}
-   <label>class id:</label><select name="class_id">
+
+
+
+
+<form rs_id="1380" action="{{url('/showStudent')}}" method="post">
+	{{csrf_field()}}
+  <fieldset rs_id="1381">
+    
+    <div class="form-group" rs_id="1391">
+     <label>class id:</label><select name="class_id">
         <?php echo get_classes(); ?>
     </select>
   <br><br><br>
@@ -53,13 +57,10 @@ function get_subjects()
         <?php echo get_subjects(); ?>
     </select>
   <br><br><br>
-  <label>date:</label><input type="text" name="date"><br><br><br>
-  <label>time:</label><input type="text" name="time"><br><br><br>
-  <!--<label>Student id:</label><input type="text" name="student_id"><br><br><br>
-  <label>Student name:</label><input type="text" name="student_name"><br><br><br>
-  <label>attendance:</label><input type="text" name="flag"><br><br><br>
-  -->
-  <input type="submit" placeholder="attend"><br><br><br>
-</form> 
-</body>
-</html>
+    </fieldset>
+
+      </div>
+    <button type="submit" class="btn btn-primary" rs_id="1436">attend</button>
+  </fieldset>
+</form>
+@endsection

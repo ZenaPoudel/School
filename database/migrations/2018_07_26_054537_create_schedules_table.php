@@ -1,7 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+
 class CreateSchedulesTable extends Migration
 {
     /**
@@ -12,12 +14,15 @@ class CreateSchedulesTable extends Migration
     public function up()
     {
         Schema::create('schedules', function (Blueprint $table) {
-            $table->increments('schedule_id');
-            $table->string('Description');
-            $table->time('time');
+            $table->increments('id');
+            //$table->string('Description');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->integer('sub_id');
+            $table->string('day');
+            $table->integer('class_id');
             $table->integer('section_id');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 

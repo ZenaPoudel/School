@@ -18,6 +18,7 @@
   <label>dob:</label><input type="text" name="dob"><br><br><br>
   <label>age:</label><input type="text" name="age"><br><br><br>
    <label>class_id:</label><input type="text" name="class_id"><br><br><br>
+   <label>section_id:</label><input type="text" name="section_id"><br><br><br>
   <input type="submit" placeholder="add"><br><br><br>
 </form> 
 </body>

@@ -13,13 +13,15 @@ class CreateAttendancesTable extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('attendances', function (Blueprint $table) {
             //$table->increments('id');
+            $table->increments('id');
             $table->integer('class_id');
             $table->integer('section_id');
             $table->integer('student_id');
-            $table->string('student_name');
-            $table->integer('sub_id');
+           // $table->foreign('student_id')->references('id')->on('student');
+            $table->integer('subject_id');
             $table->integer('flag');
             $table->date('date');
             $table->TIME('time');  
@@ -35,5 +37,6 @@ class CreateAttendancesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('attendances');
+
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\student;
+use App\Student;
 
 class studentController extends Controller
 {
@@ -30,6 +30,7 @@ class studentController extends Controller
         $student->dob = $request->post('dob');
         $student->age = $request->post('age');
         $student->class_id = $request->post('class_id');
+        $student->section_id = $request->post('section_id');
         //$attendance->flag = $request->get('flag');
         //$date=date_create($request->get('date'));
         //$format = date_format($date,"Y-m-d");
@@ -66,7 +67,11 @@ class studentController extends Controller
         else{
           echo 'Unsuccess';
         } 
-
     }
 */
+    public function test(Request $request)
+    {
+        $student = Student::find(1);
+        return ($student->attendances);
+    }
 }
