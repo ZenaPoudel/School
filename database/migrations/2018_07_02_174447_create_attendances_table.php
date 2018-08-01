@@ -21,7 +21,7 @@ class CreateAttendancesTable extends Migration
             $table->integer('section_id');
             $table->integer('student_id');
            // $table->foreign('student_id')->references('id')->on('student');
-            $table->integer('subject_id');
+           // $table->integer('subject_id');
             $table->integer('flag');
             $table->date('date');
             $table->TIME('time');  

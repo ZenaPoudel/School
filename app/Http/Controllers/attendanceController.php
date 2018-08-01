@@ -15,7 +15,6 @@ class attendanceController extends Controller
     	$attendance=attendance::all();
         return array('attendance_list'=>$attendance);
     }
-    
     public function selectStudent(Request $request)
     {
        $response=array();      

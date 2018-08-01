@@ -31,7 +31,7 @@ class ScheduleController extends Controller
     }
     public function ViewByClass(Request $request)
     {
-    	//$schedule= Schedule::where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'));
-    	//return($schedule->subjects);
+    	$schedule= Schedule::where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'));
+    	return($schedule->subjects);
     }
 }
