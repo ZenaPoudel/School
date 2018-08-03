@@ -31,6 +31,9 @@ Route::get('/schedule', function () {
 Route::get('/ettikai', function () {
     return view('ettikai');
 });
+Route::get('/toViewSchedule', function () {
+    return view('scheduleView');
+});
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/viewAttendance','attendanceController@View');
@@ -49,4 +52,5 @@ Route::post('/addSchedule','ScheduleController@Add');
 Route::post('/editSchedule','ScheduleController@Edit');
 Route::post('/viewClassSchedule','ScheduleController@ViewByClass');
 Route::get('/connect','connectionController@isConnect');
+
 //Route::get();

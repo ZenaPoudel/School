@@ -18,6 +18,7 @@ class CreateSchedulesTable extends Migration
             //$table->string('Description');
             $table->time('start_time');
             $table->time('end_time');
+            $table->integer('period');
             $table->integer('sub_id');
             $table->string('day');
             $table->integer('class_id');
