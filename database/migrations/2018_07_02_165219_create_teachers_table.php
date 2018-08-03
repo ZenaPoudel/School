@@ -22,6 +22,7 @@ class CreateTeachersTable extends Migration
             //$table->foreign('sub_id')->reference('sub_id')->on('subjects') ;
             $table->rememberToken();
             $table->timestamps();
+            
         });
     }
 

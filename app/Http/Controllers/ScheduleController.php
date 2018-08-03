@@ -37,36 +37,31 @@ class ScheduleController extends Controller
     	 $response=array();
     	  $days=array();
     	 $schedules=array();
-    	
     	 $days=Schedule::select('day')->where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'))->distinct('day')->get();
-    	
     	 $response['response']=$days;
     	 //dd($response);
     	 foreach ($days as $d) {
     	 	$day=$d['day'];
     	 	$schedules=Schedule::where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'))->where(['day'=>$day])->get();
          $d['schedule']=$schedules;
-
     	 foreach ($schedules as $schedule) {
     	 	$subject_id = $schedule['sub_id'];
-    	 	$sub= Subject::select('id','class_id','section_id','sub_name','teacher_id')->where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'))->where(['id'=>$subject_id])->get();
+    	 	$teacher_id = $schedule['teacher_id'];
+    	 	$sub= Subject::where(['id'=>$subject_id])->get();
     	 	foreach ($sub as $s) {
     	 		$subject_name=$s['sub_name'];
     	 		$schedule['subject']=$subject_name;
     	 		//dd($schedules);
-    	 		$teacher_id=$s['teacher_id'];
+    	 		//$teacher_id=$s['teacher_id'];
     	 		//dd($teacher_id);
-    	 $teacher= Teacher::select('id','name')->where(['id'=>$teacher_id])->get();
+    	 		$teacher= Teacher::select('id','name')->where(['id'=>$teacher_id])->get();
     	 foreach ($teacher as $t) {
     	 	$teacher_name=$t['name'];
     	 	$schedule['teacher']=$teacher_name;
-    	 	//dd($day);
     	 	}
     	    }
-    	 	
     	 }
     	}
-    	
     	 return $response;
     }
 }

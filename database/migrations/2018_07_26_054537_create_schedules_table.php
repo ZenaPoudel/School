@@ -19,10 +19,11 @@ class CreateSchedulesTable extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->integer('period');
-            $table->integer('sub_id');
+            $table->string('sub_id');
             $table->string('day');
             $table->integer('class_id');
             $table->integer('section_id');
+            $table->integer('teacher_id');
             //$table->timestamps();
         });
     }

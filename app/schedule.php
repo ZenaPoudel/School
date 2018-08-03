@@ -8,7 +8,7 @@ class Schedule extends Model
 {
     public $timestamps=false;
       protected $fillable = [
-        'id','class_id','section_id','start_time','end_time','day','sub_id','period'
+        'id','class_id','section_id','start_time','end_time','day','sub_id','teacher_id','period'
             ];
    /* public function subjects()
     {

@@ -12,13 +12,13 @@ class CreateSubjectsTable extends Migration
     public function up()
     {
         Schema::create('subjects', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('class_id');
-            $table->integer('section_id');
+            $table->string('id');
+            //$table->integer('class_id');
+            //$table->integer('section_id');
             $table->String('sub_name');
-            $table->integer('teacher_id');
+            //$table->integer('teacher_id');
             //$table->time('time');
-            $table->timestamps();
+            //$table->timestamps();
         });
     }
 
