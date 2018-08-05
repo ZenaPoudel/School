@@ -107,6 +107,26 @@ class attendanceController extends Controller
         auth()->student()->notify(new replyattendance)
         */
     }
+    public function attendNum(Request $request){
+
+            $response=array();
+            $class_id=$request->post('class_id');
+            $user_id=$request->post('user_id');
+            $section_id=$request->post('section_id');
+            //we have to check the session match 
+
+            $data=Attendance::where('class_id',$class_id)->where('section_id',$section_id)->where('student_id',$user_id)->where('flag',1)->get();
+
+            $total=Attendance::where('class_id',$class_id)->where('section_id',$section_id)->distinct('date')->get();
+            
+            $response['present']=$data->count();
+            $response['total']=$total->count();
+
+
+            return $response;
+
+
+    }
     /* public function edit(Request $request)
     {
     	

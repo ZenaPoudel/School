@@ -43,6 +43,7 @@ Route::get('/viewStudent','studentController@View');
 Route::post('/addStudent','studentController@Add');
 Route::get('/editStudent','studentController@Edit');
 Route::post('/showStudent','attendanceController@selectStudent');
+Route::get('/events','eventController@event');
 //Route::get('/showStudent/{student_id}','attendanceController@selectStudent');
 //Route::get('/remarks','attendanceController@remarks');
 //test
@@ -52,5 +53,7 @@ Route::post('/addSchedule','ScheduleController@Add');
 Route::post('/editSchedule','ScheduleController@Edit');
 Route::post('/viewClassSchedule','ScheduleController@ViewByClass');
 Route::get('/connect','connectionController@isConnect');
+Route::post('/loginUser','LoginController@login');
+Route::post('/provideAttendance','attendanceController@attendNum');
 
 //Route::get();
