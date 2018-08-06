@@ -40,6 +40,7 @@ class ScheduleController extends Controller
     	 $schedules=array();
     	 $days=Schedule::select('day')->where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'))->distinct('day')->get();
     	 $response['response']=$days;
+
     	 //dd($response);
     	 foreach ($days as $d) {
     	 	$day=$d['day'];

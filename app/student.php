@@ -9,7 +9,7 @@ class Student extends Model
 	//use Notifiable;
      public $timestamps=false;
       protected $fillable = [
-        'id','student_name','guardian_name','address','mobile','email','dob','age','class_id','section_id'
+        'id','student_name','roll_num','guardian_name','address','mobile','email','dob','age','class_id','section_id'
     ];
         protected $hidden = [
         'password', 'remember_token',

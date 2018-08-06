@@ -45,13 +45,14 @@ class LoginController extends Controller
 					$response['user_id']=$data->id;
 					$response['class_id']=$data->class_id;
 					$response['section_id']=$data->section_id;
+					$response['code']=$code;
 				}
 
 	    	}
 
 		}
 		else if($code=='t'){
-			$data=teacher::where('username',$username)->where('password',$password)->first(['id']);
+			$data=teacher::where('name',$username)->where('password',$password)->first(['id']);
 
 			if($data!=null){
 				$count=$data->count();
@@ -64,6 +65,8 @@ class LoginController extends Controller
 
 				$response['flag']=true;
 				$response['user_id']=$data->id;
+				$response['code']=$code;
+
 			}
 		}
 			
@@ -82,6 +85,7 @@ class LoginController extends Controller
 
 				$response['flag']=true;
 				$response['user_id']=$data->id;
+				$response['code']=$code;
 			  }
 
 			}

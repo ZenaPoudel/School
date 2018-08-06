@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMarksTable extends Migration
+class CreateResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateMarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('marks', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
+            //$table->integer('class_id');
+            //$table->integer('section_id');
+            $table->integer('student_id');
             $table->string('sub_id');
-            $table->integer('total_marks');
-           // $table->timestamps();
+            // $table->integer('Total_marks');
+            $table->integer('marks');
+            $table->integer('terminal');
         });
     }
 
@@ -28,6 +32,6 @@ class CreateMarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('marks');
+        Schema::dropIfExists('results');
     }
 }
