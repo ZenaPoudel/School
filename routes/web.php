@@ -34,6 +34,13 @@ Route::get('/ettikai', function () {
 Route::get('/toViewSchedule', function () {
     return view('scheduleView');
 });
+
+Route::get('/result', function () {
+    return view('Result');
+});
+Route::get('/toViewResult', function () {
+    return view('resultView');
+});
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/viewAttendance','attendanceController@View');
@@ -51,6 +58,7 @@ Route::get('/viewSchedule','ScheduleController@View');
 Route::post('/addSchedule','ScheduleController@Add');
 Route::post('/editSchedule','ScheduleController@Edit');
 Route::post('/viewClassSchedule','ScheduleController@ViewByClass');
+Route::post('/addResult','ResultController@add');
+Route::post('/viewClassResult','ResultController@ViewByClass');
 Route::get('/connect','connectionController@isConnect');
-
 //Route::get();

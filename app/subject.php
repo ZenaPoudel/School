@@ -9,7 +9,7 @@ class subject extends Model
 	 
 	public $timestamps=false;
       protected $fillable = [
-        'id','sub_name'
+        'id','sub_name','class_id'
     ];
    /*  public function schedules()
     {

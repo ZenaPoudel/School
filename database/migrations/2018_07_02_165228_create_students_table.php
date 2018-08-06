@@ -17,6 +17,7 @@ class CreateStudentsTable extends Migration
             $table->increments('id');
             //->unique();
             $table->string('student_name');
+            $table->integer('roll_num');
             $table->string('guardian_name');
             $table->string('address');
             $table->integer('mobile');  

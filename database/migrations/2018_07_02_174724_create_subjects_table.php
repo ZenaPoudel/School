@@ -13,12 +13,13 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->string('id');
-            //$table->integer('class_id');
-            //$table->integer('section_id');
             $table->String('sub_name');
             //$table->integer('teacher_id');
             //$table->time('time');
             //$table->timestamps();
+            $table->integer('class_id');//jasai subjectid unique hunxa
+            //$table->integer('section_id');//Harek section ma eutai ta padxa
+
         });
     }
 
@@ -32,3 +33,4 @@ class CreateSubjectsTable extends Migration
         Schema::dropIfExists('subjects');
     }
 }
+
