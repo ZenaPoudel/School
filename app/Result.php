@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Result extends Model
 {
     public $timestamps=false;
-      protected $fillable = [
-        'class_id','section_id','student_id','sub_id','marks','terminal'
-    ];
+    //   protected $fillable = [
+    //     'id','student_id','sub_id','marks','terminal'
+    // ];
 }

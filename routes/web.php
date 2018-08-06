@@ -62,10 +62,7 @@ Route::post('/viewClassSchedule','ScheduleController@ViewByClass');
 Route::post('/addResult','ResultController@add');
 Route::post('/viewClassResult','ResultController@ViewByClass');
 Route::get('/connect','connectionController@isConnect');
-<<<<<<< HEAD
 Route::post('/loginUser','LoginController@login');
 Route::post('/provideAttendance','attendanceController@attendNum');
 
-=======
->>>>>>> 580b26cd98ae5cb928bef505c5bbc681d779862f
 //Route::get();
