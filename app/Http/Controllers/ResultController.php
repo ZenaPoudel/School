@@ -21,11 +21,12 @@ class ResultController extends Controller
         $response=array();
         $response['insert']=false;
         $result = new Result;
-        $result->class_id = $request->post('class_id');
-        $result->section_id = $request->post('section_id');
+        //$result->class_id = $request->post('class_id');
+        //$result->section_id = $request->post('section_id');
         $result->student_id=$request->post('student_id');
         $result->sub_id = $request->post('sub_id');
         $result->marks = $request->post('marks');
+        $result->status = $request->post('status');
         $result->terminal = $request->post('terminal');
         if($result->save()){
         $response['insert']=true;
@@ -53,20 +54,41 @@ class ResultController extends Controller
         $response=$Student;
         foreach ($Student as $std) {
         $ObtainMarks= 0;
+        
         $id=$std['id'];
         $Result1=Result::where('student_id',$id)->where('terminal', $request->post('terminal'))->get();
 
         foreach ($Result1 as $R1) {
             $mark= $R1['marks'];
+            $status= $R1['status'];
             $ObtainMarks= $ObtainMarks + $mark;
-            //dd($ObtainMarks);
+            if($status == 0)
+            {
+                $std['Present']=false;
+                break;
+            }
+            else{
+                $std['Present']=true;
+            }
+
+             $Percentage= ($ObtainMarks/$GrandTotal)*100;
         }
-        $Percentage= ($ObtainMarks/$GrandTotal)*100;
-                $std['Percentage']=$Percentage;
+        $std['Percentage']=$Percentage;
        // dd($ObtainMarks);
     //  $response = array_prepend($response, $std);
-}
-
+        }
       return $response;
-    	     }
+    }
+     public function marks(Request $request)
+    {
+        $marks=Result::select('marks','status','sub_id')->where('student_id', $request->post('student_id'))->where('terminal', $request->post('terminal'))->get();
+        $response = $marks;
+        //dd($response);
+        foreach ($marks as $mark) {
+            $sub_id = $mark['sub_id'];
+            $Subject= Subject::where(['id'=>$sub_id])->first(['sub_name']);
+            $mark['subject']=$Subject->sub_name;
+        }
+        return $response;
+    }
 }

@@ -15,14 +15,17 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->increments('id');
-            //$table->integer('class_id');
-            //$table->integer('section_id');
-            $table->integer('student_id');
+                 $table->integer('student_id');
             $table->string('sub_id');
-            // $table->integer('Total_marks');
-            $table->integer('marks');
+                $table->integer('marks');
+            $table->integer('status');
             $table->integer('terminal');
         });
+            //$table->integer('class_id');
+            //$table->integer('section_id');
+       
+            // $table->integer('Total_marks');
+        
     }
 
     /**
