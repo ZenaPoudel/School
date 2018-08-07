@@ -8,7 +8,7 @@ class teacher extends Model
 {
      public $timestamps=false;
       protected $fillable = [
-        'id','name','email','sub_id'
+        'id','name','email'
     ];
       protected $hidden = [
         'password'

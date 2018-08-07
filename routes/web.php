@@ -41,6 +41,9 @@ Route::get('/result', function () {
 Route::get('/toViewResult', function () {
     return view('resultView');
 });
+Route::get('/toViewMarks', function () {
+    return view('ViewMarks');
+});
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/viewAttendance','attendanceController@View');
@@ -61,8 +64,14 @@ Route::post('/editSchedule','ScheduleController@Edit');
 Route::post('/viewClassSchedule','ScheduleController@ViewByClass');
 Route::post('/addResult','ResultController@add');
 Route::post('/viewClassResult','ResultController@ViewByClass');
+Route::post('/viewStudentMarks','ResultController@marks');
 Route::get('/connect','connectionController@isConnect');
+<<<<<<< HEAD
 Route::post('/loginUser','LoginController@login');
 Route::post('/provideAttendance','attendanceController@attendNum');
 
 //Route::get();
+=======
+
+//Route::get(); 
+>>>>>>> fec4e04dd61d37d2550c6f4599b4f4e8ed57e968
