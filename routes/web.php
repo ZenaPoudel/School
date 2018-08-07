@@ -66,12 +66,5 @@ Route::post('/addResult','ResultController@add');
 Route::post('/viewClassResult','ResultController@ViewByClass');
 Route::post('/viewStudentMarks','ResultController@marks');
 Route::get('/connect','connectionController@isConnect');
-<<<<<<< HEAD
 Route::post('/loginUser','LoginController@login');
 Route::post('/provideAttendance','attendanceController@attendNum');
-
-//Route::get();
-=======
-
-//Route::get(); 
->>>>>>> fec4e04dd61d37d2550c6f4599b4f4e8ed57e968
