@@ -57,7 +57,6 @@ class ResultController extends Controller
         
         $id=$std['id'];
         $Result1=Result::where('student_id',$id)->where('terminal', $request->post('terminal'))->get();
-
         foreach ($Result1 as $R1) {
             $mark= $R1['marks'];
             $status= $R1['status'];
