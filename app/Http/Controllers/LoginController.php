@@ -17,6 +17,7 @@ class LoginController extends Controller
 		$response=array();
 
 		$response['flag']=false;
+		$response['duplicate']=false;
 		$username=$request->post('user');
 		$password=$request->post('pass');
 
@@ -26,11 +27,11 @@ class LoginController extends Controller
 		if($code=='s'){
 			//if code is of student
 			
-			$data=student::where('student_name',$username)->where('password',$password)->first(['id','remember_token','class_id','section_id']);
+			$data=student::where('student_name',$username)->where('password',$password)->first(['id','remember_token','class_id','section_id','name']);
 			//selecting the specific id of the student
 
 			if($data!=null){
-
+				//if the data is not null returns value greater than 0
 				$count=$data->count();
 
 				if($count>0){
@@ -40,19 +41,26 @@ class LoginController extends Controller
 
 						$update=DB::table('students')->where('id',$data->id)->update(['remember_token'=>$key]);	
 					}
-						/* enabling the session */
+					/* if the token is not null and key is not 
+					matched during login then it is a duplicate user */
+					if($data->remember_token!=null && $key!=$data->remember_token){
+						$response['duplicate']=true;
+					}
+
+					/* enabling the session */
 					$response['flag']=true;
 					$response['user_id']=$data->id;
 					$response['class_id']=$data->class_id;
 					$response['section_id']=$data->section_id;
 					$response['code']=$code;
+					$response['name']=$data->name;
 				}
 
 	    	}
 
 		}
 		else if($code=='t'){
-			$data=teacher::where('name',$username)->where('password',$password)->first(['id']);
+			$data=teacher::where('name',$username)->where('password',$password)->first(['id','remember_token','name','email']);
 
 			if($data!=null){
 				$count=$data->count();
@@ -61,11 +69,16 @@ class LoginController extends Controller
 
 					if($data->remember_token ==null){
 						$update=DB::table('teachers')->where('id',$data->id)->update(['remember_token'=>$key]);
-				 }
+				 	}
+				   if($data->remember_token!=null && $key!=$data->remember_token){
+						$response['duplicate']=true;
+					}
 
 				$response['flag']=true;
 				$response['user_id']=$data->id;
 				$response['code']=$code;
+				$response['email']=$data->email;
+				$response['name']=$data->name;
 
 			}
 		}
@@ -82,6 +95,9 @@ class LoginController extends Controller
 					$update=DB::table('admin')->where('id',$data->id)->update(['remember_token'=>$key]);
 					
 				}
+				if($data->remember_token!=null && $key!=$data->remember_token){
+						$response['duplicate']=true;
+					}
 
 				$response['flag']=true;
 				$response['user_id']=$data->id;
@@ -94,6 +110,34 @@ class LoginController extends Controller
 
 		return $response;
 
+
+	}
+
+	public function delete(Request $request){
+
+		$response=array();
+
+		$response['delete']=false;
+
+		$user_id=$request->post('id');
+		$code=$request->post('code');
+
+		if($code=='s'){
+			$delete=DB::table('students')->where('id',$user_id)->update(['remember_token'=>null]);
+		 
+			if($delete>0) {
+				$response['delete']=true;
+			}
+
+		}
+		else if($code=='t'){
+			$delete=DB::table('teachers')->where('id',$user_id)->update(['remember_token'=>null]);
+		 
+			if($delete>0) {
+				$response['delete']=true;
+			}
+		}
+		return $response;
 
 	}
 }
