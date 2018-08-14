@@ -10,6 +10,12 @@ use Carbon\Carbon;
 
 class attendanceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+
     public function view()
     {
     	$attendance=attendance::all();
@@ -25,7 +31,9 @@ class attendanceController extends Controller
         $id=$s['id'];
         //dd($s->id);
         $attendance=Attendance::select('student_id','flag','date')->where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'))->distinct('date')->get();
+        //dd($attendance);
     $present=Attendance::select('student_id','flag','date')->where(['flag'=>1])->where(['student_id'=>$id])->distinct('date')->get();
+    //dd('$')
         $total=$attendance->count();
         $s['total']=$total;
         $present=$present->count();

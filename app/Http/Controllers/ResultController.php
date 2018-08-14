@@ -54,7 +54,6 @@ class ResultController extends Controller
         $response=$Student;
         foreach ($Student as $std) {
         $ObtainMarks= 0;
-        
         $id=$std['id'];
         $Result1=Result::where('student_id',$id)->where('terminal', $request->post('terminal'))->get();
         foreach ($Result1 as $R1) {
@@ -69,7 +68,6 @@ class ResultController extends Controller
             else{
                 $std['Present']=true;
             }
-
              $Percentage= ($ObtainMarks/$GrandTotal)*100;
         }
         $std['Percentage']=$Percentage;

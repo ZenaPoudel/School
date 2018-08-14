@@ -17,7 +17,6 @@ function get_sections()
 {
     $sections=array(1=>1,2=>2,3=>3);
     $optionsec='';
-   // while (list($k,$v)=each($classes)) {
     foreach ($sections as $sec => $valuesec) {
     
         $optionsec.='<option value"'.$valuesec.'">'.$sec.'</option>';
@@ -28,18 +27,16 @@ function get_subjects()
 {
     $subjects=array(1=>1,2=>2,3=>3);
     $optionsub='';
-   // while (list($k,$v)=each($classes)) {
     foreach ($subjects as $sub => $valuesub) {
     
         $optionsub.='<option value"'.$valuesub.'">'.$sub.'</option>';
+    
     }
+    
     return $optionsub;
+
 }
 ?>
-
-
-
-
 
 <form rs_id="1380" action="{{url('/showStudent')}}" method="post">
 	{{csrf_field()}}
@@ -52,15 +49,12 @@ function get_subjects()
   <br><br><br>
   <label>section id:</label><select name="section_id">
         <?php echo get_sections(); ?>
-    </select><br><br><br>
-    <label>subject id:</label><select name="sub_id">
-        <?php echo get_subjects(); ?>
-    </select>
+ 
   <br><br><br>
     </fieldset>
 
       </div>
-    <button type="submit" class="btn btn-primary" rs_id="1436">attend</button>
+    <button type="submit" class="btn btn-primary" name="add" placeholder="Add" rs_id="1436"> add</button>
   </fieldset>
 </form>
 @endsection

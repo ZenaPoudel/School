@@ -23,6 +23,7 @@ class CreateStudentsTable extends Migration
             $table->integer('mobile');  
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('code');
             $table->Date('dob');
             $table->integer('age');
             //$table->integer('created_at'); 

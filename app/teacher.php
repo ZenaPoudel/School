@@ -1,14 +1,17 @@
 <?php
 
 namespace App;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Database\Eloquent\Model;
-
-class teacher extends Model
+class teacher extends Authenticatable
 {
+
+  use Notifiable;
+  protected $guard= ['teacher','teacher_api'];
      public $timestamps=false;
       protected $fillable = [
-        'id','name','email'
+        'id','name','email','code', 'post'
     ];
       protected $hidden = [
         'password'

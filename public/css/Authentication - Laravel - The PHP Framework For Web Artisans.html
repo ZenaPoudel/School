@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://laravel.com/docs/5.6/authentication -->
+<html rs_id="3325"><head rs_id="3326"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title rs_id="3328">Authentication - Laravel - The PHP Framework For Web Artisans</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" rs_id="3329">
+    <meta name="author" content="Taylor Otwell" rs_id="3330">
+    <meta name="description" content="Laravel - The PHP framework for web artisans." rs_id="3331">
+    <meta name="keywords" content="laravel, php, framework, web, artisans, taylor otwell" rs_id="3332">
+    <meta name="viewport" content="width=device-width, initial-scale=1" rs_id="3333">
+            <link rel="canonical" href="https://laravel.com/docs/5.6/authentication" rs_id="3334">
+        <link href="./Authentication - Laravel - The PHP Framework For Web Artisans_files/css" rel="stylesheet" type="text/css" rs_id="3335">
+    <link rel="stylesheet" href="./Authentication - Laravel - The PHP Framework For Web Artisans_files/laravel-fb6d5c57db.css" rs_id="3336">
+    <link rel="stylesheet" href="./Authentication - Laravel - The PHP Framework For Web Artisans_files/flexboxgrid.min.css" rs_id="3337">
+    <link rel="stylesheet" type="text/css" href="./Authentication - Laravel - The PHP Framework For Web Artisans_files/fonts.css" rs_id="3338">
+    <link rel="apple-touch-icon" href="https://laravel.com/favicon.png" rs_id="3339">
+    <script src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/ga.js.download" rs_id="3340"></script><script src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/vue.min.js.download" rs_id="3341"></script>
+<script id="_carbonads_projs" type="text/javascript" src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/CKYILK3E.json" rs_id="3342"></script></head>
+<body class="docs language-php scotchified" rs_id="3343"><div class="scotch-panel-wrapper" rs_id="3344" style="position: relative; overflow: hidden; width: 100%;"><div class="scotch-panel-canvas" rs_id="3345" style="position: relative; height: 100%; width: 100%; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden; transition: all 300ms ease;">
+    <div class="laracon-banner" rs_id="3346">
+        <!-- <img src="/assets/svg/laracon-logo.svg" alt=""> -->
+        Join Laracon EU in Amsterdam on August 29th - 31st. Tickets are now available!
+        <a href="https://laracon.eu/2018" rs_id="3347">Get your ticket today!</a>
+
+<!--         Spark 6.0, the official SaaS starter-kit built on Laravel, is now available!
+        <a href="https://spark.laravel.com">Get your copy today!</a> -->
+    </div>
+    <span class="overlay" rs_id="3348"></span>
+
+    <nav class="main" rs_id="3349">
+        <a href="https://laravel.com/" class="brand nav-block" rs_id="3350">
+            <svg xmlns="http://www.w3.org/2000/svg" width="84.1" height="57.6" viewBox="0 0 84.1 57.6" rs_id="3351"><path fill="#FB503B" d="M83.8 26.9c-.6-.6-8.3-10.3-9.6-11.9-1.4-1.6-2-1.3-2.9-1.2s-10.6 1.8-11.7 1.9c-1.1.2-1.8.6-1.1 1.6.6.9 7 9.9 8.4 12l-25.5 6.1L21.2 1.5c-.8-1.2-1-1.6-2.8-1.5C16.6.1 2.5 1.3 1.5 1.3c-1 .1-2.1.5-1.1 2.9S17.4 41 17.8 42c.4 1 1.6 2.6 4.3 2 2.8-.7 12.4-3.2 17.7-4.6 2.8 5 8.4 15.2 9.5 16.7 1.4 2 2.4 1.6 4.5 1 1.7-.5 26.2-9.3 27.3-9.8 1.1-.5 1.8-.8 1-1.9-.6-.8-7-9.5-10.4-14 2.3-.6 10.6-2.8 11.5-3.1 1-.3 1.2-.8.6-1.4zm-46.3 9.5c-.3.1-14.6 3.5-15.3 3.7-.8.2-.8.1-.8-.2-.2-.3-17-35.1-17.3-35.5-.2-.4-.2-.8 0-.8S17.6 2.4 18 2.4c.5 0 .4.1.6.4 0 0 18.7 32.3 19 32.8.4.5.2.7-.1.8zm40.2 7.5c.2.4.5.6-.3.8-.7.3-24.1 8.2-24.6 8.4-.5.2-.8.3-1.4-.6s-8.2-14-8.2-14L68.1 32c.6-.2.8-.3 1.2.3.4.7 8.2 11.3 8.4 11.6zm1.6-17.6c-.6.1-9.7 2.4-9.7 2.4l-7.5-10.2c-.2-.3-.4-.6.1-.7.5-.1 9-1.6 9.4-1.7.4-.1.7-.2 1.2.5.5.6 6.9 8.8 7.2 9.1.3.3-.1.5-.7.6z" rs_id="3352"></path></svg>
+            <span rs_id="3353">Laravel</span>
+        </a>
+
+        <div class="search nav-block" rs_id="3354">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" rs_id="3355"><path fill="#A1A1A1" d="M5.8 11.7c-1.6 0-3-.6-4.1-1.7S0 7.4 0 5.8s.6-3 1.7-4.1C2.8.6 4.3 0 5.8 0s3 .6 4.1 1.7c2.3 2.3 2.3 6 0 8.3-1 1.1-2.5 1.7-4.1 1.7zM5.8 1c-1.3 0-2.5.5-3.4 1.4C1.5 3.3 1 4.5 1 5.8s.5 2.5 1.4 3.4c.9.9 2.1 1.4 3.4 1.4s2.5-.5 3.4-1.4c1.9-1.9 1.9-5 0-6.9C8.4 1.5 7.1 1 5.8 1z" rs_id="3356"></path><path fill="#A1A1A1" d="M15.5 16c-.1 0-.3 0-.3-.1L9.3 10c-.2-.2-.2-.5 0-.7s.5-.2.7 0l5.9 5.9c.2.2.2.5 0 .7-.1.1-.3.1-.4.1z" rs_id="3357"></path></svg>
+            <span class="twitter-typeahead" style="position: relative; display: inline-block; direction: ltr;" rs_id="3358"><input placeholder="search" type="text" id="search-input" rs_id="3359" class="tt-input" autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" rs_id="3360" style="position: absolute; visibility: hidden; white-space: pre; font-family: &quot;Whitney SSm A&quot;, &quot;Whitney SSm B&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><span class="tt-dropdown-menu" rs_id="3361" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none; right: auto;"><div class="tt-dataset-0" rs_id="3362"></div></span></span>
+        </div>
+
+        <ul class="main-nav" rs_id="3363">
+            <li class="nav-docs" rs_id="3364"><a href="https://laravel.com/docs" rs_id="3365">Documentation</a></li>
+<li class="nav-laracasts" rs_id="3366"><a href="https://laracasts.com/" rs_id="3367">Laracasts</a></li>
+<li class="nav-laravel-news" rs_id="3368"><a href="https://laravel-news.com/" rs_id="3369">News</a></li>
+<li class="nav-partners" rs_id="3370"><a href="https://laravel.com/partners" rs_id="3371">Partners</a></li>
+<li class="nav-forge" rs_id="3372"><a href="https://forge.laravel.com/" rs_id="3373">Forge</a></li>
+
+<li class="dropdown community-dropdown" rs_id="3374">
+	<a href="https://laravel.com/docs/5.6/authentication#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" rs_id="3375">Ecosystem <span class="caret" rs_id="3376"></span></a>
+	<ul class="dropdown-menu" role="menu" rs_id="3377">
+
+		<li rs_id="3378"><a href="https://envoyer.io/" rs_id="3379">Envoyer</a></li>
+		<li rs_id="3380"><a href="https://horizon.laravel.com/" rs_id="3381">Horizon</a></li>
+		<li rs_id="3382"><a href="https://lumen.laravel.com/" rs_id="3383">Lumen</a></li>
+		<li rs_id="3384"><a href="https://spark.laravel.com/" rs_id="3385">Spark</a></li>
+
+		<li class="divider" rs_id="3386"></li>
+
+		<li rs_id="3387"><a href="https://laracon.com.au/" rs_id="3388">Laracon AU</a></li>
+		<li rs_id="3389"><a href="https://laracon.eu/" rs_id="3390">Laracon EU</a></li>
+		<li rs_id="3391"><a href="http://laracon.us/" rs_id="3392">Laracon US</a></li>
+		<li rs_id="3393"><a href="https://laracon.net/" rs_id="3394">Laracon Online</a></li>
+
+		<li class="divider" rs_id="3395"></li>
+
+		<li rs_id="3396"><a href="https://laravel.com/certification" rs_id="3397">Certification</a></li>
+		<li rs_id="3398"><a href="https://laracasts.com/discuss" rs_id="3399">Forums</a></li>
+		<li rs_id="3400"><a href="https://github.com/laravel/laravel" rs_id="3401">GitHub</a></li>
+		<li rs_id="3402"><a href="https://larajobs.com/?partner=5#/" rs_id="3403">Jobs</a></li>
+		<li rs_id="3404"><a href="http://www.laravelpodcast.com/" rs_id="3405">Podcast</a></li>
+		<li rs_id="3406"><a href="https://larachat.co/" rs_id="3407">Slack</a></li>
+		<li rs_id="3408"><a href="https://twitter.com/laravelphp" rs_id="3409">Twitter</a></li>
+	</ul>
+</li>
+        </ul>
+
+                    <div class="switcher" rs_id="3410">
+	<div class="dropdown" rs_id="3411">
+		<button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" rs_id="3412">
+			5.6
+			<span class="caret" rs_id="3413"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" rs_id="3414">
+							<li role="presentation" rs_id="3415">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/master/authentication" rs_id="3416">Master</a>
+				</li>
+							<li role="presentation" rs_id="3417">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/5.6/authentication" rs_id="3418">5.6</a>
+				</li>
+							<li role="presentation" rs_id="3419">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/5.5/authentication" rs_id="3420">5.5</a>
+				</li>
+							<li role="presentation" rs_id="3421">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/5.4/authentication" rs_id="3422">5.4</a>
+				</li>
+							<li role="presentation" rs_id="3423">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/5.3/authentication" rs_id="3424">5.3</a>
+				</li>
+							<li role="presentation" rs_id="3425">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/5.2/authentication" rs_id="3426">5.2</a>
+				</li>
+							<li role="presentation" rs_id="3427">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/5.1/authentication" rs_id="3428">5.1</a>
+				</li>
+							<li role="presentation" rs_id="3429">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/5.0/authentication" rs_id="3430">5.0</a>
+				</li>
+							<li role="presentation" rs_id="3431">
+					<a role="menuitem" tabindex="-1" href="https://laravel.com/docs/4.2/authentication" rs_id="3432">4.2</a>
+				</li>
+					</ul>
+	</div>
+</div>
+        
+        <div class="responsive-sidebar-nav" rs_id="3433">
+            <a href="https://laravel.com/docs/5.6/authentication#" class="toggle-slide menu-link btn" rs_id="3434">☰</a>
+        </div>
+    </nav>
+
+    <nav id="slide-menu" class="slide-menu scotch-panel-left" role="navigation" rs_id="3435" style="top: 0px; left: -70%; width: 70%; height: 100%; position: absolute; z-index: 888888; overflow: hidden; backface-visibility: hidden; display: block;">
+
+	<div class="brand" rs_id="3436">
+		<a href="https://laravel.com/" rs_id="3437">
+			<img src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/laravel-logo-white.png" height="50" rs_id="3438">
+		</a>
+	</div>
+
+	<ul class="slide-main-nav" rs_id="3439">
+		<li rs_id="3440"><a href="https://laravel.com/" rs_id="3441">Home</a></li>
+		<li class="nav-docs" rs_id="3442"><a href="https://laravel.com/docs" rs_id="3443">Documentation</a></li>
+<li class="nav-laracasts" rs_id="3444"><a href="https://laracasts.com/" rs_id="3445">Laracasts</a></li>
+<li class="nav-laravel-news" rs_id="3446"><a href="https://laravel-news.com/" rs_id="3447">News</a></li>
+<li class="nav-partners" rs_id="3448"><a href="https://laravel.com/partners" rs_id="3449">Partners</a></li>
+<li class="nav-forge" rs_id="3450"><a href="https://forge.laravel.com/" rs_id="3451">Forge</a></li>
+
+<li class="dropdown community-dropdown" rs_id="3452">
+	<a href="https://laravel.com/docs/5.6/authentication#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" rs_id="3453">Ecosystem <span class="caret" rs_id="3454"></span></a>
+	<ul class="dropdown-menu" role="menu" rs_id="3455">
+
+		<li rs_id="3456"><a href="https://envoyer.io/" rs_id="3457">Envoyer</a></li>
+		<li rs_id="3458"><a href="https://horizon.laravel.com/" rs_id="3459">Horizon</a></li>
+		<li rs_id="3460"><a href="https://lumen.laravel.com/" rs_id="3461">Lumen</a></li>
+		<li rs_id="3462"><a href="https://spark.laravel.com/" rs_id="3463">Spark</a></li>
+
+		<li class="divider" rs_id="3464"></li>
+
+		<li rs_id="3465"><a href="https://laracon.com.au/" rs_id="3466">Laracon AU</a></li>
+		<li rs_id="3467"><a href="https://laracon.eu/" rs_id="3468">Laracon EU</a></li>
+		<li rs_id="3469"><a href="http://laracon.us/" rs_id="3470">Laracon US</a></li>
+		<li rs_id="3471"><a href="https://laracon.net/" rs_id="3472">Laracon Online</a></li>
+
+		<li class="divider" rs_id="3473"></li>
+
+		<li rs_id="3474"><a href="https://laravel.com/certification" rs_id="3475">Certification</a></li>
+		<li rs_id="3476"><a href="https://laracasts.com/discuss" rs_id="3477">Forums</a></li>
+		<li rs_id="3478"><a href="https://github.com/laravel/laravel" rs_id="3479">GitHub</a></li>
+		<li rs_id="3480"><a href="https://larajobs.com/?partner=5#/" rs_id="3481">Jobs</a></li>
+		<li rs_id="3482"><a href="http://www.laravelpodcast.com/" rs_id="3483">Podcast</a></li>
+		<li rs_id="3484"><a href="https://larachat.co/" rs_id="3485">Slack</a></li>
+		<li rs_id="3486"><a href="https://twitter.com/laravelphp" rs_id="3487">Twitter</a></li>
+	</ul>
+</li>
+	</ul>
+
+	<div class="slide-docs-nav" rs_id="3488">
+		<h2 rs_id="3489">Documentation</h2>
+		<ul rs_id="3490">
+<li rs_id="3491">
+<h2 rs_id="3492">Prologue</h2>
+<ul rs_id="3493">
+<li rs_id="3494"><a href="https://laravel.com/docs/5.6/releases" rs_id="3495">Release Notes</a></li>
+<li rs_id="3496"><a href="https://laravel.com/docs/5.6/upgrade" rs_id="3497">Upgrade Guide</a></li>
+<li rs_id="3498"><a href="https://laravel.com/docs/5.6/contributions" rs_id="3499">Contribution Guide</a></li>
+<li rs_id="3500"><a href="https://laravel.com/api/5.6" rs_id="3501">API Documentation</a></li>
+</ul>
+</li>
+<li rs_id="3502">
+<h2 rs_id="3503">Getting Started</h2>
+<ul rs_id="3504">
+<li rs_id="3505"><a href="https://laravel.com/docs/5.6/installation" rs_id="3506">Installation</a></li>
+<li rs_id="3507"><a href="https://laravel.com/docs/5.6/configuration" rs_id="3508">Configuration</a></li>
+<li rs_id="3509"><a href="https://laravel.com/docs/5.6/structure" rs_id="3510">Directory Structure</a></li>
+<li rs_id="3511"><a href="https://laravel.com/docs/5.6/homestead" rs_id="3512">Homestead</a></li>
+<li rs_id="3513"><a href="https://laravel.com/docs/5.6/valet" rs_id="3514">Valet</a></li>
+<li rs_id="3515"><a href="https://laravel.com/docs/5.6/deployment" rs_id="3516">Deployment</a></li>
+</ul>
+</li>
+<li rs_id="3517">
+<h2 rs_id="3518">Architecture Concepts</h2>
+<ul rs_id="3519">
+<li rs_id="3520"><a href="https://laravel.com/docs/5.6/lifecycle" rs_id="3521">Request Lifecycle</a></li>
+<li rs_id="3522"><a href="https://laravel.com/docs/5.6/container" rs_id="3523">Service Container</a></li>
+<li rs_id="3524"><a href="https://laravel.com/docs/5.6/providers" rs_id="3525">Service Providers</a></li>
+<li rs_id="3526"><a href="https://laravel.com/docs/5.6/facades" rs_id="3527">Facades</a></li>
+<li rs_id="3528"><a href="https://laravel.com/docs/5.6/contracts" rs_id="3529">Contracts</a></li>
+</ul>
+</li>
+<li rs_id="3530">
+<h2 rs_id="3531">The Basics</h2>
+<ul rs_id="3532">
+<li rs_id="3533"><a href="https://laravel.com/docs/5.6/routing" rs_id="3534">Routing</a></li>
+<li rs_id="3535"><a href="https://laravel.com/docs/5.6/middleware" rs_id="3536">Middleware</a></li>
+<li rs_id="3537"><a href="https://laravel.com/docs/5.6/csrf" rs_id="3538">CSRF Protection</a></li>
+<li rs_id="3539"><a href="https://laravel.com/docs/5.6/controllers" rs_id="3540">Controllers</a></li>
+<li rs_id="3541"><a href="https://laravel.com/docs/5.6/requests" rs_id="3542">Requests</a></li>
+<li rs_id="3543"><a href="https://laravel.com/docs/5.6/responses" rs_id="3544">Responses</a></li>
+<li rs_id="3545"><a href="https://laravel.com/docs/5.6/views" rs_id="3546">Views</a></li>
+<li rs_id="3547"><a href="https://laravel.com/docs/5.6/urls" rs_id="3548">URL Generation</a></li>
+<li rs_id="3549"><a href="https://laravel.com/docs/5.6/session" rs_id="3550">Session</a></li>
+<li rs_id="3551"><a href="https://laravel.com/docs/5.6/validation" rs_id="3552">Validation</a></li>
+<li rs_id="3553"><a href="https://laravel.com/docs/5.6/errors" rs_id="3554">Error Handling</a></li>
+<li rs_id="3555"><a href="https://laravel.com/docs/5.6/logging" rs_id="3556">Logging</a></li>
+</ul>
+</li>
+<li rs_id="3557">
+<h2 rs_id="3558">Frontend</h2>
+<ul rs_id="3559">
+<li rs_id="3560"><a href="https://laravel.com/docs/5.6/blade" rs_id="3561">Blade Templates</a></li>
+<li rs_id="3562"><a href="https://laravel.com/docs/5.6/localization" rs_id="3563">Localization</a></li>
+<li rs_id="3564"><a href="https://laravel.com/docs/5.6/frontend" rs_id="3565">Frontend Scaffolding</a></li>
+<li rs_id="3566"><a href="https://laravel.com/docs/5.6/mix" rs_id="3567">Compiling Assets</a></li>
+</ul>
+</li>
+<li rs_id="3568">
+<h2 rs_id="3569">Security</h2>
+<ul rs_id="3570">
+<li rs_id="3571"><a href="https://laravel.com/docs/5.6/authentication" rs_id="3572">Authentication</a></li>
+<li rs_id="3573"><a href="https://laravel.com/docs/5.6/passport" rs_id="3574">API Authentication</a></li>
+<li rs_id="3575"><a href="https://laravel.com/docs/5.6/authorization" rs_id="3576">Authorization</a></li>
+<li rs_id="3577"><a href="https://laravel.com/docs/5.6/encryption" rs_id="3578">Encryption</a></li>
+<li rs_id="3579"><a href="https://laravel.com/docs/5.6/hashing" rs_id="3580">Hashing</a></li>
+<li rs_id="3581"><a href="https://laravel.com/docs/5.6/passwords" rs_id="3582">Password Reset</a></li>
+</ul>
+</li>
+<li rs_id="3583">
+<h2 rs_id="3584">Digging Deeper</h2>
+<ul rs_id="3585">
+<li rs_id="3586"><a href="https://laravel.com/docs/5.6/artisan" rs_id="3587">Artisan Console</a></li>
+<li rs_id="3588"><a href="https://laravel.com/docs/5.6/broadcasting" rs_id="3589">Broadcasting</a></li>
+<li rs_id="3590"><a href="https://laravel.com/docs/5.6/cache" rs_id="3591">Cache</a></li>
+<li rs_id="3592"><a href="https://laravel.com/docs/5.6/collections" rs_id="3593">Collections</a></li>
+<li rs_id="3594"><a href="https://laravel.com/docs/5.6/events" rs_id="3595">Events</a></li>
+<li rs_id="3596"><a href="https://laravel.com/docs/5.6/filesystem" rs_id="3597">File Storage</a></li>
+<li rs_id="3598"><a href="https://laravel.com/docs/5.6/helpers" rs_id="3599">Helpers</a></li>
+<li rs_id="3600"><a href="https://laravel.com/docs/5.6/mail" rs_id="3601">Mail</a></li>
+<li rs_id="3602"><a href="https://laravel.com/docs/5.6/notifications" rs_id="3603">Notifications</a></li>
+<li rs_id="3604"><a href="https://laravel.com/docs/5.6/packages" rs_id="3605">Package Development</a></li>
+<li rs_id="3606"><a href="https://laravel.com/docs/5.6/queues" rs_id="3607">Queues</a></li>
+<li rs_id="3608"><a href="https://laravel.com/docs/5.6/scheduling" rs_id="3609">Task Scheduling</a></li>
+</ul>
+</li>
+<li rs_id="3610">
+<h2 rs_id="3611">Database</h2>
+<ul rs_id="3612">
+<li rs_id="3613"><a href="https://laravel.com/docs/5.6/database" rs_id="3614">Getting Started</a></li>
+<li rs_id="3615"><a href="https://laravel.com/docs/5.6/queries" rs_id="3616">Query Builder</a></li>
+<li rs_id="3617"><a href="https://laravel.com/docs/5.6/pagination" rs_id="3618">Pagination</a></li>
+<li rs_id="3619"><a href="https://laravel.com/docs/5.6/migrations" rs_id="3620">Migrations</a></li>
+<li rs_id="3621"><a href="https://laravel.com/docs/5.6/seeding" rs_id="3622">Seeding</a></li>
+<li rs_id="3623"><a href="https://laravel.com/docs/5.6/redis" rs_id="3624">Redis</a></li>
+</ul>
+</li>
+<li rs_id="3625">
+<h2 rs_id="3626">Eloquent ORM</h2>
+<ul rs_id="3627">
+<li rs_id="3628"><a href="https://laravel.com/docs/5.6/eloquent" rs_id="3629">Getting Started</a></li>
+<li rs_id="3630"><a href="https://laravel.com/docs/5.6/eloquent-relationships" rs_id="3631">Relationships</a></li>
+<li rs_id="3632"><a href="https://laravel.com/docs/5.6/eloquent-collections" rs_id="3633">Collections</a></li>
+<li rs_id="3634"><a href="https://laravel.com/docs/5.6/eloquent-mutators" rs_id="3635">Mutators</a></li>
+<li rs_id="3636"><a href="https://laravel.com/docs/5.6/eloquent-resources" rs_id="3637">API Resources</a></li>
+<li rs_id="3638"><a href="https://laravel.com/docs/5.6/eloquent-serialization" rs_id="3639">Serialization</a></li>
+</ul>
+</li>
+<li rs_id="3640">
+<h2 rs_id="3641">Testing</h2>
+<ul rs_id="3642">
+<li rs_id="3643"><a href="https://laravel.com/docs/5.6/testing" rs_id="3644">Getting Started</a></li>
+<li rs_id="3645"><a href="https://laravel.com/docs/5.6/http-tests" rs_id="3646">HTTP Tests</a></li>
+<li rs_id="3647"><a href="https://laravel.com/docs/5.6/dusk" rs_id="3648">Browser Tests</a></li>
+<li rs_id="3649"><a href="https://laravel.com/docs/5.6/database-testing" rs_id="3650">Database</a></li>
+<li rs_id="3651"><a href="https://laravel.com/docs/5.6/mocking" rs_id="3652">Mocking</a></li>
+</ul>
+</li>
+<li rs_id="3653">
+<h2 rs_id="3654">Official Packages</h2>
+<ul rs_id="3655">
+<li rs_id="3656"><a href="https://laravel.com/docs/5.6/billing" rs_id="3657">Cashier</a></li>
+<li rs_id="3658"><a href="https://laravel.com/docs/5.6/envoy" rs_id="3659">Envoy</a></li>
+<li rs_id="3660"><a href="https://laravel.com/docs/5.6/horizon" rs_id="3661">Horizon</a></li>
+<li rs_id="3662"><a href="https://laravel.com/docs/5.6/passport" rs_id="3663">Passport</a></li>
+<li rs_id="3664"><a href="https://laravel.com/docs/5.6/scout" rs_id="3665">Scout</a></li>
+<li rs_id="3666"><a href="https://laravel.com/docs/5.6/socialite" rs_id="3667">Socialite</a></li>
+</ul>
+</li>
+</ul>
+	</div>
+
+</nav>
+
+<div class="docs-wrapper container" rs_id="3668">
+
+	<section class="sidebar" rs_id="3669">
+		<script async="" type="text/javascript" src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/carbon.js.download" id="_carbonads_js" rs_id="3670"></script><div id="carbonads" rs_id="3671"><span rs_id="3672"><span class="carbon-wrap" rs_id="3673"><a href="https://srv.carbonads.net/ads/click/x/GTND42QICKSDEKQUCTA4YKQMCK7I523NCESDPZ3JCW7IC2JECW7DT2QKC6BICK7NF6SI6K3EHJNCLSIZ?segment=placement:laravelcom;" class="carbon-img" target="_blank" rel="noopener" rs_id="3674"><img src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/1533151640-board_timeline_yellow.png" alt="" border="0" height="100" width="130" style="max-width: 130px;" rs_id="3675"></a><a href="https://srv.carbonads.net/ads/click/x/GTND42QICKSDEKQUCTA4YKQMCK7I523NCESDPZ3JCW7IC2JECW7DT2QKC6BICK7NF6SI6K3EHJNCLSIZ?segment=placement:laravelcom;" class="carbon-text" target="_blank" rel="noopener" rs_id="3676">The new generation of project management tools is here and it’s visual.</a></span><a href="http://carbonads.net/?utm_source=laravelcom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank" rel="noopener" rs_id="3677">ads via Carbon</a><img src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/B20652854.212994676" border="0" height="1" width="1" style="display: none;" rs_id="3678"></span></div>
+		<small rs_id="3679"><a href="https://laravel.com/docs/5.6/authentication#" id="doc-expand" style="font-size: 11px; color: #B8B8B8;" rs_id="3680">Expand All</a></small>
+		<ul rs_id="3681">
+<li rs_id="3682">
+<h2 rs_id="3683" tabindex="0">Prologue</h2>
+<ul rs_id="3684">
+<li rs_id="3685"><a href="https://laravel.com/docs/5.6/releases" rs_id="3686">Release Notes</a></li>
+<li rs_id="3687"><a href="https://laravel.com/docs/5.6/upgrade" rs_id="3688">Upgrade Guide</a></li>
+<li rs_id="3689"><a href="https://laravel.com/docs/5.6/contributions" rs_id="3690">Contribution Guide</a></li>
+<li rs_id="3691"><a href="https://laravel.com/api/5.6" rs_id="3692">API Documentation</a></li>
+</ul>
+</li>
+<li rs_id="3693">
+<h2 rs_id="3694" tabindex="0">Getting Started</h2>
+<ul rs_id="3695">
+<li rs_id="3696"><a href="https://laravel.com/docs/5.6/installation" rs_id="3697">Installation</a></li>
+<li rs_id="3698"><a href="https://laravel.com/docs/5.6/configuration" rs_id="3699">Configuration</a></li>
+<li rs_id="3700"><a href="https://laravel.com/docs/5.6/structure" rs_id="3701">Directory Structure</a></li>
+<li rs_id="3702"><a href="https://laravel.com/docs/5.6/homestead" rs_id="3703">Homestead</a></li>
+<li rs_id="3704"><a href="https://laravel.com/docs/5.6/valet" rs_id="3705">Valet</a></li>
+<li rs_id="3706"><a href="https://laravel.com/docs/5.6/deployment" rs_id="3707">Deployment</a></li>
+</ul>
+</li>
+<li rs_id="3708">
+<h2 rs_id="3709" tabindex="0">Architecture Concepts</h2>
+<ul rs_id="3710">
+<li rs_id="3711"><a href="https://laravel.com/docs/5.6/lifecycle" rs_id="3712">Request Lifecycle</a></li>
+<li rs_id="3713"><a href="https://laravel.com/docs/5.6/container" rs_id="3714">Service Container</a></li>
+<li rs_id="3715"><a href="https://laravel.com/docs/5.6/providers" rs_id="3716">Service Providers</a></li>
+<li rs_id="3717"><a href="https://laravel.com/docs/5.6/facades" rs_id="3718">Facades</a></li>
+<li rs_id="3719"><a href="https://laravel.com/docs/5.6/contracts" rs_id="3720">Contracts</a></li>
+</ul>
+</li>
+<li rs_id="3721">
+<h2 rs_id="3722" tabindex="0">The Basics</h2>
+<ul rs_id="3723">
+<li rs_id="3724"><a href="https://laravel.com/docs/5.6/routing" rs_id="3725">Routing</a></li>
+<li rs_id="3726"><a href="https://laravel.com/docs/5.6/middleware" rs_id="3727">Middleware</a></li>
+<li rs_id="3728"><a href="https://laravel.com/docs/5.6/csrf" rs_id="3729">CSRF Protection</a></li>
+<li rs_id="3730"><a href="https://laravel.com/docs/5.6/controllers" rs_id="3731">Controllers</a></li>
+<li rs_id="3732"><a href="https://laravel.com/docs/5.6/requests" rs_id="3733">Requests</a></li>
+<li rs_id="3734"><a href="https://laravel.com/docs/5.6/responses" rs_id="3735">Responses</a></li>
+<li rs_id="3736"><a href="https://laravel.com/docs/5.6/views" rs_id="3737">Views</a></li>
+<li rs_id="3738"><a href="https://laravel.com/docs/5.6/urls" rs_id="3739">URL Generation</a></li>
+<li rs_id="3740"><a href="https://laravel.com/docs/5.6/session" rs_id="3741">Session</a></li>
+<li rs_id="3742"><a href="https://laravel.com/docs/5.6/validation" rs_id="3743">Validation</a></li>
+<li rs_id="3744"><a href="https://laravel.com/docs/5.6/errors" rs_id="3745">Error Handling</a></li>
+<li rs_id="3746"><a href="https://laravel.com/docs/5.6/logging" rs_id="3747">Logging</a></li>
+</ul>
+</li>
+<li rs_id="3748">
+<h2 rs_id="3749" tabindex="0">Frontend</h2>
+<ul rs_id="3750">
+<li rs_id="3751"><a href="https://laravel.com/docs/5.6/blade" rs_id="3752">Blade Templates</a></li>
+<li rs_id="3753"><a href="https://laravel.com/docs/5.6/localization" rs_id="3754">Localization</a></li>
+<li rs_id="3755"><a href="https://laravel.com/docs/5.6/frontend" rs_id="3756">Frontend Scaffolding</a></li>
+<li rs_id="3757"><a href="https://laravel.com/docs/5.6/mix" rs_id="3758">Compiling Assets</a></li>
+</ul>
+</li>
+<li rs_id="3759">
+<h2 rs_id="3760" tabindex="0" class="is-active">Security</h2>
+<ul rs_id="3761">
+<li rs_id="3762" style="font-weight: bold;"><a href="https://laravel.com/docs/5.6/authentication" rs_id="3763">Authentication</a></li>
+<li rs_id="3764"><a href="https://laravel.com/docs/5.6/passport" rs_id="3765">API Authentication</a></li>
+<li rs_id="3766"><a href="https://laravel.com/docs/5.6/authorization" rs_id="3767">Authorization</a></li>
+<li rs_id="3768"><a href="https://laravel.com/docs/5.6/encryption" rs_id="3769">Encryption</a></li>
+<li rs_id="3770"><a href="https://laravel.com/docs/5.6/hashing" rs_id="3771">Hashing</a></li>
+<li rs_id="3772"><a href="https://laravel.com/docs/5.6/passwords" rs_id="3773">Password Reset</a></li>
+</ul>
+</li>
+<li rs_id="3774">
+<h2 rs_id="3775" tabindex="0">Digging Deeper</h2>
+<ul rs_id="3776">
+<li rs_id="3777"><a href="https://laravel.com/docs/5.6/artisan" rs_id="3778">Artisan Console</a></li>
+<li rs_id="3779"><a href="https://laravel.com/docs/5.6/broadcasting" rs_id="3780">Broadcasting</a></li>
+<li rs_id="3781"><a href="https://laravel.com/docs/5.6/cache" rs_id="3782">Cache</a></li>
+<li rs_id="3783"><a href="https://laravel.com/docs/5.6/collections" rs_id="3784">Collections</a></li>
+<li rs_id="3785"><a href="https://laravel.com/docs/5.6/events" rs_id="3786">Events</a></li>
+<li rs_id="3787"><a href="https://laravel.com/docs/5.6/filesystem" rs_id="3788">File Storage</a></li>
+<li rs_id="3789"><a href="https://laravel.com/docs/5.6/helpers" rs_id="3790">Helpers</a></li>
+<li rs_id="3791"><a href="https://laravel.com/docs/5.6/mail" rs_id="3792">Mail</a></li>
+<li rs_id="3793"><a href="https://laravel.com/docs/5.6/notifications" rs_id="3794">Notifications</a></li>
+<li rs_id="3795"><a href="https://laravel.com/docs/5.6/packages" rs_id="3796">Package Development</a></li>
+<li rs_id="3797"><a href="https://laravel.com/docs/5.6/queues" rs_id="3798">Queues</a></li>
+<li rs_id="3799"><a href="https://laravel.com/docs/5.6/scheduling" rs_id="3800">Task Scheduling</a></li>
+</ul>
+</li>
+<li rs_id="3801">
+<h2 rs_id="3802" tabindex="0">Database</h2>
+<ul rs_id="3803">
+<li rs_id="3804"><a href="https://laravel.com/docs/5.6/database" rs_id="3805">Getting Started</a></li>
+<li rs_id="3806"><a href="https://laravel.com/docs/5.6/queries" rs_id="3807">Query Builder</a></li>
+<li rs_id="3808"><a href="https://laravel.com/docs/5.6/pagination" rs_id="3809">Pagination</a></li>
+<li rs_id="3810"><a href="https://laravel.com/docs/5.6/migrations" rs_id="3811">Migrations</a></li>
+<li rs_id="3812"><a href="https://laravel.com/docs/5.6/seeding" rs_id="3813">Seeding</a></li>
+<li rs_id="3814"><a href="https://laravel.com/docs/5.6/redis" rs_id="3815">Redis</a></li>
+</ul>
+</li>
+<li rs_id="3816">
+<h2 rs_id="3817" tabindex="0">Eloquent ORM</h2>
+<ul rs_id="3818">
+<li rs_id="3819"><a href="https://laravel.com/docs/5.6/eloquent" rs_id="3820">Getting Started</a></li>
+<li rs_id="3821"><a href="https://laravel.com/docs/5.6/eloquent-relationships" rs_id="3822">Relationships</a></li>
+<li rs_id="3823"><a href="https://laravel.com/docs/5.6/eloquent-collections" rs_id="3824">Collections</a></li>
+<li rs_id="3825"><a href="https://laravel.com/docs/5.6/eloquent-mutators" rs_id="3826">Mutators</a></li>
+<li rs_id="3827"><a href="https://laravel.com/docs/5.6/eloquent-resources" rs_id="3828">API Resources</a></li>
+<li rs_id="3829"><a href="https://laravel.com/docs/5.6/eloquent-serialization" rs_id="3830">Serialization</a></li>
+</ul>
+</li>
+<li rs_id="3831">
+<h2 rs_id="3832" tabindex="0">Testing</h2>
+<ul rs_id="3833">
+<li rs_id="3834"><a href="https://laravel.com/docs/5.6/testing" rs_id="3835">Getting Started</a></li>
+<li rs_id="3836"><a href="https://laravel.com/docs/5.6/http-tests" rs_id="3837">HTTP Tests</a></li>
+<li rs_id="3838"><a href="https://laravel.com/docs/5.6/dusk" rs_id="3839">Browser Tests</a></li>
+<li rs_id="3840"><a href="https://laravel.com/docs/5.6/database-testing" rs_id="3841">Database</a></li>
+<li rs_id="3842"><a href="https://laravel.com/docs/5.6/mocking" rs_id="3843">Mocking</a></li>
+</ul>
+</li>
+<li rs_id="3844">
+<h2 rs_id="3845" tabindex="0">Official Packages</h2>
+<ul rs_id="3846">
+<li rs_id="3847"><a href="https://laravel.com/docs/5.6/billing" rs_id="3848">Cashier</a></li>
+<li rs_id="3849"><a href="https://laravel.com/docs/5.6/envoy" rs_id="3850">Envoy</a></li>
+<li rs_id="3851"><a href="https://laravel.com/docs/5.6/horizon" rs_id="3852">Horizon</a></li>
+<li rs_id="3853"><a href="https://laravel.com/docs/5.6/passport" rs_id="3854">Passport</a></li>
+<li rs_id="3855"><a href="https://laravel.com/docs/5.6/scout" rs_id="3856">Scout</a></li>
+<li rs_id="3857"><a href="https://laravel.com/docs/5.6/socialite" rs_id="3858">Socialite</a></li>
+</ul>
+</li>
+</ul>
+	</section>
+
+	
+
+	<article rs_id="3859" style="opacity: 1;">
+		<h1 rs_id="3860">Authentication</h1>
+<ul rs_id="3861">
+<li rs_id="3862"><a href="https://laravel.com/docs/5.6/authentication#introduction" rs_id="3863">Introduction</a>
+<ul rs_id="3864">
+<li rs_id="3865"><a href="https://laravel.com/docs/5.6/authentication#introduction-database-considerations" rs_id="3866">Database Considerations</a></li>
+</ul></li>
+<li rs_id="3867"><a href="https://laravel.com/docs/5.6/authentication#authentication-quickstart" rs_id="3868">Authentication Quickstart</a>
+<ul rs_id="3869">
+<li rs_id="3870"><a href="https://laravel.com/docs/5.6/authentication#included-routing" rs_id="3871">Routing</a></li>
+<li rs_id="3872"><a href="https://laravel.com/docs/5.6/authentication#included-views" rs_id="3873">Views</a></li>
+<li rs_id="3874"><a href="https://laravel.com/docs/5.6/authentication#included-authenticating" rs_id="3875">Authenticating</a></li>
+<li rs_id="3876"><a href="https://laravel.com/docs/5.6/authentication#retrieving-the-authenticated-user" rs_id="3877">Retrieving The Authenticated User</a></li>
+<li rs_id="3878"><a href="https://laravel.com/docs/5.6/authentication#protecting-routes" rs_id="3879">Protecting Routes</a></li>
+<li rs_id="3880"><a href="https://laravel.com/docs/5.6/authentication#login-throttling" rs_id="3881">Login Throttling</a></li>
+</ul></li>
+<li rs_id="3882"><a href="https://laravel.com/docs/5.6/authentication#authenticating-users" rs_id="3883">Manually Authenticating Users</a>
+<ul rs_id="3884">
+<li rs_id="3885"><a href="https://laravel.com/docs/5.6/authentication#remembering-users" rs_id="3886">Remembering Users</a></li>
+<li rs_id="3887"><a href="https://laravel.com/docs/5.6/authentication#other-authentication-methods" rs_id="3888">Other Authentication Methods</a></li>
+</ul></li>
+<li rs_id="3889"><a href="https://laravel.com/docs/5.6/authentication#http-basic-authentication" rs_id="3890">HTTP Basic Authentication</a>
+<ul rs_id="3891">
+<li rs_id="3892"><a href="https://laravel.com/docs/5.6/authentication#stateless-http-basic-authentication" rs_id="3893">Stateless HTTP Basic Authentication</a></li>
+</ul></li>
+<li rs_id="3894"><a href="https://laravel.com/docs/5.6/authentication#logging-out" rs_id="3895">Logging Out</a>
+<ul rs_id="3896">
+<li rs_id="3897"><a href="https://laravel.com/docs/5.6/authentication#invalidating-sessions-on-other-devices" rs_id="3898">Invalidating Sessions On Other Devices</a></li>
+</ul></li>
+<li rs_id="3899"><a href="https://github.com/laravel/socialite" rs_id="3900">Social Authentication</a></li>
+<li rs_id="3901"><a href="https://laravel.com/docs/5.6/authentication#adding-custom-guards" rs_id="3902">Adding Custom Guards</a>
+<ul rs_id="3903">
+<li rs_id="3904"><a href="https://laravel.com/docs/5.6/authentication#closure-request-guards" rs_id="3905">Closure Request Guards</a></li>
+</ul></li>
+<li rs_id="3906"><a href="https://laravel.com/docs/5.6/authentication#adding-custom-user-providers" rs_id="3907">Adding Custom User Providers</a>
+<ul rs_id="3908">
+<li rs_id="3909"><a href="https://laravel.com/docs/5.6/authentication#the-user-provider-contract" rs_id="3910">The User Provider Contract</a></li>
+<li rs_id="3911"><a href="https://laravel.com/docs/5.6/authentication#the-authenticatable-contract" rs_id="3912">The Authenticatable Contract</a></li>
+</ul></li>
+<li rs_id="3913"><a href="https://laravel.com/docs/5.6/authentication#events" rs_id="3914">Events</a></li>
+</ul>
+<p rs_id="3915"><a name="introduction" rs_id="3916"></a></p>
+<h2 rs_id="3917"><a href="https://laravel.com/docs/5.6/authentication#introduction" rs_id="3918">Introduction</a></h2>
+<blockquote rs_id="3919" class="has-icon tip">
+<p rs_id="3920"><div class="flag" rs_id="3921"><span class="svg" rs_id="3922"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" width="56.6px" height="87.5px" viewBox="0 0 56.6 87.5" enable-background="new 0 0 56.6 87.5" xml:space="preserve" rs_id="3923"><path fill="#FFFFFF" d="M28.7 64.5c-1.4 0-2.5-1.1-2.5-2.5v-5.7 -5V41c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5v10.1 5 5.8C31.2 63.4 30.1 64.5 28.7 64.5zM26.4 0.1C11.9 1 0.3 13.1 0 27.7c-0.1 7.9 3 15.2 8.2 20.4 0.5 0.5 0.8 1 1 1.7l3.1 13.1c0.3 1.1 1.3 1.9 2.4 1.9 0.3 0 0.7-0.1 1.1-0.2 1.1-0.5 1.6-1.8 1.4-3l-2-8.4 -0.4-1.8c-0.7-2.9-2-5.7-4-8 -1-1.2-2-2.5-2.7-3.9C5.8 35.3 4.7 30.3 5.4 25 6.7 14.5 15.2 6.3 25.6 5.1c13.9-1.5 25.8 9.4 25.8 23 0 4.1-1.1 7.9-2.9 11.2 -0.8 1.4-1.7 2.7-2.7 3.9 -2 2.3-3.3 5-4 8L41.4 53l-2 8.4c-0.3 1.2 0.3 2.5 1.4 3 0.3 0.2 0.7 0.2 1.1 0.2 1.1 0 2.2-0.8 2.4-1.9l3.1-13.1c0.2-0.6 0.5-1.2 1-1.7 5-5.1 8.2-12.1 8.2-19.8C56.4 12 42.8-1 26.4 0.1zM43.7 69.6c0 0.5-0.1 0.9-0.3 1.3 -0.4 0.8-0.7 1.6-0.9 2.5 -0.7 3-2 8.6-2 8.6 -1.3 3.2-4.4 5.5-7.9 5.5h-4.1H28h-0.5 -3.6c-3.5 0-6.7-2.4-7.9-5.7l-0.1-0.4 -1.8-7.8c-0.4-1.1-0.8-2.1-1.2-3.1 -0.1-0.3-0.2-0.5-0.2-0.9 0.1-1.3 1.3-2.1 2.6-2.1H41C42.4 67.5 43.6 68.2 43.7 69.6zM37.7 72.5H26.9c-4.2 0-7.2 3.9-6.3 7.9 0.6 1.3 1.8 2.1 3.2 2.1h4.1 0.5 0.5 3.6c1.4 0 2.7-0.8 3.2-2.1L37.7 72.5z" rs_id="3924"></path></svg></span></div> <strong rs_id="3925">Want to get started fast?</strong> Just run <code rs_id="3926" class=" language-php">php artisan make<span class="token punctuation" rs_id="3927">:</span>auth</code> and <code rs_id="3928" class=" language-php">php artisan migrate</code> in a fresh Laravel application. Then, navigate your browser to <code rs_id="3929" class=" language-php">http<span class="token punctuation" rs_id="3930">:</span><span class="token operator" rs_id="3931">/</span><span class="token operator" rs_id="3932">/</span>your<span class="token operator" rs_id="3933">-</span>app<span class="token punctuation" rs_id="3934">.</span>test<span class="token operator" rs_id="3935">/</span>register</code> or any other URL that is assigned to your application. These two commands will take care of scaffolding your entire authentication system!</p>
+</blockquote>
+<p rs_id="3936">Laravel makes implementing authentication very simple. In fact, almost everything is configured for you out of the box. The authentication configuration file is located at <code rs_id="3937" class=" language-php">config<span class="token operator" rs_id="3938">/</span>auth<span class="token punctuation" rs_id="3939">.</span>php</code>, which contains several well documented options for tweaking the behavior of the authentication services.</p>
+<p rs_id="3940">At its core, Laravel's authentication facilities are made up of "guards" and "providers". Guards define how users are authenticated for each request. For example, Laravel ships with a <code rs_id="3941" class=" language-php">session</code> guard which maintains state using session storage and cookies.</p>
+<p rs_id="3942">Providers define how users are retrieved from your persistent storage. Laravel ships with support for retrieving users using Eloquent and the database query builder. However, you are free to define additional providers as needed for your application.</p>
+<p rs_id="3943">Don't worry if this all sounds confusing now! Many applications will never need to modify the default authentication configuration.</p>
+<p rs_id="3944"><a name="introduction-database-considerations" rs_id="3945"></a></p>
+<h3 rs_id="3946">Database Considerations</h3>
+<p rs_id="3947">By default, Laravel includes an <code rs_id="3948" class=" language-php">App\<span class="token package" rs_id="3949">User</span></code> <a href="https://laravel.com/docs/5.6/eloquent" rs_id="3950">Eloquent model</a> in your <code rs_id="3951" class=" language-php">app</code> directory. This model may be used with the default Eloquent authentication driver. If your application is not using Eloquent, you may use the <code rs_id="3952" class=" language-php">database</code> authentication driver which uses the Laravel query builder.</p>
+<p rs_id="3953">When building the database schema for the <code rs_id="3954" class=" language-php">App\<span class="token package" rs_id="3955">User</span></code> model, make sure the password column is at least 60 characters in length. Maintaining the default string column length of 255 characters would be a good choice.</p>
+<p rs_id="3956">Also, you should verify that your <code rs_id="3957" class=" language-php">users</code> (or equivalent) table contains a nullable, string <code rs_id="3958" class=" language-php">remember_token</code> column of 100 characters. This column will be used to store a token for users that select the "remember me" option when logging into your application.</p>
+<p rs_id="3959"><a name="authentication-quickstart" rs_id="3960"></a></p>
+<h2 rs_id="3961"><a href="https://laravel.com/docs/5.6/authentication#authentication-quickstart" rs_id="3962">Authentication Quickstart</a></h2>
+<p rs_id="3963">Laravel ships with several pre-built authentication controllers, which are located in the <code rs_id="3964" class=" language-php">App\<span class="token package" rs_id="3965">Http<span class="token punctuation" rs_id="3966">\</span>Controllers<span class="token punctuation" rs_id="3967">\</span>Auth</span></code> namespace. The <code rs_id="3968" class=" language-php">RegisterController</code> handles new user registration, the <code rs_id="3969" class=" language-php">LoginController</code> handles authentication, the <code rs_id="3970" class=" language-php">ForgotPasswordController</code> handles e-mailing links for resetting passwords, and the <code rs_id="3971" class=" language-php">ResetPasswordController</code> contains the logic to reset passwords. Each of these controllers uses a trait to include their necessary methods. For many applications, you will not need to modify these controllers at all.</p>
+<p rs_id="3972"><a name="included-routing" rs_id="3973"></a></p>
+<h3 rs_id="3974">Routing</h3>
+<p rs_id="3975">Laravel provides a quick way to scaffold all of the routes and views you need for authentication using one simple command:</p>
+<pre rs_id="3976" class=" language-php"><code rs_id="3977" class=" language-php">php artisan make<span class="token punctuation" rs_id="3978">:</span>auth</code></pre>
+<p rs_id="3979">This command should be used on fresh applications and will install a layout view, registration and login views, as well as routes for all authentication end-points. A <code rs_id="3980" class=" language-php">HomeController</code> will also be generated to handle post-login requests to your application's dashboard.</p>
+<p rs_id="3981"><a name="included-views" rs_id="3982"></a></p>
+<h3 rs_id="3983">Views</h3>
+<p rs_id="3984">As mentioned in the previous section, the <code rs_id="3985" class=" language-php">php artisan make<span class="token punctuation" rs_id="3986">:</span>auth</code> command will create all of the views you need for authentication and place them in the <code rs_id="3987" class=" language-php">resources<span class="token operator" rs_id="3988">/</span>views<span class="token operator" rs_id="3989">/</span>auth</code> directory.</p>
+<p rs_id="3990">The <code rs_id="3991" class=" language-php">make<span class="token punctuation" rs_id="3992">:</span>auth</code> command will also create a <code rs_id="3993" class=" language-php">resources<span class="token operator" rs_id="3994">/</span>views<span class="token operator" rs_id="3995">/</span>layouts</code> directory containing a base layout for your application. All of these views use the Bootstrap CSS framework, but you are free to customize them however you wish.</p>
+<p rs_id="3996"><a name="included-authenticating" rs_id="3997"></a></p>
+<h3 rs_id="3998">Authenticating</h3>
+<p rs_id="3999">Now that you have routes and views setup for the included authentication controllers, you are ready to register and authenticate new users for your application! You may access your application in a browser since the authentication controllers already contain the logic (via their traits) to authenticate existing users and store new users in the database.</p>
+<h4 rs_id="4000">Path Customization</h4>
+<p rs_id="4001">When a user is successfully authenticated, they will be redirected to the <code rs_id="4002" class=" language-php"><span class="token operator" rs_id="4003">/</span>home</code> URI. You can customize the post-authentication redirect location by defining a <code rs_id="4004" class=" language-php">redirectTo</code> property on the <code rs_id="4005" class=" language-php">LoginController</code>, <code rs_id="4006" class=" language-php">RegisterController</code>, and <code rs_id="4007" class=" language-php">ResetPasswordController</code>:</p>
+<pre rs_id="4008" class=" language-php"><code rs_id="4009" class=" language-php"><span class="token keyword" rs_id="4010">protected</span> <span class="token variable" rs_id="4011">$redirectTo</span> <span class="token operator" rs_id="4012">=</span> <span class="token string" rs_id="4013">'/'</span><span class="token punctuation" rs_id="4014">;</span></code></pre>
+<p rs_id="4015">Next, you should modify the <code rs_id="4016" class=" language-php">RedirectIfAuthenticated</code> middleware's <code rs_id="4017" class=" language-php">handle</code> method to use your new URI when redirecting the user.</p>
+<p rs_id="4018">If the redirect path needs custom generation logic you may define a <code rs_id="4019" class=" language-php">redirectTo</code> method instead of a <code rs_id="4020" class=" language-php">redirectTo</code> property:</p>
+<pre rs_id="4021" class=" language-php"><code rs_id="4022" class=" language-php"><span class="token keyword" rs_id="4023">protected</span> <span class="token keyword" rs_id="4024">function</span> <span class="token function" rs_id="4025">redirectTo<span class="token punctuation" rs_id="4026">(</span></span><span class="token punctuation" rs_id="4027">)</span>
+<span class="token punctuation" rs_id="4028">{</span>
+    <span class="token keyword" rs_id="4029">return</span> <span class="token string" rs_id="4030">'/path'</span><span class="token punctuation" rs_id="4031">;</span>
+<span class="token punctuation" rs_id="4032">}</span></code></pre>
+<blockquote rs_id="4033" class="has-icon tip">
+<p rs_id="4034"><div class="flag" rs_id="4035"><span class="svg" rs_id="4036"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" width="56.6px" height="87.5px" viewBox="0 0 56.6 87.5" enable-background="new 0 0 56.6 87.5" xml:space="preserve" rs_id="4037"><path fill="#FFFFFF" d="M28.7 64.5c-1.4 0-2.5-1.1-2.5-2.5v-5.7 -5V41c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5v10.1 5 5.8C31.2 63.4 30.1 64.5 28.7 64.5zM26.4 0.1C11.9 1 0.3 13.1 0 27.7c-0.1 7.9 3 15.2 8.2 20.4 0.5 0.5 0.8 1 1 1.7l3.1 13.1c0.3 1.1 1.3 1.9 2.4 1.9 0.3 0 0.7-0.1 1.1-0.2 1.1-0.5 1.6-1.8 1.4-3l-2-8.4 -0.4-1.8c-0.7-2.9-2-5.7-4-8 -1-1.2-2-2.5-2.7-3.9C5.8 35.3 4.7 30.3 5.4 25 6.7 14.5 15.2 6.3 25.6 5.1c13.9-1.5 25.8 9.4 25.8 23 0 4.1-1.1 7.9-2.9 11.2 -0.8 1.4-1.7 2.7-2.7 3.9 -2 2.3-3.3 5-4 8L41.4 53l-2 8.4c-0.3 1.2 0.3 2.5 1.4 3 0.3 0.2 0.7 0.2 1.1 0.2 1.1 0 2.2-0.8 2.4-1.9l3.1-13.1c0.2-0.6 0.5-1.2 1-1.7 5-5.1 8.2-12.1 8.2-19.8C56.4 12 42.8-1 26.4 0.1zM43.7 69.6c0 0.5-0.1 0.9-0.3 1.3 -0.4 0.8-0.7 1.6-0.9 2.5 -0.7 3-2 8.6-2 8.6 -1.3 3.2-4.4 5.5-7.9 5.5h-4.1H28h-0.5 -3.6c-3.5 0-6.7-2.4-7.9-5.7l-0.1-0.4 -1.8-7.8c-0.4-1.1-0.8-2.1-1.2-3.1 -0.1-0.3-0.2-0.5-0.2-0.9 0.1-1.3 1.3-2.1 2.6-2.1H41C42.4 67.5 43.6 68.2 43.7 69.6zM37.7 72.5H26.9c-4.2 0-7.2 3.9-6.3 7.9 0.6 1.3 1.8 2.1 3.2 2.1h4.1 0.5 0.5 3.6c1.4 0 2.7-0.8 3.2-2.1L37.7 72.5z" rs_id="4038"></path></svg></span></div> The <code rs_id="4039" class=" language-php">redirectTo</code> method will take precedence over the <code rs_id="4040" class=" language-php">redirectTo</code> attribute.</p>
+</blockquote>
+<h4 rs_id="4041">Username Customization</h4>
+<p rs_id="4042">By default, Laravel uses the <code rs_id="4043" class=" language-php">email</code> field for authentication. If you would like to customize this, you may define a <code rs_id="4044" class=" language-php">username</code> method on your <code rs_id="4045" class=" language-php">LoginController</code>:</p>
+<pre rs_id="4046" class=" language-php"><code rs_id="4047" class=" language-php"><span class="token keyword" rs_id="4048">public</span> <span class="token keyword" rs_id="4049">function</span> <span class="token function" rs_id="4050">username<span class="token punctuation" rs_id="4051">(</span></span><span class="token punctuation" rs_id="4052">)</span>
+<span class="token punctuation" rs_id="4053">{</span>
+    <span class="token keyword" rs_id="4054">return</span> <span class="token string" rs_id="4055">'username'</span><span class="token punctuation" rs_id="4056">;</span>
+<span class="token punctuation" rs_id="4057">}</span></code></pre>
+<h4 rs_id="4058">Guard Customization</h4>
+<p rs_id="4059">You may also customize the "guard" that is used to authenticate and register users. To get started, define a <code rs_id="4060" class=" language-php">guard</code> method on your <code rs_id="4061" class=" language-php">LoginController</code>, <code rs_id="4062" class=" language-php">RegisterController</code>, and <code rs_id="4063" class=" language-php">ResetPasswordController</code>. The method should return a guard instance:</p>
+<pre rs_id="4064" class=" language-php"><code rs_id="4065" class=" language-php"><span class="token keyword" rs_id="4066">use</span> <span class="token package" rs_id="4067">Illuminate<span class="token punctuation" rs_id="4068">\</span>Support<span class="token punctuation" rs_id="4069">\</span>Facades<span class="token punctuation" rs_id="4070">\</span>Auth</span><span class="token punctuation" rs_id="4071">;</span>
+
+<span class="token keyword" rs_id="4072">protected</span> <span class="token keyword" rs_id="4073">function</span> <span class="token function" rs_id="4074">guard<span class="token punctuation" rs_id="4075">(</span></span><span class="token punctuation" rs_id="4076">)</span>
+<span class="token punctuation" rs_id="4077">{</span>
+    <span class="token keyword" rs_id="4078">return</span> <span class="token scope" rs_id="4079">Auth<span class="token punctuation" rs_id="4080">::</span></span><span class="token function" rs_id="4081">guard<span class="token punctuation" rs_id="4082">(</span></span><span class="token string" rs_id="4083">'guard-name'</span><span class="token punctuation" rs_id="4084">)</span><span class="token punctuation" rs_id="4085">;</span>
+<span class="token punctuation" rs_id="4086">}</span></code></pre>
+<h4 rs_id="4087">Validation / Storage Customization</h4>
+<p rs_id="4088">To modify the form fields that are required when a new user registers with your application, or to customize how new users are stored into your database, you may modify the <code rs_id="4089" class=" language-php">RegisterController</code> class. This class is responsible for validating and creating new users of your application.</p>
+<p rs_id="4090">The <code rs_id="4091" class=" language-php">validator</code> method of the <code rs_id="4092" class=" language-php">RegisterController</code> contains the validation rules for new users of the application. You are free to modify this method as you wish.</p>
+<p rs_id="4093">The <code rs_id="4094" class=" language-php">create</code> method of the <code rs_id="4095" class=" language-php">RegisterController</code> is responsible for creating new <code rs_id="4096" class=" language-php">App\<span class="token package" rs_id="4097">User</span></code> records in your database using the <a href="https://laravel.com/docs/5.6/eloquent" rs_id="4098">Eloquent ORM</a>. You are free to modify this method according to the needs of your database.</p>
+<p rs_id="4099"><a name="retrieving-the-authenticated-user" rs_id="4100"></a></p>
+<h3 rs_id="4101">Retrieving The Authenticated User</h3>
+<p rs_id="4102">You may access the authenticated user via the <code rs_id="4103" class=" language-php">Auth</code> facade:</p>
+<pre rs_id="4104" class=" language-php"><code rs_id="4105" class=" language-php"><span class="token keyword" rs_id="4106">use</span> <span class="token package" rs_id="4107">Illuminate<span class="token punctuation" rs_id="4108">\</span>Support<span class="token punctuation" rs_id="4109">\</span>Facades<span class="token punctuation" rs_id="4110">\</span>Auth</span><span class="token punctuation" rs_id="4111">;</span>
+<span class="token comment" spellcheck="true" rs_id="4112">
+// Get the currently authenticated user...
+</span><span class="token variable" rs_id="4113">$user</span> <span class="token operator" rs_id="4114">=</span> <span class="token scope" rs_id="4115">Auth<span class="token punctuation" rs_id="4116">::</span></span><span class="token function" rs_id="4117">user<span class="token punctuation" rs_id="4118">(</span></span><span class="token punctuation" rs_id="4119">)</span><span class="token punctuation" rs_id="4120">;</span>
+<span class="token comment" spellcheck="true" rs_id="4121">
+// Get the currently authenticated user's ID...
+</span><span class="token variable" rs_id="4122">$id</span> <span class="token operator" rs_id="4123">=</span> <span class="token scope" rs_id="4124">Auth<span class="token punctuation" rs_id="4125">::</span></span><span class="token function" rs_id="4126">id<span class="token punctuation" rs_id="4127">(</span></span><span class="token punctuation" rs_id="4128">)</span><span class="token punctuation" rs_id="4129">;</span></code></pre>
+<p rs_id="4130">Alternatively, once a user is authenticated, you may access the authenticated user via an <code rs_id="4131" class=" language-php">Illuminate\<span class="token package" rs_id="4132">Http<span class="token punctuation" rs_id="4133">\</span>Request</span></code> instance. Remember, type-hinted classes will automatically be injected into your controller methods:</p>
+<pre rs_id="4134" class=" language-php"><code rs_id="4135" class=" language-php"><span class="token delimiter" rs_id="4136">&lt;?php</span>
+
+<span class="token keyword" rs_id="4137">namespace</span> <span class="token package" rs_id="4138">App<span class="token punctuation" rs_id="4139">\</span>Http<span class="token punctuation" rs_id="4140">\</span>Controllers</span><span class="token punctuation" rs_id="4141">;</span>
+
+<span class="token keyword" rs_id="4142">use</span> <span class="token package" rs_id="4143">Illuminate<span class="token punctuation" rs_id="4144">\</span>Http<span class="token punctuation" rs_id="4145">\</span>Request</span><span class="token punctuation" rs_id="4146">;</span>
+
+<span class="token keyword" rs_id="4147">class</span> <span class="token class-name" rs_id="4148">ProfileController</span> <span class="token keyword" rs_id="4149">extends</span> <span class="token class-name" rs_id="4150">Controller</span>
+<span class="token punctuation" rs_id="4151">{</span>
+    <span class="token comment" spellcheck="true" rs_id="4152">/**
+     * Update the user's profile.
+     *
+     * @param  Request  $request
+     * @return Response
+     */</span>
+    <span class="token keyword" rs_id="4153">public</span> <span class="token keyword" rs_id="4154">function</span> <span class="token function" rs_id="4155">update<span class="token punctuation" rs_id="4156">(</span></span>Request <span class="token variable" rs_id="4157">$request</span><span class="token punctuation" rs_id="4158">)</span>
+    <span class="token punctuation" rs_id="4159">{</span>
+       <span class="token comment" spellcheck="true" rs_id="4160"> // $request-&gt;user() returns an instance of the authenticated user...
+</span>    <span class="token punctuation" rs_id="4161">}</span>
+<span class="token punctuation" rs_id="4162">}</span></code></pre>
+<h4 rs_id="4163">Determining If The Current User Is Authenticated</h4>
+<p rs_id="4164">To determine if the user is already logged into your application, you may use the <code rs_id="4165" class=" language-php">check</code> method on the <code rs_id="4166" class=" language-php">Auth</code> facade, which will return <code rs_id="4167" class=" language-php"><span class="token boolean" rs_id="4168">true</span></code> if the user is authenticated:</p>
+<pre rs_id="4169" class=" language-php"><code rs_id="4170" class=" language-php"><span class="token keyword" rs_id="4171">use</span> <span class="token package" rs_id="4172">Illuminate<span class="token punctuation" rs_id="4173">\</span>Support<span class="token punctuation" rs_id="4174">\</span>Facades<span class="token punctuation" rs_id="4175">\</span>Auth</span><span class="token punctuation" rs_id="4176">;</span>
+
+<span class="token keyword" rs_id="4177">if</span> <span class="token punctuation" rs_id="4178">(</span><span class="token scope" rs_id="4179">Auth<span class="token punctuation" rs_id="4180">::</span></span><span class="token function" rs_id="4181">check<span class="token punctuation" rs_id="4182">(</span></span><span class="token punctuation" rs_id="4183">)</span><span class="token punctuation" rs_id="4184">)</span> <span class="token punctuation" rs_id="4185">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4186"> // The user is logged in...
+</span><span class="token punctuation" rs_id="4187">}</span></code></pre>
+<blockquote rs_id="4188" class="has-icon tip">
+<p rs_id="4189"><div class="flag" rs_id="4190"><span class="svg" rs_id="4191"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" width="56.6px" height="87.5px" viewBox="0 0 56.6 87.5" enable-background="new 0 0 56.6 87.5" xml:space="preserve" rs_id="4192"><path fill="#FFFFFF" d="M28.7 64.5c-1.4 0-2.5-1.1-2.5-2.5v-5.7 -5V41c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5v10.1 5 5.8C31.2 63.4 30.1 64.5 28.7 64.5zM26.4 0.1C11.9 1 0.3 13.1 0 27.7c-0.1 7.9 3 15.2 8.2 20.4 0.5 0.5 0.8 1 1 1.7l3.1 13.1c0.3 1.1 1.3 1.9 2.4 1.9 0.3 0 0.7-0.1 1.1-0.2 1.1-0.5 1.6-1.8 1.4-3l-2-8.4 -0.4-1.8c-0.7-2.9-2-5.7-4-8 -1-1.2-2-2.5-2.7-3.9C5.8 35.3 4.7 30.3 5.4 25 6.7 14.5 15.2 6.3 25.6 5.1c13.9-1.5 25.8 9.4 25.8 23 0 4.1-1.1 7.9-2.9 11.2 -0.8 1.4-1.7 2.7-2.7 3.9 -2 2.3-3.3 5-4 8L41.4 53l-2 8.4c-0.3 1.2 0.3 2.5 1.4 3 0.3 0.2 0.7 0.2 1.1 0.2 1.1 0 2.2-0.8 2.4-1.9l3.1-13.1c0.2-0.6 0.5-1.2 1-1.7 5-5.1 8.2-12.1 8.2-19.8C56.4 12 42.8-1 26.4 0.1zM43.7 69.6c0 0.5-0.1 0.9-0.3 1.3 -0.4 0.8-0.7 1.6-0.9 2.5 -0.7 3-2 8.6-2 8.6 -1.3 3.2-4.4 5.5-7.9 5.5h-4.1H28h-0.5 -3.6c-3.5 0-6.7-2.4-7.9-5.7l-0.1-0.4 -1.8-7.8c-0.4-1.1-0.8-2.1-1.2-3.1 -0.1-0.3-0.2-0.5-0.2-0.9 0.1-1.3 1.3-2.1 2.6-2.1H41C42.4 67.5 43.6 68.2 43.7 69.6zM37.7 72.5H26.9c-4.2 0-7.2 3.9-6.3 7.9 0.6 1.3 1.8 2.1 3.2 2.1h4.1 0.5 0.5 3.6c1.4 0 2.7-0.8 3.2-2.1L37.7 72.5z" rs_id="4193"></path></svg></span></div> Even though it is possible to determine if a user is authenticated using the <code rs_id="4194" class=" language-php">check</code> method, you will typically use a middleware to verify that the user is authenticated before allowing the user access to certain routes / controllers. To learn more about this, check out the documentation on <a href="https://laravel.com/docs/5.6/authentication#protecting-routes" rs_id="4195">protecting routes</a>.</p>
+</blockquote>
+<p rs_id="4196"><a name="protecting-routes" rs_id="4197"></a></p>
+<h3 rs_id="4198">Protecting Routes</h3>
+<p rs_id="4199"><a href="https://laravel.com/docs/5.6/middleware" rs_id="4200">Route middleware</a> can be used to only allow authenticated users to access a given route. Laravel ships with an <code rs_id="4201" class=" language-php">auth</code> middleware, which is defined at <code rs_id="4202" class=" language-php">Illuminate\<span class="token package" rs_id="4203">Auth<span class="token punctuation" rs_id="4204">\</span>Middleware<span class="token punctuation" rs_id="4205">\</span>Authenticate</span></code>. Since this middleware is already registered in your HTTP kernel, all you need to do is attach the middleware to a route definition:</p>
+<pre rs_id="4206" class=" language-php"><code rs_id="4207" class=" language-php"><span class="token scope" rs_id="4208">Route<span class="token punctuation" rs_id="4209">::</span></span><span class="token function" rs_id="4210">get<span class="token punctuation" rs_id="4211">(</span></span><span class="token string" rs_id="4212">'profile'</span><span class="token punctuation" rs_id="4213">,</span> <span class="token keyword" rs_id="4214">function</span> <span class="token punctuation" rs_id="4215">(</span><span class="token punctuation" rs_id="4216">)</span> <span class="token punctuation" rs_id="4217">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4218"> // Only authenticated users may enter...
+</span><span class="token punctuation" rs_id="4219">}</span><span class="token punctuation" rs_id="4220">)</span><span class="token operator" rs_id="4221">-</span><span class="token operator" rs_id="4222">&gt;</span><span class="token function" rs_id="4223">middleware<span class="token punctuation" rs_id="4224">(</span></span><span class="token string" rs_id="4225">'auth'</span><span class="token punctuation" rs_id="4226">)</span><span class="token punctuation" rs_id="4227">;</span></code></pre>
+<p rs_id="4228">Of course, if you are using <a href="https://laravel.com/docs/5.6/controllers" rs_id="4229">controllers</a>, you may call the <code rs_id="4230" class=" language-php">middleware</code> method from the controller's constructor instead of attaching it in the route definition directly:</p>
+<pre rs_id="4231" class=" language-php"><code rs_id="4232" class=" language-php"><span class="token keyword" rs_id="4233">public</span> <span class="token keyword" rs_id="4234">function</span> <span class="token function" rs_id="4235">__construct<span class="token punctuation" rs_id="4236">(</span></span><span class="token punctuation" rs_id="4237">)</span>
+<span class="token punctuation" rs_id="4238">{</span>
+    <span class="token this" rs_id="4239">$this</span><span class="token operator" rs_id="4240">-</span><span class="token operator" rs_id="4241">&gt;</span><span class="token function" rs_id="4242">middleware<span class="token punctuation" rs_id="4243">(</span></span><span class="token string" rs_id="4244">'auth'</span><span class="token punctuation" rs_id="4245">)</span><span class="token punctuation" rs_id="4246">;</span>
+<span class="token punctuation" rs_id="4247">}</span></code></pre>
+<h4 rs_id="4248">Redirecting Unauthenticated Users</h4>
+<p rs_id="4249">When the <code rs_id="4250" class=" language-php">auth</code> middleware detects an unauthorized user, it will either return a JSON <code rs_id="4251" class=" language-php"><span class="token number" rs_id="4252">401</span></code> response, or, if the request was not an AJAX request, redirect the user to the <code rs_id="4253" class=" language-php">login</code> <a href="https://laravel.com/docs/5.6/routing#named-routes" rs_id="4254">named route</a>.</p>
+<p rs_id="4255">You may modify this behavior by defining an <code rs_id="4256" class=" language-php">unauthenticated</code> function in your <code rs_id="4257" class=" language-php">app<span class="token operator" rs_id="4258">/</span>Exceptions<span class="token operator" rs_id="4259">/</span>Handler<span class="token punctuation" rs_id="4260">.</span>php</code> file:</p>
+<pre rs_id="4261" class=" language-php"><code rs_id="4262" class=" language-php"><span class="token keyword" rs_id="4263">use</span> <span class="token package" rs_id="4264">Illuminate<span class="token punctuation" rs_id="4265">\</span>Auth<span class="token punctuation" rs_id="4266">\</span>AuthenticationException</span><span class="token punctuation" rs_id="4267">;</span>
+
+<span class="token keyword" rs_id="4268">protected</span> <span class="token keyword" rs_id="4269">function</span> <span class="token function" rs_id="4270">unauthenticated<span class="token punctuation" rs_id="4271">(</span></span><span class="token variable" rs_id="4272">$request</span><span class="token punctuation" rs_id="4273">,</span> AuthenticationException <span class="token variable" rs_id="4274">$exception</span><span class="token punctuation" rs_id="4275">)</span>
+<span class="token punctuation" rs_id="4276">{</span>
+    <span class="token keyword" rs_id="4277">return</span> <span class="token variable" rs_id="4278">$request</span><span class="token operator" rs_id="4279">-</span><span class="token operator" rs_id="4280">&gt;</span><span class="token function" rs_id="4281">expectsJson<span class="token punctuation" rs_id="4282">(</span></span><span class="token punctuation" rs_id="4283">)</span>
+                <span class="token operator" rs_id="4284">?</span> <span class="token function" rs_id="4285">response<span class="token punctuation" rs_id="4286">(</span></span><span class="token punctuation" rs_id="4287">)</span><span class="token operator" rs_id="4288">-</span><span class="token operator" rs_id="4289">&gt;</span><span class="token function" rs_id="4290">json<span class="token punctuation" rs_id="4291">(</span></span><span class="token punctuation" rs_id="4292">[</span><span class="token string" rs_id="4293">'message'</span> <span class="token operator" rs_id="4294">=</span><span class="token operator" rs_id="4295">&gt;</span> <span class="token variable" rs_id="4296">$exception</span><span class="token operator" rs_id="4297">-</span><span class="token operator" rs_id="4298">&gt;</span><span class="token function" rs_id="4299">getMessage<span class="token punctuation" rs_id="4300">(</span></span><span class="token punctuation" rs_id="4301">)</span><span class="token punctuation" rs_id="4302">]</span><span class="token punctuation" rs_id="4303">,</span> <span class="token number" rs_id="4304">401</span><span class="token punctuation" rs_id="4305">)</span>
+                <span class="token punctuation" rs_id="4306">:</span> <span class="token function" rs_id="4307">redirect<span class="token punctuation" rs_id="4308">(</span></span><span class="token punctuation" rs_id="4309">)</span><span class="token operator" rs_id="4310">-</span><span class="token operator" rs_id="4311">&gt;</span><span class="token function" rs_id="4312">guest<span class="token punctuation" rs_id="4313">(</span></span><span class="token function" rs_id="4314">route<span class="token punctuation" rs_id="4315">(</span></span><span class="token string" rs_id="4316">'login'</span><span class="token punctuation" rs_id="4317">)</span><span class="token punctuation" rs_id="4318">)</span><span class="token punctuation" rs_id="4319">;</span>
+<span class="token punctuation" rs_id="4320">}</span></code></pre>
+<h4 rs_id="4321">Specifying A Guard</h4>
+<p rs_id="4322">When attaching the <code rs_id="4323" class=" language-php">auth</code> middleware to a route, you may also specify which guard should be used to authenticate the user. The guard specified should correspond to one of the keys in the <code rs_id="4324" class=" language-php">guards</code> array of your <code rs_id="4325" class=" language-php">auth<span class="token punctuation" rs_id="4326">.</span>php</code> configuration file:</p>
+<pre rs_id="4327" class=" language-php"><code rs_id="4328" class=" language-php"><span class="token keyword" rs_id="4329">public</span> <span class="token keyword" rs_id="4330">function</span> <span class="token function" rs_id="4331">__construct<span class="token punctuation" rs_id="4332">(</span></span><span class="token punctuation" rs_id="4333">)</span>
+<span class="token punctuation" rs_id="4334">{</span>
+    <span class="token this" rs_id="4335">$this</span><span class="token operator" rs_id="4336">-</span><span class="token operator" rs_id="4337">&gt;</span><span class="token function" rs_id="4338">middleware<span class="token punctuation" rs_id="4339">(</span></span><span class="token string" rs_id="4340">'auth:api'</span><span class="token punctuation" rs_id="4341">)</span><span class="token punctuation" rs_id="4342">;</span>
+<span class="token punctuation" rs_id="4343">}</span></code></pre>
+<p rs_id="4344"><a name="login-throttling" rs_id="4345"></a></p>
+<h3 rs_id="4346">Login Throttling</h3>
+<p rs_id="4347">If you are using Laravel's built-in <code rs_id="4348" class=" language-php">LoginController</code> class, the <code rs_id="4349" class=" language-php">Illuminate\<span class="token package" rs_id="4350">Foundation<span class="token punctuation" rs_id="4351">\</span>Auth<span class="token punctuation" rs_id="4352">\</span>ThrottlesLogins</span></code> trait will already be included in your controller. By default, the user will not be able to login for one minute if they fail to provide the correct credentials after several attempts. The throttling is unique to the user's username / e-mail address and their IP address.</p>
+<p rs_id="4353"><a name="authenticating-users" rs_id="4354"></a></p>
+<h2 rs_id="4355"><a href="https://laravel.com/docs/5.6/authentication#authenticating-users" rs_id="4356">Manually Authenticating Users</a></h2>
+<p rs_id="4357">Of course, you are not required to use the authentication controllers included with Laravel. If you choose to remove these controllers, you will need to manage user authentication using the Laravel authentication classes directly. Don't worry, it's a cinch!</p>
+<p rs_id="4358">We will access Laravel's authentication services via the <code rs_id="4359" class=" language-php">Auth</code> <a href="https://laravel.com/docs/5.6/facades" rs_id="4360">facade</a>, so we'll need to make sure to import the <code rs_id="4361" class=" language-php">Auth</code> facade at the top of the class. Next, let's check out the <code rs_id="4362" class=" language-php">attempt</code> method:</p>
+<pre rs_id="4363" class=" language-php"><code rs_id="4364" class=" language-php"><span class="token delimiter" rs_id="4365">&lt;?php</span>
+
+<span class="token keyword" rs_id="4366">namespace</span> <span class="token package" rs_id="4367">App<span class="token punctuation" rs_id="4368">\</span>Http<span class="token punctuation" rs_id="4369">\</span>Controllers</span><span class="token punctuation" rs_id="4370">;</span>
+
+<span class="token keyword" rs_id="4371">use</span> <span class="token package" rs_id="4372">Illuminate<span class="token punctuation" rs_id="4373">\</span>Http<span class="token punctuation" rs_id="4374">\</span>Request</span><span class="token punctuation" rs_id="4375">;</span>
+<span class="token keyword" rs_id="4376">use</span> <span class="token package" rs_id="4377">Illuminate<span class="token punctuation" rs_id="4378">\</span>Support<span class="token punctuation" rs_id="4379">\</span>Facades<span class="token punctuation" rs_id="4380">\</span>Auth</span><span class="token punctuation" rs_id="4381">;</span>
+
+<span class="token keyword" rs_id="4382">class</span> <span class="token class-name" rs_id="4383">LoginController</span> <span class="token keyword" rs_id="4384">extends</span> <span class="token class-name" rs_id="4385">Controller</span>
+<span class="token punctuation" rs_id="4386">{</span>
+    <span class="token comment" spellcheck="true" rs_id="4387">/**
+     * Handle an authentication attempt.
+     *
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return Response
+     */</span>
+    <span class="token keyword" rs_id="4388">public</span> <span class="token keyword" rs_id="4389">function</span> <span class="token function" rs_id="4390">authenticate<span class="token punctuation" rs_id="4391">(</span></span>Request <span class="token variable" rs_id="4392">$request</span><span class="token punctuation" rs_id="4393">)</span>
+    <span class="token punctuation" rs_id="4394">{</span>
+        <span class="token variable" rs_id="4395">$credentials</span> <span class="token operator" rs_id="4396">=</span> <span class="token variable" rs_id="4397">$request</span><span class="token operator" rs_id="4398">-</span><span class="token operator" rs_id="4399">&gt;</span><span class="token function" rs_id="4400">only<span class="token punctuation" rs_id="4401">(</span></span><span class="token string" rs_id="4402">'email'</span><span class="token punctuation" rs_id="4403">,</span> <span class="token string" rs_id="4404">'password'</span><span class="token punctuation" rs_id="4405">)</span><span class="token punctuation" rs_id="4406">;</span>
+
+        <span class="token keyword" rs_id="4407">if</span> <span class="token punctuation" rs_id="4408">(</span><span class="token scope" rs_id="4409">Auth<span class="token punctuation" rs_id="4410">::</span></span><span class="token function" rs_id="4411">attempt<span class="token punctuation" rs_id="4412">(</span></span><span class="token variable" rs_id="4413">$credentials</span><span class="token punctuation" rs_id="4414">)</span><span class="token punctuation" rs_id="4415">)</span> <span class="token punctuation" rs_id="4416">{</span>
+           <span class="token comment" spellcheck="true" rs_id="4417"> // Authentication passed...
+</span>            <span class="token keyword" rs_id="4418">return</span> <span class="token function" rs_id="4419">redirect<span class="token punctuation" rs_id="4420">(</span></span><span class="token punctuation" rs_id="4421">)</span><span class="token operator" rs_id="4422">-</span><span class="token operator" rs_id="4423">&gt;</span><span class="token function" rs_id="4424">intended<span class="token punctuation" rs_id="4425">(</span></span><span class="token string" rs_id="4426">'dashboard'</span><span class="token punctuation" rs_id="4427">)</span><span class="token punctuation" rs_id="4428">;</span>
+        <span class="token punctuation" rs_id="4429">}</span>
+    <span class="token punctuation" rs_id="4430">}</span>
+<span class="token punctuation" rs_id="4431">}</span></code></pre>
+<p rs_id="4432">The <code rs_id="4433" class=" language-php">attempt</code> method accepts an array of key / value pairs as its first argument. The values in the array will be used to find the user in your database table. So, in the example above, the user will be retrieved by the value of the <code rs_id="4434" class=" language-php">email</code> column. If the user is found, the hashed password stored in the database will be compared with the <code rs_id="4435" class=" language-php">password</code> value passed to the method via the array. You should not hash the password specified as the <code rs_id="4436" class=" language-php">password</code> value, since the framework will automatically hash the value before comparing it to the hashed password in the database. If the two hashed passwords match an authenticated session will be started for the user.</p>
+<p rs_id="4437">The <code rs_id="4438" class=" language-php">attempt</code> method will return <code rs_id="4439" class=" language-php"><span class="token boolean" rs_id="4440">true</span></code> if authentication was successful. Otherwise, <code rs_id="4441" class=" language-php"><span class="token boolean" rs_id="4442">false</span></code> will be returned.</p>
+<p rs_id="4443">The <code rs_id="4444" class=" language-php">intended</code> method on the redirector will redirect the user to the URL they were attempting to access before being intercepted by the authentication middleware. A fallback URI may be given to this method in case the intended destination is not available.</p>
+<h4 rs_id="4445">Specifying Additional Conditions</h4>
+<p rs_id="4446">If you wish, you may also add extra conditions to the authentication query in addition to the user's e-mail and password. For example, we may verify that user is marked as "active":</p>
+<pre rs_id="4447" class=" language-php"><code rs_id="4448" class=" language-php"><span class="token keyword" rs_id="4449">if</span> <span class="token punctuation" rs_id="4450">(</span><span class="token scope" rs_id="4451">Auth<span class="token punctuation" rs_id="4452">::</span></span><span class="token function" rs_id="4453">attempt<span class="token punctuation" rs_id="4454">(</span></span><span class="token punctuation" rs_id="4455">[</span><span class="token string" rs_id="4456">'email'</span> <span class="token operator" rs_id="4457">=</span><span class="token operator" rs_id="4458">&gt;</span> <span class="token variable" rs_id="4459">$email</span><span class="token punctuation" rs_id="4460">,</span> <span class="token string" rs_id="4461">'password'</span> <span class="token operator" rs_id="4462">=</span><span class="token operator" rs_id="4463">&gt;</span> <span class="token variable" rs_id="4464">$password</span><span class="token punctuation" rs_id="4465">,</span> <span class="token string" rs_id="4466">'active'</span> <span class="token operator" rs_id="4467">=</span><span class="token operator" rs_id="4468">&gt;</span> <span class="token number" rs_id="4469">1</span><span class="token punctuation" rs_id="4470">]</span><span class="token punctuation" rs_id="4471">)</span><span class="token punctuation" rs_id="4472">)</span> <span class="token punctuation" rs_id="4473">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4474"> // The user is active, not suspended, and exists.
+</span><span class="token punctuation" rs_id="4475">}</span></code></pre>
+<blockquote rs_id="4476" class="has-icon note">
+<p rs_id="4477"><div class="flag" rs_id="4478"><span class="svg" rs_id="4479"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" width="90px" height="90px" viewBox="0 0 90 90" enable-background="new 0 0 90 90" xml:space="preserve" rs_id="4480"><path fill="#FFFFFF" d="M45 0C20.1 0 0 20.1 0 45s20.1 45 45 45 45-20.1 45-45S69.9 0 45 0zM45 74.5c-3.6 0-6.5-2.9-6.5-6.5s2.9-6.5 6.5-6.5 6.5 2.9 6.5 6.5S48.6 74.5 45 74.5zM52.1 23.9l-2.5 29.6c0 2.5-2.1 4.6-4.6 4.6 -2.5 0-4.6-2.1-4.6-4.6l-2.5-29.6c-0.1-0.4-0.1-0.7-0.1-1.1 0-4 3.2-7.2 7.2-7.2 4 0 7.2 3.2 7.2 7.2C52.2 23.1 52.2 23.5 52.1 23.9z" rs_id="4481"></path></svg></span></div> In these examples, <code rs_id="4482" class=" language-php">email</code> is not a required option, it is merely used as an example. You should use whatever column name corresponds to a "username" in your database.</p>
+</blockquote>
+<h4 rs_id="4483">Accessing Specific Guard Instances</h4>
+<p rs_id="4484">You may specify which guard instance you would like to utilize using the <code rs_id="4485" class=" language-php">guard</code> method on the <code rs_id="4486" class=" language-php">Auth</code> facade. This allows you to manage authentication for separate parts of your application using entirely separate authenticatable models or user tables.</p>
+<p rs_id="4487">The guard name passed to the <code rs_id="4488" class=" language-php">guard</code> method should correspond to one of the guards configured in your <code rs_id="4489" class=" language-php">auth<span class="token punctuation" rs_id="4490">.</span>php</code> configuration file:</p>
+<pre rs_id="4491" class=" language-php"><code rs_id="4492" class=" language-php"><span class="token keyword" rs_id="4493">if</span> <span class="token punctuation" rs_id="4494">(</span><span class="token scope" rs_id="4495">Auth<span class="token punctuation" rs_id="4496">::</span></span><span class="token function" rs_id="4497">guard<span class="token punctuation" rs_id="4498">(</span></span><span class="token string" rs_id="4499">'admin'</span><span class="token punctuation" rs_id="4500">)</span><span class="token operator" rs_id="4501">-</span><span class="token operator" rs_id="4502">&gt;</span><span class="token function" rs_id="4503">attempt<span class="token punctuation" rs_id="4504">(</span></span><span class="token variable" rs_id="4505">$credentials</span><span class="token punctuation" rs_id="4506">)</span><span class="token punctuation" rs_id="4507">)</span> <span class="token punctuation" rs_id="4508">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4509"> //
+</span><span class="token punctuation" rs_id="4510">}</span></code></pre>
+<h4 rs_id="4511">Logging Out</h4>
+<p rs_id="4512">To log users out of your application, you may use the <code rs_id="4513" class=" language-php">logout</code> method on the <code rs_id="4514" class=" language-php">Auth</code> facade. This will clear the authentication information in the user's session:</p>
+<pre rs_id="4515" class=" language-php"><code rs_id="4516" class=" language-php"><span class="token scope" rs_id="4517">Auth<span class="token punctuation" rs_id="4518">::</span></span><span class="token function" rs_id="4519">logout<span class="token punctuation" rs_id="4520">(</span></span><span class="token punctuation" rs_id="4521">)</span><span class="token punctuation" rs_id="4522">;</span></code></pre>
+<p rs_id="4523"><a name="remembering-users" rs_id="4524"></a></p>
+<h3 rs_id="4525">Remembering Users</h3>
+<p rs_id="4526">If you would like to provide "remember me" functionality in your application, you may pass a boolean value as the second argument to the <code rs_id="4527" class=" language-php">attempt</code> method, which will keep the user authenticated indefinitely, or until they manually logout. Of course, your <code rs_id="4528" class=" language-php">users</code> table must include the string <code rs_id="4529" class=" language-php">remember_token</code> column, which will be used to store the "remember me" token.</p>
+<pre rs_id="4530" class=" language-php"><code rs_id="4531" class=" language-php"><span class="token keyword" rs_id="4532">if</span> <span class="token punctuation" rs_id="4533">(</span><span class="token scope" rs_id="4534">Auth<span class="token punctuation" rs_id="4535">::</span></span><span class="token function" rs_id="4536">attempt<span class="token punctuation" rs_id="4537">(</span></span><span class="token punctuation" rs_id="4538">[</span><span class="token string" rs_id="4539">'email'</span> <span class="token operator" rs_id="4540">=</span><span class="token operator" rs_id="4541">&gt;</span> <span class="token variable" rs_id="4542">$email</span><span class="token punctuation" rs_id="4543">,</span> <span class="token string" rs_id="4544">'password'</span> <span class="token operator" rs_id="4545">=</span><span class="token operator" rs_id="4546">&gt;</span> <span class="token variable" rs_id="4547">$password</span><span class="token punctuation" rs_id="4548">]</span><span class="token punctuation" rs_id="4549">,</span> <span class="token variable" rs_id="4550">$remember</span><span class="token punctuation" rs_id="4551">)</span><span class="token punctuation" rs_id="4552">)</span> <span class="token punctuation" rs_id="4553">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4554"> // The user is being remembered...
+</span><span class="token punctuation" rs_id="4555">}</span></code></pre>
+<blockquote rs_id="4556" class="has-icon tip">
+<p rs_id="4557"><div class="flag" rs_id="4558"><span class="svg" rs_id="4559"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" width="56.6px" height="87.5px" viewBox="0 0 56.6 87.5" enable-background="new 0 0 56.6 87.5" xml:space="preserve" rs_id="4560"><path fill="#FFFFFF" d="M28.7 64.5c-1.4 0-2.5-1.1-2.5-2.5v-5.7 -5V41c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5v10.1 5 5.8C31.2 63.4 30.1 64.5 28.7 64.5zM26.4 0.1C11.9 1 0.3 13.1 0 27.7c-0.1 7.9 3 15.2 8.2 20.4 0.5 0.5 0.8 1 1 1.7l3.1 13.1c0.3 1.1 1.3 1.9 2.4 1.9 0.3 0 0.7-0.1 1.1-0.2 1.1-0.5 1.6-1.8 1.4-3l-2-8.4 -0.4-1.8c-0.7-2.9-2-5.7-4-8 -1-1.2-2-2.5-2.7-3.9C5.8 35.3 4.7 30.3 5.4 25 6.7 14.5 15.2 6.3 25.6 5.1c13.9-1.5 25.8 9.4 25.8 23 0 4.1-1.1 7.9-2.9 11.2 -0.8 1.4-1.7 2.7-2.7 3.9 -2 2.3-3.3 5-4 8L41.4 53l-2 8.4c-0.3 1.2 0.3 2.5 1.4 3 0.3 0.2 0.7 0.2 1.1 0.2 1.1 0 2.2-0.8 2.4-1.9l3.1-13.1c0.2-0.6 0.5-1.2 1-1.7 5-5.1 8.2-12.1 8.2-19.8C56.4 12 42.8-1 26.4 0.1zM43.7 69.6c0 0.5-0.1 0.9-0.3 1.3 -0.4 0.8-0.7 1.6-0.9 2.5 -0.7 3-2 8.6-2 8.6 -1.3 3.2-4.4 5.5-7.9 5.5h-4.1H28h-0.5 -3.6c-3.5 0-6.7-2.4-7.9-5.7l-0.1-0.4 -1.8-7.8c-0.4-1.1-0.8-2.1-1.2-3.1 -0.1-0.3-0.2-0.5-0.2-0.9 0.1-1.3 1.3-2.1 2.6-2.1H41C42.4 67.5 43.6 68.2 43.7 69.6zM37.7 72.5H26.9c-4.2 0-7.2 3.9-6.3 7.9 0.6 1.3 1.8 2.1 3.2 2.1h4.1 0.5 0.5 3.6c1.4 0 2.7-0.8 3.2-2.1L37.7 72.5z" rs_id="4561"></path></svg></span></div> If you are using the built-in <code rs_id="4562" class=" language-php">LoginController</code> that is shipped with Laravel, the proper logic to "remember" users is already implemented by the traits used by the controller.</p>
+</blockquote>
+<p rs_id="4563">If you are "remembering" users, you may use the <code rs_id="4564" class=" language-php">viaRemember</code> method to determine if the user was authenticated using the "remember me" cookie:</p>
+<pre rs_id="4565" class=" language-php"><code rs_id="4566" class=" language-php"><span class="token keyword" rs_id="4567">if</span> <span class="token punctuation" rs_id="4568">(</span><span class="token scope" rs_id="4569">Auth<span class="token punctuation" rs_id="4570">::</span></span><span class="token function" rs_id="4571">viaRemember<span class="token punctuation" rs_id="4572">(</span></span><span class="token punctuation" rs_id="4573">)</span><span class="token punctuation" rs_id="4574">)</span> <span class="token punctuation" rs_id="4575">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4576"> //
+</span><span class="token punctuation" rs_id="4577">}</span></code></pre>
+<p rs_id="4578"><a name="other-authentication-methods" rs_id="4579"></a></p>
+<h3 rs_id="4580">Other Authentication Methods</h3>
+<h4 rs_id="4581">Authenticate A User Instance</h4>
+<p rs_id="4582">If you need to log an existing user instance into your application, you may call the <code rs_id="4583" class=" language-php">login</code> method with the user instance. The given object must be an implementation of the <code rs_id="4584" class=" language-php">Illuminate\<span class="token package" rs_id="4585">Contracts<span class="token punctuation" rs_id="4586">\</span>Auth<span class="token punctuation" rs_id="4587">\</span>Authenticatable</span></code> <a href="https://laravel.com/docs/5.6/contracts" rs_id="4588">contract</a>. Of course, the <code rs_id="4589" class=" language-php">App\<span class="token package" rs_id="4590">User</span></code> model included with Laravel already implements this interface:</p>
+<pre rs_id="4591" class=" language-php"><code rs_id="4592" class=" language-php"><span class="token scope" rs_id="4593">Auth<span class="token punctuation" rs_id="4594">::</span></span><span class="token function" rs_id="4595">login<span class="token punctuation" rs_id="4596">(</span></span><span class="token variable" rs_id="4597">$user</span><span class="token punctuation" rs_id="4598">)</span><span class="token punctuation" rs_id="4599">;</span>
+<span class="token comment" spellcheck="true" rs_id="4600">
+// Login and "remember" the given user...
+</span><span class="token scope" rs_id="4601">Auth<span class="token punctuation" rs_id="4602">::</span></span><span class="token function" rs_id="4603">login<span class="token punctuation" rs_id="4604">(</span></span><span class="token variable" rs_id="4605">$user</span><span class="token punctuation" rs_id="4606">,</span> <span class="token boolean" rs_id="4607">true</span><span class="token punctuation" rs_id="4608">)</span><span class="token punctuation" rs_id="4609">;</span></code></pre>
+<p rs_id="4610">Of course, you may specify the guard instance you would like to use:</p>
+<pre rs_id="4611" class=" language-php"><code rs_id="4612" class=" language-php"><span class="token scope" rs_id="4613">Auth<span class="token punctuation" rs_id="4614">::</span></span><span class="token function" rs_id="4615">guard<span class="token punctuation" rs_id="4616">(</span></span><span class="token string" rs_id="4617">'admin'</span><span class="token punctuation" rs_id="4618">)</span><span class="token operator" rs_id="4619">-</span><span class="token operator" rs_id="4620">&gt;</span><span class="token function" rs_id="4621">login<span class="token punctuation" rs_id="4622">(</span></span><span class="token variable" rs_id="4623">$user</span><span class="token punctuation" rs_id="4624">)</span><span class="token punctuation" rs_id="4625">;</span></code></pre>
+<h4 rs_id="4626">Authenticate A User By ID</h4>
+<p rs_id="4627">To log a user into the application by their ID, you may use the <code rs_id="4628" class=" language-php">loginUsingId</code> method. This method accepts the primary key of the user you wish to authenticate:</p>
+<pre rs_id="4629" class=" language-php"><code rs_id="4630" class=" language-php"><span class="token scope" rs_id="4631">Auth<span class="token punctuation" rs_id="4632">::</span></span><span class="token function" rs_id="4633">loginUsingId<span class="token punctuation" rs_id="4634">(</span></span><span class="token number" rs_id="4635">1</span><span class="token punctuation" rs_id="4636">)</span><span class="token punctuation" rs_id="4637">;</span>
+<span class="token comment" spellcheck="true" rs_id="4638">
+// Login and "remember" the given user...
+</span><span class="token scope" rs_id="4639">Auth<span class="token punctuation" rs_id="4640">::</span></span><span class="token function" rs_id="4641">loginUsingId<span class="token punctuation" rs_id="4642">(</span></span><span class="token number" rs_id="4643">1</span><span class="token punctuation" rs_id="4644">,</span> <span class="token boolean" rs_id="4645">true</span><span class="token punctuation" rs_id="4646">)</span><span class="token punctuation" rs_id="4647">;</span></code></pre>
+<h4 rs_id="4648">Authenticate A User Once</h4>
+<p rs_id="4649">You may use the <code rs_id="4650" class=" language-php">once</code> method to log a user into the application for a single request. No sessions or cookies will be utilized, which means this method may be helpful when building a stateless API:</p>
+<pre rs_id="4651" class=" language-php"><code rs_id="4652" class=" language-php"><span class="token keyword" rs_id="4653">if</span> <span class="token punctuation" rs_id="4654">(</span><span class="token scope" rs_id="4655">Auth<span class="token punctuation" rs_id="4656">::</span></span><span class="token function" rs_id="4657">once<span class="token punctuation" rs_id="4658">(</span></span><span class="token variable" rs_id="4659">$credentials</span><span class="token punctuation" rs_id="4660">)</span><span class="token punctuation" rs_id="4661">)</span> <span class="token punctuation" rs_id="4662">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4663"> //
+</span><span class="token punctuation" rs_id="4664">}</span></code></pre>
+<p rs_id="4665"><a name="http-basic-authentication" rs_id="4666"></a></p>
+<h2 rs_id="4667"><a href="https://laravel.com/docs/5.6/authentication#http-basic-authentication" rs_id="4668">HTTP Basic Authentication</a></h2>
+<p rs_id="4669"><a href="https://en.wikipedia.org/wiki/Basic_access_authentication" rs_id="4670">HTTP Basic Authentication</a> provides a quick way to authenticate users of your application without setting up a dedicated "login" page. To get started, attach the <code rs_id="4671" class=" language-php">auth<span class="token punctuation" rs_id="4672">.</span>basic</code> <a href="https://laravel.com/docs/5.6/middleware" rs_id="4673">middleware</a> to your route. The <code rs_id="4674" class=" language-php">auth<span class="token punctuation" rs_id="4675">.</span>basic</code> middleware is included with the Laravel framework, so you do not need to define it:</p>
+<pre rs_id="4676" class=" language-php"><code rs_id="4677" class=" language-php"><span class="token scope" rs_id="4678">Route<span class="token punctuation" rs_id="4679">::</span></span><span class="token function" rs_id="4680">get<span class="token punctuation" rs_id="4681">(</span></span><span class="token string" rs_id="4682">'profile'</span><span class="token punctuation" rs_id="4683">,</span> <span class="token keyword" rs_id="4684">function</span> <span class="token punctuation" rs_id="4685">(</span><span class="token punctuation" rs_id="4686">)</span> <span class="token punctuation" rs_id="4687">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4688"> // Only authenticated users may enter...
+</span><span class="token punctuation" rs_id="4689">}</span><span class="token punctuation" rs_id="4690">)</span><span class="token operator" rs_id="4691">-</span><span class="token operator" rs_id="4692">&gt;</span><span class="token function" rs_id="4693">middleware<span class="token punctuation" rs_id="4694">(</span></span><span class="token string" rs_id="4695">'auth.basic'</span><span class="token punctuation" rs_id="4696">)</span><span class="token punctuation" rs_id="4697">;</span></code></pre>
+<p rs_id="4698">Once the middleware has been attached to the route, you will automatically be prompted for credentials when accessing the route in your browser. By default, the <code rs_id="4699" class=" language-php">auth<span class="token punctuation" rs_id="4700">.</span>basic</code> middleware will use the <code rs_id="4701" class=" language-php">email</code> column on the user record as the "username".</p>
+<h4 rs_id="4702">A Note On FastCGI</h4>
+<p rs_id="4703">If you are using PHP FastCGI, HTTP Basic authentication may not work correctly out of the box. The following lines should be added to your <code rs_id="4704" class=" language-php"><span class="token punctuation" rs_id="4705">.</span>htaccess</code> file:</p>
+<pre rs_id="4706" class=" language-php"><code rs_id="4707" class=" language-php">RewriteCond <span class="token operator" rs_id="4708">%</span><span class="token punctuation" rs_id="4709">{</span><span class="token constant" rs_id="4710">HTTP</span><span class="token punctuation" rs_id="4711">:</span>Authorization<span class="token punctuation" rs_id="4712">}</span> <span class="token operator" rs_id="4713">^</span><span class="token punctuation" rs_id="4714">(</span><span class="token punctuation" rs_id="4715">.</span><span class="token operator" rs_id="4716">+</span><span class="token punctuation" rs_id="4717">)</span>$
+RewriteRule <span class="token punctuation" rs_id="4718">.</span><span class="token operator" rs_id="4719">*</span> <span class="token operator" rs_id="4720">-</span> <span class="token punctuation" rs_id="4721">[</span>E<span class="token operator" rs_id="4722">=</span><span class="token constant" rs_id="4723">HTTP_AUTHORIZATION</span><span class="token punctuation" rs_id="4724">:</span><span class="token operator" rs_id="4725">%</span><span class="token punctuation" rs_id="4726">{</span><span class="token constant" rs_id="4727">HTTP</span><span class="token punctuation" rs_id="4728">:</span>Authorization<span class="token punctuation" rs_id="4729">}</span><span class="token punctuation" rs_id="4730">]</span></code></pre>
+<p rs_id="4731"><a name="stateless-http-basic-authentication" rs_id="4732"></a></p>
+<h3 rs_id="4733">Stateless HTTP Basic Authentication</h3>
+<p rs_id="4734">You may also use HTTP Basic Authentication without setting a user identifier cookie in the session, which is particularly useful for API authentication. To do so, <a href="https://laravel.com/docs/5.6/middleware" rs_id="4735">define a middleware</a> that calls the <code rs_id="4736" class=" language-php">onceBasic</code> method. If no response is returned by the <code rs_id="4737" class=" language-php">onceBasic</code> method, the request may be passed further into the application:</p>
+<pre rs_id="4738" class=" language-php"><code rs_id="4739" class=" language-php"><span class="token delimiter" rs_id="4740">&lt;?php</span>
+
+<span class="token keyword" rs_id="4741">namespace</span> <span class="token package" rs_id="4742">App<span class="token punctuation" rs_id="4743">\</span>Http<span class="token punctuation" rs_id="4744">\</span>Middleware</span><span class="token punctuation" rs_id="4745">;</span>
+
+<span class="token keyword" rs_id="4746">use</span> <span class="token package" rs_id="4747">Illuminate<span class="token punctuation" rs_id="4748">\</span>Support<span class="token punctuation" rs_id="4749">\</span>Facades<span class="token punctuation" rs_id="4750">\</span>Auth</span><span class="token punctuation" rs_id="4751">;</span>
+
+<span class="token keyword" rs_id="4752">class</span> <span class="token class-name" rs_id="4753">AuthenticateOnceWithBasicAuth</span>
+<span class="token punctuation" rs_id="4754">{</span>
+    <span class="token comment" spellcheck="true" rs_id="4755">/**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */</span>
+    <span class="token keyword" rs_id="4756">public</span> <span class="token keyword" rs_id="4757">function</span> <span class="token function" rs_id="4758">handle<span class="token punctuation" rs_id="4759">(</span></span><span class="token variable" rs_id="4760">$request</span><span class="token punctuation" rs_id="4761">,</span> <span class="token variable" rs_id="4762">$next</span><span class="token punctuation" rs_id="4763">)</span>
+    <span class="token punctuation" rs_id="4764">{</span>
+        <span class="token keyword" rs_id="4765">return</span> <span class="token scope" rs_id="4766">Auth<span class="token punctuation" rs_id="4767">::</span></span><span class="token function" rs_id="4768">onceBasic<span class="token punctuation" rs_id="4769">(</span></span><span class="token punctuation" rs_id="4770">)</span> <span class="token operator" rs_id="4771">?</span><span class="token punctuation" rs_id="4772">:</span> <span class="token variable" rs_id="4773">$next</span><span class="token punctuation" rs_id="4774">(</span><span class="token variable" rs_id="4775">$request</span><span class="token punctuation" rs_id="4776">)</span><span class="token punctuation" rs_id="4777">;</span>
+    <span class="token punctuation" rs_id="4778">}</span>
+
+<span class="token punctuation" rs_id="4779">}</span></code></pre>
+<p rs_id="4780">Next, <a href="https://laravel.com/docs/5.6/middleware#registering-middleware" rs_id="4781">register the route middleware</a> and attach it to a route:</p>
+<pre rs_id="4782" class=" language-php"><code rs_id="4783" class=" language-php"><span class="token scope" rs_id="4784">Route<span class="token punctuation" rs_id="4785">::</span></span><span class="token function" rs_id="4786">get<span class="token punctuation" rs_id="4787">(</span></span><span class="token string" rs_id="4788">'api/user'</span><span class="token punctuation" rs_id="4789">,</span> <span class="token keyword" rs_id="4790">function</span> <span class="token punctuation" rs_id="4791">(</span><span class="token punctuation" rs_id="4792">)</span> <span class="token punctuation" rs_id="4793">{</span>
+   <span class="token comment" spellcheck="true" rs_id="4794"> // Only authenticated users may enter...
+</span><span class="token punctuation" rs_id="4795">}</span><span class="token punctuation" rs_id="4796">)</span><span class="token operator" rs_id="4797">-</span><span class="token operator" rs_id="4798">&gt;</span><span class="token function" rs_id="4799">middleware<span class="token punctuation" rs_id="4800">(</span></span><span class="token string" rs_id="4801">'auth.basic.once'</span><span class="token punctuation" rs_id="4802">)</span><span class="token punctuation" rs_id="4803">;</span></code></pre>
+<p rs_id="4804"><a name="logging-out" rs_id="4805"></a></p>
+<h2 rs_id="4806"><a href="https://laravel.com/docs/5.6/authentication#logging-out" rs_id="4807">Logging Out</a></h2>
+<p rs_id="4808">To manually log users out of your application, you may use the <code rs_id="4809" class=" language-php">logout</code> method on the <code rs_id="4810" class=" language-php">Auth</code> facade. This will clear the authentication information in the user's session:</p>
+<pre rs_id="4811" class=" language-php"><code rs_id="4812" class=" language-php"><span class="token keyword" rs_id="4813">use</span> <span class="token package" rs_id="4814">Illuminate<span class="token punctuation" rs_id="4815">\</span>Support<span class="token punctuation" rs_id="4816">\</span>Facades<span class="token punctuation" rs_id="4817">\</span>Auth</span><span class="token punctuation" rs_id="4818">;</span>
+
+<span class="token scope" rs_id="4819">Auth<span class="token punctuation" rs_id="4820">::</span></span><span class="token function" rs_id="4821">logout<span class="token punctuation" rs_id="4822">(</span></span><span class="token punctuation" rs_id="4823">)</span><span class="token punctuation" rs_id="4824">;</span></code></pre>
+<p rs_id="4825"><a name="invalidating-sessions-on-other-devices" rs_id="4826"></a></p>
+<h3 rs_id="4827">Invalidating Sessions On Other Devices</h3>
+<p rs_id="4828">Laravel also provides a mechanism for invalidating and "logging out" a user's sessions that are active on other devices without invalidating the session on their current device. Before getting started, you should make sure that the <code rs_id="4829" class=" language-php">Illuminate\<span class="token package" rs_id="4830">Session<span class="token punctuation" rs_id="4831">\</span>Middleware<span class="token punctuation" rs_id="4832">\</span>AuthenticateSession</span></code> middleware is present and un-commented in your <code rs_id="4833" class=" language-php">app<span class="token operator" rs_id="4834">/</span>Http<span class="token operator" rs_id="4835">/</span>Kernel<span class="token punctuation" rs_id="4836">.</span>php</code> class' <code rs_id="4837" class=" language-php">web</code> middleware group:</p>
+<pre rs_id="4838" class=" language-php"><code rs_id="4839" class=" language-php"><span class="token string" rs_id="4840">'web'</span> <span class="token operator" rs_id="4841">=</span><span class="token operator" rs_id="4842">&gt;</span> <span class="token punctuation" rs_id="4843">[</span>
+   <span class="token comment" spellcheck="true" rs_id="4844"> // ...
+</span>    \<span class="token scope" rs_id="4845">Illuminate<span class="token punctuation" rs_id="4846">\</span>Session<span class="token punctuation" rs_id="4847">\</span>Middleware<span class="token punctuation" rs_id="4848">\</span>AuthenticateSession<span class="token punctuation" rs_id="4849">::</span></span><span class="token keyword" rs_id="4850">class</span><span class="token punctuation" rs_id="4851">,</span>
+   <span class="token comment" spellcheck="true" rs_id="4852"> // ...
+</span><span class="token punctuation" rs_id="4853">]</span><span class="token punctuation" rs_id="4854">,</span></code></pre>
+<p rs_id="4855">Then, you may use the <code rs_id="4856" class=" language-php">logoutOtherDevices</code> method on the <code rs_id="4857" class=" language-php">Auth</code> facade. This method requires the user to provide their current password, which your application should accept through an input form:</p>
+<pre rs_id="4858" class=" language-php"><code rs_id="4859" class=" language-php"><span class="token keyword" rs_id="4860">use</span> <span class="token package" rs_id="4861">Illuminate<span class="token punctuation" rs_id="4862">\</span>Support<span class="token punctuation" rs_id="4863">\</span>Facades<span class="token punctuation" rs_id="4864">\</span>Auth</span><span class="token punctuation" rs_id="4865">;</span>
+
+<span class="token scope" rs_id="4866">Auth<span class="token punctuation" rs_id="4867">::</span></span><span class="token function" rs_id="4868">logoutOtherDevices<span class="token punctuation" rs_id="4869">(</span></span><span class="token variable" rs_id="4870">$password</span><span class="token punctuation" rs_id="4871">)</span><span class="token punctuation" rs_id="4872">;</span></code></pre>
+<blockquote rs_id="4873" class="has-icon note">
+<p rs_id="4874"><div class="flag" rs_id="4875"><span class="svg" rs_id="4876"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" width="90px" height="90px" viewBox="0 0 90 90" enable-background="new 0 0 90 90" xml:space="preserve" rs_id="4877"><path fill="#FFFFFF" d="M45 0C20.1 0 0 20.1 0 45s20.1 45 45 45 45-20.1 45-45S69.9 0 45 0zM45 74.5c-3.6 0-6.5-2.9-6.5-6.5s2.9-6.5 6.5-6.5 6.5 2.9 6.5 6.5S48.6 74.5 45 74.5zM52.1 23.9l-2.5 29.6c0 2.5-2.1 4.6-4.6 4.6 -2.5 0-4.6-2.1-4.6-4.6l-2.5-29.6c-0.1-0.4-0.1-0.7-0.1-1.1 0-4 3.2-7.2 7.2-7.2 4 0 7.2 3.2 7.2 7.2C52.2 23.1 52.2 23.5 52.1 23.9z" rs_id="4878"></path></svg></span></div> When the <code rs_id="4879" class=" language-php">logoutOtherDevices</code> method is invoked, the user's other sessions will be invalidated entirely, meaning they will be "logged out" of all guards they were previously authenticated by.</p>
+</blockquote>
+<p rs_id="4880"><a name="adding-custom-guards" rs_id="4881"></a></p>
+<h2 rs_id="4882"><a href="https://laravel.com/docs/5.6/authentication#adding-custom-guards" rs_id="4883">Adding Custom Guards</a></h2>
+<p rs_id="4884">You may define your own authentication guards using the <code rs_id="4885" class=" language-php">extend</code> method on the <code rs_id="4886" class=" language-php">Auth</code> facade. You should place this call to <code rs_id="4887" class=" language-php">extend</code> within a <a href="https://laravel.com/docs/5.6/providers" rs_id="4888">service provider</a>. Since Laravel already ships with an <code rs_id="4889" class=" language-php">AuthServiceProvider</code>, we can place the code in that provider:</p>
+<pre rs_id="4890" class=" language-php"><code rs_id="4891" class=" language-php"><span class="token delimiter" rs_id="4892">&lt;?php</span>
+
+<span class="token keyword" rs_id="4893">namespace</span> <span class="token package" rs_id="4894">App<span class="token punctuation" rs_id="4895">\</span>Providers</span><span class="token punctuation" rs_id="4896">;</span>
+
+<span class="token keyword" rs_id="4897">use</span> <span class="token package" rs_id="4898">App<span class="token punctuation" rs_id="4899">\</span>Services<span class="token punctuation" rs_id="4900">\</span>Auth<span class="token punctuation" rs_id="4901">\</span>JwtGuard</span><span class="token punctuation" rs_id="4902">;</span>
+<span class="token keyword" rs_id="4903">use</span> <span class="token package" rs_id="4904">Illuminate<span class="token punctuation" rs_id="4905">\</span>Support<span class="token punctuation" rs_id="4906">\</span>Facades<span class="token punctuation" rs_id="4907">\</span>Auth</span><span class="token punctuation" rs_id="4908">;</span>
+<span class="token keyword" rs_id="4909">use</span> <span class="token package" rs_id="4910">Illuminate<span class="token punctuation" rs_id="4911">\</span>Foundation<span class="token punctuation" rs_id="4912">\</span>Support<span class="token punctuation" rs_id="4913">\</span>Providers<span class="token punctuation" rs_id="4914">\</span>AuthServiceProvider</span> <span class="token keyword" rs_id="4915">as</span> ServiceProvider<span class="token punctuation" rs_id="4916">;</span>
+
+<span class="token keyword" rs_id="4917">class</span> <span class="token class-name" rs_id="4918">AuthServiceProvider</span> <span class="token keyword" rs_id="4919">extends</span> <span class="token class-name" rs_id="4920">ServiceProvider</span>
+<span class="token punctuation" rs_id="4921">{</span>
+    <span class="token comment" spellcheck="true" rs_id="4922">/**
+     * Register any application authentication / authorization services.
+     *
+     * @return void
+     */</span>
+    <span class="token keyword" rs_id="4923">public</span> <span class="token keyword" rs_id="4924">function</span> <span class="token function" rs_id="4925">boot<span class="token punctuation" rs_id="4926">(</span></span><span class="token punctuation" rs_id="4927">)</span>
+    <span class="token punctuation" rs_id="4928">{</span>
+        <span class="token this" rs_id="4929">$this</span><span class="token operator" rs_id="4930">-</span><span class="token operator" rs_id="4931">&gt;</span><span class="token function" rs_id="4932">registerPolicies<span class="token punctuation" rs_id="4933">(</span></span><span class="token punctuation" rs_id="4934">)</span><span class="token punctuation" rs_id="4935">;</span>
+
+        <span class="token scope" rs_id="4936">Auth<span class="token punctuation" rs_id="4937">::</span></span><span class="token function" rs_id="4938">extend<span class="token punctuation" rs_id="4939">(</span></span><span class="token string" rs_id="4940">'jwt'</span><span class="token punctuation" rs_id="4941">,</span> <span class="token keyword" rs_id="4942">function</span> <span class="token punctuation" rs_id="4943">(</span><span class="token variable" rs_id="4944">$app</span><span class="token punctuation" rs_id="4945">,</span> <span class="token variable" rs_id="4946">$name</span><span class="token punctuation" rs_id="4947">,</span> <span class="token keyword" rs_id="4948">array</span> <span class="token variable" rs_id="4949">$config</span><span class="token punctuation" rs_id="4950">)</span> <span class="token punctuation" rs_id="4951">{</span>
+           <span class="token comment" spellcheck="true" rs_id="4952"> // Return an instance of Illuminate\Contracts\Auth\Guard...
+</span>
+            <span class="token keyword" rs_id="4953">return</span> <span class="token keyword" rs_id="4954">new</span> <span class="token class-name" rs_id="4955">JwtGuard</span><span class="token punctuation" rs_id="4956">(</span><span class="token scope" rs_id="4957">Auth<span class="token punctuation" rs_id="4958">::</span></span><span class="token function" rs_id="4959">createUserProvider<span class="token punctuation" rs_id="4960">(</span></span><span class="token variable" rs_id="4961">$config</span><span class="token punctuation" rs_id="4962">[</span><span class="token string" rs_id="4963">'provider'</span><span class="token punctuation" rs_id="4964">]</span><span class="token punctuation" rs_id="4965">)</span><span class="token punctuation" rs_id="4966">)</span><span class="token punctuation" rs_id="4967">;</span>
+        <span class="token punctuation" rs_id="4968">}</span><span class="token punctuation" rs_id="4969">)</span><span class="token punctuation" rs_id="4970">;</span>
+    <span class="token punctuation" rs_id="4971">}</span>
+<span class="token punctuation" rs_id="4972">}</span></code></pre>
+<p rs_id="4973">As you can see in the example above, the callback passed to the <code rs_id="4974" class=" language-php">extend</code> method should return an implementation of <code rs_id="4975" class=" language-php">Illuminate\<span class="token package" rs_id="4976">Contracts<span class="token punctuation" rs_id="4977">\</span>Auth<span class="token punctuation" rs_id="4978">\</span>Guard</span></code>. This interface contains a few methods you will need to implement to define a custom guard. Once your custom guard has been defined, you may use this guard in the <code rs_id="4979" class=" language-php">guards</code> configuration of your <code rs_id="4980" class=" language-php">auth<span class="token punctuation" rs_id="4981">.</span>php</code> configuration file:</p>
+<pre rs_id="4982" class=" language-php"><code rs_id="4983" class=" language-php"><span class="token string" rs_id="4984">'guards'</span> <span class="token operator" rs_id="4985">=</span><span class="token operator" rs_id="4986">&gt;</span> <span class="token punctuation" rs_id="4987">[</span>
+    <span class="token string" rs_id="4988">'api'</span> <span class="token operator" rs_id="4989">=</span><span class="token operator" rs_id="4990">&gt;</span> <span class="token punctuation" rs_id="4991">[</span>
+        <span class="token string" rs_id="4992">'driver'</span> <span class="token operator" rs_id="4993">=</span><span class="token operator" rs_id="4994">&gt;</span> <span class="token string" rs_id="4995">'jwt'</span><span class="token punctuation" rs_id="4996">,</span>
+        <span class="token string" rs_id="4997">'provider'</span> <span class="token operator" rs_id="4998">=</span><span class="token operator" rs_id="4999">&gt;</span> <span class="token string" rs_id="5000">'users'</span><span class="token punctuation" rs_id="5001">,</span>
+    <span class="token punctuation" rs_id="5002">]</span><span class="token punctuation" rs_id="5003">,</span>
+<span class="token punctuation" rs_id="5004">]</span><span class="token punctuation" rs_id="5005">,</span></code></pre>
+<p rs_id="5006"><a name="closure-request-guards" rs_id="5007"></a></p>
+<h3 rs_id="5008">Closure Request Guards</h3>
+<p rs_id="5009">The simplest way to implement a custom, HTTP request based authentication system is by using the <code rs_id="5010" class=" language-php"><span class="token scope" rs_id="5011">Auth<span class="token punctuation" rs_id="5012">::</span></span>viaRequest</code> method. This method allows you to quickly define your authentication process using a single Closure.</p>
+<p rs_id="5013">To get started, call the <code rs_id="5014" class=" language-php"><span class="token scope" rs_id="5015">Auth<span class="token punctuation" rs_id="5016">::</span></span>viaRequest</code> method within the <code rs_id="5017" class=" language-php">boot</code> method of your <code rs_id="5018" class=" language-php">AuthServiceProvider</code>. The <code rs_id="5019" class=" language-php">viaRequest</code> method accepts a guard name as its first argument. This name can be any string that describes your custom guard. The second argument passed to the method should be a Closure that receives the incoming HTTP request and returns a user instance or, if authentication fails, <code rs_id="5020" class=" language-php"><span class="token keyword" rs_id="5021">null</span></code>:</p>
+<pre rs_id="5022" class=" language-php"><code rs_id="5023" class=" language-php"><span class="token keyword" rs_id="5024">use</span> <span class="token package" rs_id="5025">App<span class="token punctuation" rs_id="5026">\</span>User</span><span class="token punctuation" rs_id="5027">;</span>
+<span class="token keyword" rs_id="5028">use</span> <span class="token package" rs_id="5029">Illuminate<span class="token punctuation" rs_id="5030">\</span>Http<span class="token punctuation" rs_id="5031">\</span>Request</span><span class="token punctuation" rs_id="5032">;</span>
+<span class="token keyword" rs_id="5033">use</span> <span class="token package" rs_id="5034">Illuminate<span class="token punctuation" rs_id="5035">\</span>Support<span class="token punctuation" rs_id="5036">\</span>Facades<span class="token punctuation" rs_id="5037">\</span>Auth</span><span class="token punctuation" rs_id="5038">;</span>
+
+<span class="token comment" spellcheck="true" rs_id="5039">/**
+ * Register any application authentication / authorization services.
+ *
+ * @return void
+ */</span>
+<span class="token keyword" rs_id="5040">public</span> <span class="token keyword" rs_id="5041">function</span> <span class="token function" rs_id="5042">boot<span class="token punctuation" rs_id="5043">(</span></span><span class="token punctuation" rs_id="5044">)</span>
+<span class="token punctuation" rs_id="5045">{</span>
+    <span class="token this" rs_id="5046">$this</span><span class="token operator" rs_id="5047">-</span><span class="token operator" rs_id="5048">&gt;</span><span class="token function" rs_id="5049">registerPolicies<span class="token punctuation" rs_id="5050">(</span></span><span class="token punctuation" rs_id="5051">)</span><span class="token punctuation" rs_id="5052">;</span>
+
+    <span class="token scope" rs_id="5053">Auth<span class="token punctuation" rs_id="5054">::</span></span><span class="token function" rs_id="5055">viaRequest<span class="token punctuation" rs_id="5056">(</span></span><span class="token string" rs_id="5057">'custom-token'</span><span class="token punctuation" rs_id="5058">,</span> <span class="token keyword" rs_id="5059">function</span> <span class="token punctuation" rs_id="5060">(</span><span class="token variable" rs_id="5061">$request</span><span class="token punctuation" rs_id="5062">)</span> <span class="token punctuation" rs_id="5063">{</span>
+        <span class="token keyword" rs_id="5064">return</span> <span class="token scope" rs_id="5065">User<span class="token punctuation" rs_id="5066">::</span></span><span class="token function" rs_id="5067">where<span class="token punctuation" rs_id="5068">(</span></span><span class="token string" rs_id="5069">'token'</span><span class="token punctuation" rs_id="5070">,</span> <span class="token variable" rs_id="5071">$request</span><span class="token operator" rs_id="5072">-</span><span class="token operator" rs_id="5073">&gt;</span><span class="token property" rs_id="5074">token</span><span class="token punctuation" rs_id="5075">)</span><span class="token operator" rs_id="5076">-</span><span class="token operator" rs_id="5077">&gt;</span><span class="token function" rs_id="5078">first<span class="token punctuation" rs_id="5079">(</span></span><span class="token punctuation" rs_id="5080">)</span><span class="token punctuation" rs_id="5081">;</span>
+    <span class="token punctuation" rs_id="5082">}</span><span class="token punctuation" rs_id="5083">)</span><span class="token punctuation" rs_id="5084">;</span>
+<span class="token punctuation" rs_id="5085">}</span></code></pre>
+<p rs_id="5086">Once your custom guard has been defined, you may use this guard in the <code rs_id="5087" class=" language-php">guards</code> configuration of your <code rs_id="5088" class=" language-php">auth<span class="token punctuation" rs_id="5089">.</span>php</code> configuration file:</p>
+<pre rs_id="5090" class=" language-php"><code rs_id="5091" class=" language-php"><span class="token string" rs_id="5092">'guards'</span> <span class="token operator" rs_id="5093">=</span><span class="token operator" rs_id="5094">&gt;</span> <span class="token punctuation" rs_id="5095">[</span>
+    <span class="token string" rs_id="5096">'api'</span> <span class="token operator" rs_id="5097">=</span><span class="token operator" rs_id="5098">&gt;</span> <span class="token punctuation" rs_id="5099">[</span>
+        <span class="token string" rs_id="5100">'driver'</span> <span class="token operator" rs_id="5101">=</span><span class="token operator" rs_id="5102">&gt;</span> <span class="token string" rs_id="5103">'custom-token'</span><span class="token punctuation" rs_id="5104">,</span>
+    <span class="token punctuation" rs_id="5105">]</span><span class="token punctuation" rs_id="5106">,</span>
+<span class="token punctuation" rs_id="5107">]</span><span class="token punctuation" rs_id="5108">,</span></code></pre>
+<p rs_id="5109"><a name="adding-custom-user-providers" rs_id="5110"></a></p>
+<h2 rs_id="5111"><a href="https://laravel.com/docs/5.6/authentication#adding-custom-user-providers" rs_id="5112">Adding Custom User Providers</a></h2>
+<p rs_id="5113">If you are not using a traditional relational database to store your users, you will need to extend Laravel with your own authentication user provider. We will use the <code rs_id="5114" class=" language-php">provider</code> method on the <code rs_id="5115" class=" language-php">Auth</code> facade to define a custom user provider:</p>
+<pre rs_id="5116" class=" language-php"><code rs_id="5117" class=" language-php"><span class="token delimiter" rs_id="5118">&lt;?php</span>
+
+<span class="token keyword" rs_id="5119">namespace</span> <span class="token package" rs_id="5120">App<span class="token punctuation" rs_id="5121">\</span>Providers</span><span class="token punctuation" rs_id="5122">;</span>
+
+<span class="token keyword" rs_id="5123">use</span> <span class="token package" rs_id="5124">Illuminate<span class="token punctuation" rs_id="5125">\</span>Support<span class="token punctuation" rs_id="5126">\</span>Facades<span class="token punctuation" rs_id="5127">\</span>Auth</span><span class="token punctuation" rs_id="5128">;</span>
+<span class="token keyword" rs_id="5129">use</span> <span class="token package" rs_id="5130">App<span class="token punctuation" rs_id="5131">\</span>Extensions<span class="token punctuation" rs_id="5132">\</span>RiakUserProvider</span><span class="token punctuation" rs_id="5133">;</span>
+<span class="token keyword" rs_id="5134">use</span> <span class="token package" rs_id="5135">Illuminate<span class="token punctuation" rs_id="5136">\</span>Foundation<span class="token punctuation" rs_id="5137">\</span>Support<span class="token punctuation" rs_id="5138">\</span>Providers<span class="token punctuation" rs_id="5139">\</span>AuthServiceProvider</span> <span class="token keyword" rs_id="5140">as</span> ServiceProvider<span class="token punctuation" rs_id="5141">;</span>
+
+<span class="token keyword" rs_id="5142">class</span> <span class="token class-name" rs_id="5143">AuthServiceProvider</span> <span class="token keyword" rs_id="5144">extends</span> <span class="token class-name" rs_id="5145">ServiceProvider</span>
+<span class="token punctuation" rs_id="5146">{</span>
+    <span class="token comment" spellcheck="true" rs_id="5147">/**
+     * Register any application authentication / authorization services.
+     *
+     * @return void
+     */</span>
+    <span class="token keyword" rs_id="5148">public</span> <span class="token keyword" rs_id="5149">function</span> <span class="token function" rs_id="5150">boot<span class="token punctuation" rs_id="5151">(</span></span><span class="token punctuation" rs_id="5152">)</span>
+    <span class="token punctuation" rs_id="5153">{</span>
+        <span class="token this" rs_id="5154">$this</span><span class="token operator" rs_id="5155">-</span><span class="token operator" rs_id="5156">&gt;</span><span class="token function" rs_id="5157">registerPolicies<span class="token punctuation" rs_id="5158">(</span></span><span class="token punctuation" rs_id="5159">)</span><span class="token punctuation" rs_id="5160">;</span>
+
+        <span class="token scope" rs_id="5161">Auth<span class="token punctuation" rs_id="5162">::</span></span><span class="token function" rs_id="5163">provider<span class="token punctuation" rs_id="5164">(</span></span><span class="token string" rs_id="5165">'riak'</span><span class="token punctuation" rs_id="5166">,</span> <span class="token keyword" rs_id="5167">function</span> <span class="token punctuation" rs_id="5168">(</span><span class="token variable" rs_id="5169">$app</span><span class="token punctuation" rs_id="5170">,</span> <span class="token keyword" rs_id="5171">array</span> <span class="token variable" rs_id="5172">$config</span><span class="token punctuation" rs_id="5173">)</span> <span class="token punctuation" rs_id="5174">{</span>
+           <span class="token comment" spellcheck="true" rs_id="5175"> // Return an instance of Illuminate\Contracts\Auth\UserProvider...
+</span>
+            <span class="token keyword" rs_id="5176">return</span> <span class="token keyword" rs_id="5177">new</span> <span class="token class-name" rs_id="5178">RiakUserProvider</span><span class="token punctuation" rs_id="5179">(</span><span class="token variable" rs_id="5180">$app</span><span class="token operator" rs_id="5181">-</span><span class="token operator" rs_id="5182">&gt;</span><span class="token function" rs_id="5183">make<span class="token punctuation" rs_id="5184">(</span></span><span class="token string" rs_id="5185">'riak.connection'</span><span class="token punctuation" rs_id="5186">)</span><span class="token punctuation" rs_id="5187">)</span><span class="token punctuation" rs_id="5188">;</span>
+        <span class="token punctuation" rs_id="5189">}</span><span class="token punctuation" rs_id="5190">)</span><span class="token punctuation" rs_id="5191">;</span>
+    <span class="token punctuation" rs_id="5192">}</span>
+<span class="token punctuation" rs_id="5193">}</span></code></pre>
+<p rs_id="5194">After you have registered the provider using the <code rs_id="5195" class=" language-php">provider</code> method, you may switch to the new user provider in your <code rs_id="5196" class=" language-php">auth<span class="token punctuation" rs_id="5197">.</span>php</code> configuration file. First, define a <code rs_id="5198" class=" language-php">provider</code> that uses your new driver:</p>
+<pre rs_id="5199" class=" language-php"><code rs_id="5200" class=" language-php"><span class="token string" rs_id="5201">'providers'</span> <span class="token operator" rs_id="5202">=</span><span class="token operator" rs_id="5203">&gt;</span> <span class="token punctuation" rs_id="5204">[</span>
+    <span class="token string" rs_id="5205">'users'</span> <span class="token operator" rs_id="5206">=</span><span class="token operator" rs_id="5207">&gt;</span> <span class="token punctuation" rs_id="5208">[</span>
+        <span class="token string" rs_id="5209">'driver'</span> <span class="token operator" rs_id="5210">=</span><span class="token operator" rs_id="5211">&gt;</span> <span class="token string" rs_id="5212">'riak'</span><span class="token punctuation" rs_id="5213">,</span>
+    <span class="token punctuation" rs_id="5214">]</span><span class="token punctuation" rs_id="5215">,</span>
+<span class="token punctuation" rs_id="5216">]</span><span class="token punctuation" rs_id="5217">,</span></code></pre>
+<p rs_id="5218">Finally, you may use this provider in your <code rs_id="5219" class=" language-php">guards</code> configuration:</p>
+<pre rs_id="5220" class=" language-php"><code rs_id="5221" class=" language-php"><span class="token string" rs_id="5222">'guards'</span> <span class="token operator" rs_id="5223">=</span><span class="token operator" rs_id="5224">&gt;</span> <span class="token punctuation" rs_id="5225">[</span>
+    <span class="token string" rs_id="5226">'web'</span> <span class="token operator" rs_id="5227">=</span><span class="token operator" rs_id="5228">&gt;</span> <span class="token punctuation" rs_id="5229">[</span>
+        <span class="token string" rs_id="5230">'driver'</span> <span class="token operator" rs_id="5231">=</span><span class="token operator" rs_id="5232">&gt;</span> <span class="token string" rs_id="5233">'session'</span><span class="token punctuation" rs_id="5234">,</span>
+        <span class="token string" rs_id="5235">'provider'</span> <span class="token operator" rs_id="5236">=</span><span class="token operator" rs_id="5237">&gt;</span> <span class="token string" rs_id="5238">'users'</span><span class="token punctuation" rs_id="5239">,</span>
+    <span class="token punctuation" rs_id="5240">]</span><span class="token punctuation" rs_id="5241">,</span>
+<span class="token punctuation" rs_id="5242">]</span><span class="token punctuation" rs_id="5243">,</span></code></pre>
+<p rs_id="5244"><a name="the-user-provider-contract" rs_id="5245"></a></p>
+<h3 rs_id="5246">The User Provider Contract</h3>
+<p rs_id="5247">The <code rs_id="5248" class=" language-php">Illuminate\<span class="token package" rs_id="5249">Contracts<span class="token punctuation" rs_id="5250">\</span>Auth<span class="token punctuation" rs_id="5251">\</span>UserProvider</span></code> implementations are only responsible for fetching a <code rs_id="5252" class=" language-php">Illuminate\<span class="token package" rs_id="5253">Contracts<span class="token punctuation" rs_id="5254">\</span>Auth<span class="token punctuation" rs_id="5255">\</span>Authenticatable</span></code> implementation out of a persistent storage system, such as MySQL, Riak, etc. These two interfaces allow the Laravel authentication mechanisms to continue functioning regardless of how the user data is stored or what type of class is used to represent it.</p>
+<p rs_id="5256">Let's take a look at the <code rs_id="5257" class=" language-php">Illuminate\<span class="token package" rs_id="5258">Contracts<span class="token punctuation" rs_id="5259">\</span>Auth<span class="token punctuation" rs_id="5260">\</span>UserProvider</span></code> contract:</p>
+<pre rs_id="5261" class=" language-php"><code rs_id="5262" class=" language-php"><span class="token delimiter" rs_id="5263">&lt;?php</span>
+
+<span class="token keyword" rs_id="5264">namespace</span> <span class="token package" rs_id="5265">Illuminate<span class="token punctuation" rs_id="5266">\</span>Contracts<span class="token punctuation" rs_id="5267">\</span>Auth</span><span class="token punctuation" rs_id="5268">;</span>
+
+<span class="token keyword" rs_id="5269">interface</span> <span class="token class-name" rs_id="5270">UserProvider</span> <span class="token punctuation" rs_id="5271">{</span>
+
+    <span class="token keyword" rs_id="5272">public</span> <span class="token keyword" rs_id="5273">function</span> <span class="token function" rs_id="5274">retrieveById<span class="token punctuation" rs_id="5275">(</span></span><span class="token variable" rs_id="5276">$identifier</span><span class="token punctuation" rs_id="5277">)</span><span class="token punctuation" rs_id="5278">;</span>
+    <span class="token keyword" rs_id="5279">public</span> <span class="token keyword" rs_id="5280">function</span> <span class="token function" rs_id="5281">retrieveByToken<span class="token punctuation" rs_id="5282">(</span></span><span class="token variable" rs_id="5283">$identifier</span><span class="token punctuation" rs_id="5284">,</span> <span class="token variable" rs_id="5285">$token</span><span class="token punctuation" rs_id="5286">)</span><span class="token punctuation" rs_id="5287">;</span>
+    <span class="token keyword" rs_id="5288">public</span> <span class="token keyword" rs_id="5289">function</span> <span class="token function" rs_id="5290">updateRememberToken<span class="token punctuation" rs_id="5291">(</span></span>Authenticatable <span class="token variable" rs_id="5292">$user</span><span class="token punctuation" rs_id="5293">,</span> <span class="token variable" rs_id="5294">$token</span><span class="token punctuation" rs_id="5295">)</span><span class="token punctuation" rs_id="5296">;</span>
+    <span class="token keyword" rs_id="5297">public</span> <span class="token keyword" rs_id="5298">function</span> <span class="token function" rs_id="5299">retrieveByCredentials<span class="token punctuation" rs_id="5300">(</span></span><span class="token keyword" rs_id="5301">array</span> <span class="token variable" rs_id="5302">$credentials</span><span class="token punctuation" rs_id="5303">)</span><span class="token punctuation" rs_id="5304">;</span>
+    <span class="token keyword" rs_id="5305">public</span> <span class="token keyword" rs_id="5306">function</span> <span class="token function" rs_id="5307">validateCredentials<span class="token punctuation" rs_id="5308">(</span></span>Authenticatable <span class="token variable" rs_id="5309">$user</span><span class="token punctuation" rs_id="5310">,</span> <span class="token keyword" rs_id="5311">array</span> <span class="token variable" rs_id="5312">$credentials</span><span class="token punctuation" rs_id="5313">)</span><span class="token punctuation" rs_id="5314">;</span>
+
+<span class="token punctuation" rs_id="5315">}</span></code></pre>
+<p rs_id="5316">The <code rs_id="5317" class=" language-php">retrieveById</code> function typically receives a key representing the user, such as an auto-incrementing ID from a MySQL database. The <code rs_id="5318" class=" language-php">Authenticatable</code> implementation matching the ID should be retrieved and returned by the method.</p>
+<p rs_id="5319">The <code rs_id="5320" class=" language-php">retrieveByToken</code> function retrieves a user by their unique <code rs_id="5321" class=" language-php"><span class="token variable" rs_id="5322">$identifier</span></code> and "remember me" <code rs_id="5323" class=" language-php"><span class="token variable" rs_id="5324">$token</span></code>, stored in a field <code rs_id="5325" class=" language-php">remember_token</code>. As with the previous method, the <code rs_id="5326" class=" language-php">Authenticatable</code> implementation should be returned.</p>
+<p rs_id="5327">The <code rs_id="5328" class=" language-php">updateRememberToken</code> method updates the <code rs_id="5329" class=" language-php"><span class="token variable" rs_id="5330">$user</span></code> field <code rs_id="5331" class=" language-php">remember_token</code> with the new <code rs_id="5332" class=" language-php"><span class="token variable" rs_id="5333">$token</span></code>. A fresh token is assigned on a successful "remember me" login attempt or when the user is logging out.</p>
+<p rs_id="5334">The <code rs_id="5335" class=" language-php">retrieveByCredentials</code> method receives the array of credentials passed to the <code rs_id="5336" class=" language-php"><span class="token scope" rs_id="5337">Auth<span class="token punctuation" rs_id="5338">::</span></span>attempt</code> method when attempting to sign into an application. The method should then "query" the underlying persistent storage for the user matching those credentials. Typically, this method will run a query with a "where" condition on <code rs_id="5339" class=" language-php"><span class="token variable" rs_id="5340">$credentials</span><span class="token punctuation" rs_id="5341">[</span><span class="token string" rs_id="5342">'username'</span><span class="token punctuation" rs_id="5343">]</span></code>. The method should then return an implementation of <code rs_id="5344" class=" language-php">Authenticatable</code>. <strong rs_id="5345">This method should not attempt to do any password validation or authentication.</strong></p>
+<p rs_id="5346">The <code rs_id="5347" class=" language-php">validateCredentials</code> method should compare the given <code rs_id="5348" class=" language-php"><span class="token variable" rs_id="5349">$user</span></code> with the <code rs_id="5350" class=" language-php"><span class="token variable" rs_id="5351">$credentials</span></code> to authenticate the user. For example, this method should probably use <code rs_id="5352" class=" language-php"><span class="token scope" rs_id="5353">Hash<span class="token punctuation" rs_id="5354">::</span></span>check</code> to compare the value of <code rs_id="5355" class=" language-php"><span class="token variable" rs_id="5356">$user</span><span class="token operator" rs_id="5357">-</span><span class="token operator" rs_id="5358">&gt;</span><span class="token function" rs_id="5359">getAuthPassword<span class="token punctuation" rs_id="5360">(</span></span><span class="token punctuation" rs_id="5361">)</span></code> to the value of <code rs_id="5362" class=" language-php"><span class="token variable" rs_id="5363">$credentials</span><span class="token punctuation" rs_id="5364">[</span><span class="token string" rs_id="5365">'password'</span><span class="token punctuation" rs_id="5366">]</span></code>. This method should return <code rs_id="5367" class=" language-php"><span class="token boolean" rs_id="5368">true</span></code> or <code rs_id="5369" class=" language-php"><span class="token boolean" rs_id="5370">false</span></code> indicating on whether the password is valid.</p>
+<p rs_id="5371"><a name="the-authenticatable-contract" rs_id="5372"></a></p>
+<h3 rs_id="5373">The Authenticatable Contract</h3>
+<p rs_id="5374">Now that we have explored each of the methods on the <code rs_id="5375" class=" language-php">UserProvider</code>, let's take a look at the <code rs_id="5376" class=" language-php">Authenticatable</code> contract. Remember, the provider should return implementations of this interface from the <code rs_id="5377" class=" language-php">retrieveById</code>, <code rs_id="5378" class=" language-php">retrieveByToken</code>, and <code rs_id="5379" class=" language-php">retrieveByCredentials</code> methods:</p>
+<pre rs_id="5380" class=" language-php"><code rs_id="5381" class=" language-php"><span class="token delimiter" rs_id="5382">&lt;?php</span>
+
+<span class="token keyword" rs_id="5383">namespace</span> <span class="token package" rs_id="5384">Illuminate<span class="token punctuation" rs_id="5385">\</span>Contracts<span class="token punctuation" rs_id="5386">\</span>Auth</span><span class="token punctuation" rs_id="5387">;</span>
+
+<span class="token keyword" rs_id="5388">interface</span> <span class="token class-name" rs_id="5389">Authenticatable</span> <span class="token punctuation" rs_id="5390">{</span>
+
+    <span class="token keyword" rs_id="5391">public</span> <span class="token keyword" rs_id="5392">function</span> <span class="token function" rs_id="5393">getAuthIdentifierName<span class="token punctuation" rs_id="5394">(</span></span><span class="token punctuation" rs_id="5395">)</span><span class="token punctuation" rs_id="5396">;</span>
+    <span class="token keyword" rs_id="5397">public</span> <span class="token keyword" rs_id="5398">function</span> <span class="token function" rs_id="5399">getAuthIdentifier<span class="token punctuation" rs_id="5400">(</span></span><span class="token punctuation" rs_id="5401">)</span><span class="token punctuation" rs_id="5402">;</span>
+    <span class="token keyword" rs_id="5403">public</span> <span class="token keyword" rs_id="5404">function</span> <span class="token function" rs_id="5405">getAuthPassword<span class="token punctuation" rs_id="5406">(</span></span><span class="token punctuation" rs_id="5407">)</span><span class="token punctuation" rs_id="5408">;</span>
+    <span class="token keyword" rs_id="5409">public</span> <span class="token keyword" rs_id="5410">function</span> <span class="token function" rs_id="5411">getRememberToken<span class="token punctuation" rs_id="5412">(</span></span><span class="token punctuation" rs_id="5413">)</span><span class="token punctuation" rs_id="5414">;</span>
+    <span class="token keyword" rs_id="5415">public</span> <span class="token keyword" rs_id="5416">function</span> <span class="token function" rs_id="5417">setRememberToken<span class="token punctuation" rs_id="5418">(</span></span><span class="token variable" rs_id="5419">$value</span><span class="token punctuation" rs_id="5420">)</span><span class="token punctuation" rs_id="5421">;</span>
+    <span class="token keyword" rs_id="5422">public</span> <span class="token keyword" rs_id="5423">function</span> <span class="token function" rs_id="5424">getRememberTokenName<span class="token punctuation" rs_id="5425">(</span></span><span class="token punctuation" rs_id="5426">)</span><span class="token punctuation" rs_id="5427">;</span>
+
+<span class="token punctuation" rs_id="5428">}</span></code></pre>
+<p rs_id="5429">This interface is simple. The <code rs_id="5430" class=" language-php">getAuthIdentifierName</code> method should return the name of the "primary key" field of the user and the <code rs_id="5431" class=" language-php">getAuthIdentifier</code> method should return the "primary key" of the user. In a MySQL back-end, again, this would be the auto-incrementing primary key. The <code rs_id="5432" class=" language-php">getAuthPassword</code> should return the user's hashed password. This interface allows the authentication system to work with any User class, regardless of what ORM or storage abstraction layer you are using. By default, Laravel includes a <code rs_id="5433" class=" language-php">User</code> class in the <code rs_id="5434" class=" language-php">app</code> directory which implements this interface, so you may consult this class for an implementation example.</p>
+<p rs_id="5435"><a name="events" rs_id="5436"></a></p>
+<h2 rs_id="5437"><a href="https://laravel.com/docs/5.6/authentication#events" rs_id="5438">Events</a></h2>
+<p rs_id="5439">Laravel raises a variety of <a href="https://laravel.com/docs/5.6/events" rs_id="5440">events</a> during the authentication process. You may attach listeners to these events in your <code rs_id="5441" class=" language-php">EventServiceProvider</code>:</p>
+<pre rs_id="5442" class=" language-php"><code rs_id="5443" class=" language-php"><span class="token comment" spellcheck="true" rs_id="5444">/**
+ * The event listener mappings for the application.
+ *
+ * @var array
+ */</span>
+<span class="token keyword" rs_id="5445">protected</span> <span class="token variable" rs_id="5446">$listen</span> <span class="token operator" rs_id="5447">=</span> <span class="token punctuation" rs_id="5448">[</span>
+    <span class="token string" rs_id="5449">'Illuminate\Auth\Events\Registered'</span> <span class="token operator" rs_id="5450">=</span><span class="token operator" rs_id="5451">&gt;</span> <span class="token punctuation" rs_id="5452">[</span>
+        <span class="token string" rs_id="5453">'App\Listeners\LogRegisteredUser'</span><span class="token punctuation" rs_id="5454">,</span>
+    <span class="token punctuation" rs_id="5455">]</span><span class="token punctuation" rs_id="5456">,</span>
+
+    <span class="token string" rs_id="5457">'Illuminate\Auth\Events\Attempting'</span> <span class="token operator" rs_id="5458">=</span><span class="token operator" rs_id="5459">&gt;</span> <span class="token punctuation" rs_id="5460">[</span>
+        <span class="token string" rs_id="5461">'App\Listeners\LogAuthenticationAttempt'</span><span class="token punctuation" rs_id="5462">,</span>
+    <span class="token punctuation" rs_id="5463">]</span><span class="token punctuation" rs_id="5464">,</span>
+
+    <span class="token string" rs_id="5465">'Illuminate\Auth\Events\Authenticated'</span> <span class="token operator" rs_id="5466">=</span><span class="token operator" rs_id="5467">&gt;</span> <span class="token punctuation" rs_id="5468">[</span>
+        <span class="token string" rs_id="5469">'App\Listeners\LogAuthenticated'</span><span class="token punctuation" rs_id="5470">,</span>
+    <span class="token punctuation" rs_id="5471">]</span><span class="token punctuation" rs_id="5472">,</span>
+
+    <span class="token string" rs_id="5473">'Illuminate\Auth\Events\Login'</span> <span class="token operator" rs_id="5474">=</span><span class="token operator" rs_id="5475">&gt;</span> <span class="token punctuation" rs_id="5476">[</span>
+        <span class="token string" rs_id="5477">'App\Listeners\LogSuccessfulLogin'</span><span class="token punctuation" rs_id="5478">,</span>
+    <span class="token punctuation" rs_id="5479">]</span><span class="token punctuation" rs_id="5480">,</span>
+
+    <span class="token string" rs_id="5481">'Illuminate\Auth\Events\Failed'</span> <span class="token operator" rs_id="5482">=</span><span class="token operator" rs_id="5483">&gt;</span> <span class="token punctuation" rs_id="5484">[</span>
+        <span class="token string" rs_id="5485">'App\Listeners\LogFailedLogin'</span><span class="token punctuation" rs_id="5486">,</span>
+    <span class="token punctuation" rs_id="5487">]</span><span class="token punctuation" rs_id="5488">,</span>
+
+    <span class="token string" rs_id="5489">'Illuminate\Auth\Events\Logout'</span> <span class="token operator" rs_id="5490">=</span><span class="token operator" rs_id="5491">&gt;</span> <span class="token punctuation" rs_id="5492">[</span>
+        <span class="token string" rs_id="5493">'App\Listeners\LogSuccessfulLogout'</span><span class="token punctuation" rs_id="5494">,</span>
+    <span class="token punctuation" rs_id="5495">]</span><span class="token punctuation" rs_id="5496">,</span>
+
+    <span class="token string" rs_id="5497">'Illuminate\Auth\Events\Lockout'</span> <span class="token operator" rs_id="5498">=</span><span class="token operator" rs_id="5499">&gt;</span> <span class="token punctuation" rs_id="5500">[</span>
+        <span class="token string" rs_id="5501">'App\Listeners\LogLockout'</span><span class="token punctuation" rs_id="5502">,</span>
+    <span class="token punctuation" rs_id="5503">]</span><span class="token punctuation" rs_id="5504">,</span>
+
+    <span class="token string" rs_id="5505">'Illuminate\Auth\Events\PasswordReset'</span> <span class="token operator" rs_id="5506">=</span><span class="token operator" rs_id="5507">&gt;</span> <span class="token punctuation" rs_id="5508">[</span>
+        <span class="token string" rs_id="5509">'App\Listeners\LogPasswordReset'</span><span class="token punctuation" rs_id="5510">,</span>
+    <span class="token punctuation" rs_id="5511">]</span><span class="token punctuation" rs_id="5512">,</span>
+<span class="token punctuation" rs_id="5513">]</span><span class="token punctuation" rs_id="5514">;</span></code></pre>
+	</article>
+</div>
+
+    <footer class="main" rs_id="5515">
+        <ul rs_id="5516">
+            <li class="nav-docs" rs_id="5517"><a href="https://laravel.com/docs" rs_id="5518">Documentation</a></li>
+<li class="nav-laracasts" rs_id="5519"><a href="https://laracasts.com/" rs_id="5520">Laracasts</a></li>
+<li class="nav-laravel-news" rs_id="5521"><a href="https://laravel-news.com/" rs_id="5522">News</a></li>
+<li class="nav-partners" rs_id="5523"><a href="https://laravel.com/partners" rs_id="5524">Partners</a></li>
+<li class="nav-forge" rs_id="5525"><a href="https://forge.laravel.com/" rs_id="5526">Forge</a></li>
+
+<li class="dropdown community-dropdown" rs_id="5527">
+	<a href="https://laravel.com/docs/5.6/authentication#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" rs_id="5528">Ecosystem <span class="caret" rs_id="5529"></span></a>
+	<ul class="dropdown-menu" role="menu" rs_id="5530">
+
+		<li rs_id="5531"><a href="https://envoyer.io/" rs_id="5532">Envoyer</a></li>
+		<li rs_id="5533"><a href="https://horizon.laravel.com/" rs_id="5534">Horizon</a></li>
+		<li rs_id="5535"><a href="https://lumen.laravel.com/" rs_id="5536">Lumen</a></li>
+		<li rs_id="5537"><a href="https://spark.laravel.com/" rs_id="5538">Spark</a></li>
+
+		<li class="divider" rs_id="5539"></li>
+
+		<li rs_id="5540"><a href="https://laracon.com.au/" rs_id="5541">Laracon AU</a></li>
+		<li rs_id="5542"><a href="https://laracon.eu/" rs_id="5543">Laracon EU</a></li>
+		<li rs_id="5544"><a href="http://laracon.us/" rs_id="5545">Laracon US</a></li>
+		<li rs_id="5546"><a href="https://laracon.net/" rs_id="5547">Laracon Online</a></li>
+
+		<li class="divider" rs_id="5548"></li>
+
+		<li rs_id="5549"><a href="https://laravel.com/certification" rs_id="5550">Certification</a></li>
+		<li rs_id="5551"><a href="https://laracasts.com/discuss" rs_id="5552">Forums</a></li>
+		<li rs_id="5553"><a href="https://github.com/laravel/laravel" rs_id="5554">GitHub</a></li>
+		<li rs_id="5555"><a href="https://larajobs.com/?partner=5#/" rs_id="5556">Jobs</a></li>
+		<li rs_id="5557"><a href="http://www.laravelpodcast.com/" rs_id="5558">Podcast</a></li>
+		<li rs_id="5559"><a href="https://larachat.co/" rs_id="5560">Slack</a></li>
+		<li rs_id="5561"><a href="https://twitter.com/laravelphp" rs_id="5562">Twitter</a></li>
+	</ul>
+</li>
+        </ul>
+        <p rs_id="5563">Laravel is a trademark of Taylor Otwell. Copyright © Taylor Otwell.</p>
+        <p class="less-significant" rs_id="5564">
+            <a href="http://jackmcdade.com/" rs_id="5565">
+                Designed by<br rs_id="5566">
+                <svg xmlns="http://www.w3.org/2000/svg" width="128.2" height="28" viewBox="0 0 128.2 28" rs_id="5567"><g fill="#c3c3c3" rs_id="5568"><path d="M14.2.4v1.4l-1.4-.3.3 4.5c.1 1.5 0 3-.1 4.5 0 .4-.1.8-.1 1.2-.1.4-.1.8-.3 1.2-.1.4-.3.7-.5 1.1-.2.3-.5.6-.9.9-.4.2-.9.4-1.5.6-.6.2-1.1.3-1.6.3-.6 0-1.2-.1-1.6-.3-.5-.2-.9-.6-1.1-1-.3-.5-.5-1-.6-1.6-.1-.6-.1-1.3 0-2.1 0-.2.1-.5.2-.7-.1-.2 0-.4.1-.6l.3-.6 1.1.4c.2 0 .5.1.8.2.3.1.5.1.6.2 0 .2 0 .4-.1.5-.1.2-.1.3-.2.4-.1.1-.2.3-.2.4-.1.2-.1.3-.1.5L6 10.8c-.1.3-.2.7-.2 1.1 0 .4.1.8.2 1.2.2.4.4.7.6 1 .3.3.6.4 1 .3.6 0 1.1-.3 1.4-.6.3-.4.5-.9.7-1.7.1-.7.2-1.6.2-2.8V5.4c0-.6-.1-1.3-.1-2-.1-.6-.2-1.3-.3-2H5.7c-.7 0-1.5 0-2.2.2-.3.1-.6.2-1 .4-.3.1-.6.4-.9.6-.2.3-.4.6-.5 1-.1.3-.1.7 0 1 .1.5.3.8.4.9v-.1c0-.4.1-.8.4-1 .3-.2.6-.3.9-.3.3 0 .6.1.9.3.3.2.4.6.4 1s-.1.8-.4 1c-.3.2-.6.3-1 .3-.8 0-1.4-.2-1.8-.7-.4-.4-.7-.9-.8-1.5C0 4 0 3.4.2 2.7c.2-.6.5-1.1 1-1.5.4-.3.8-.5 1.2-.7.4-.1.9-.2 1.4-.3.5-.1.9-.1 1.4-.1h2.9c.6 0 1.1 0 1.6.1.5 0 1 .1 1.5.1s1 .1 1.5.1c.4.1.9.1 1.5 0zM25.2 14.3c0 .2.1.4.1.6 0 .2.1.4.1.7-1-.1-2-.2-3-.1-1.1.1-2.1.2-3 .4 0-.2-.1-.4-.1-.5 0-.2-.1-.4-.1-.5.2 0 .5-.1.7-.1.2 0 .4-.1.6-.1-.1-1.5-.3-3.1-.5-4.6-.5.1-.9.1-1.4.2-.5.1-.9.1-1.4.2-.2.7-.3 1.3-.5 2s-.3 1.3-.5 2h.6c.1 0 .3 0 .4.1v.9c0 .1 0 .2-.1.3H14v-1.2h1c.2-.5.3-1 .4-1.5.1-.5.3-1 .4-1.5.2-.6.3-1.2.5-1.7.2-.6.3-1.2.5-1.7.2-1.1.4-2.1.6-3.2.2-1.1.3-2.1.4-3.2h-1.4c0-.2.1-.4.1-.6 0-.2 0-.4.1-.6h5.8l.2 1.2h-1c.3 2.1.7 4.3 1 6.5.3 2.2.7 4.4 1 6.5h1.6zM17.5 9c.4-.1.7-.1 1.1-.2.4-.1.8-.1 1.2-.2-.2-1-.3-2-.5-2.9-.2-1-.4-1.9-.6-2.9-.2 1-.4 2.1-.5 3.1-.3 1-.5 2.1-.7 3.1zM36.7 10.4h-.6c0 .6 0 1.2-.2 1.9-.2.6-.5 1.2-1 1.6-.5.5-1 .9-1.6 1.1-.6.3-1.3.4-2 .5-.6.1-1.1.1-1.8 0-.6-.1-1.1-.4-1.6-.7-.2-.2-.5-.4-.8-.7-.3-.3-.5-.5-.6-.8-.3-.5-.5-1-.6-1.5-.2-.5-.3-.9-.4-1.4-.1-.5-.2-1-.2-1.5s0-1 .1-1.6c.2-1 .4-2 .8-2.9.4-.9.8-1.7 1.4-2.3.5-.7 1.2-1.2 1.9-1.6.7-.3 1.4-.5 2.2-.5.3 0 .5 0 .8.1.3.1.5.2.7.4.3.3.7.7 1 1.2.3.5.6 1.2.7 1.9h.6v.6l-2.5.4c-.3.1-.5.1-.6 0-.1 0-.2-.1-.2-.2-.1-.1-.1-.2 0-.3h.4c.2-.2.3-.3.3-.6v-.7c0-.5-.2-.9-.5-1.3l-.4-.4c-.2-.1-.4-.1-.6 0-.2 0-.4.2-.6.4-.2.2-.4.5-.5.9-.3.2-.4.6-.5.9-.1.3-.2.5-.2.7-.6 2.6-.7 5.3-.2 8 .1.3.2.7.3 1s.3.6.5.9c.2.3.5.5.8.7.3.2.6.2 1 .1.6-.1 1-.4 1.4-1 .3-.5.6-1.1.7-1.8.1-.3.1-.6.1-.9v-.5c-.2 0-.4 0-.6-.1-.1-.1-.2-.2-.2-.3 0-.1 0-.2.1-.3h3.4c0 .1 0 .2-.1.3-.1.1-.1.2-.1.3z" rs_id="5569"></path><path d="M48 14.2c.1.2.3.3.5.4.2.1.5.1.7 0 .1.1.1.2.1.4s-.1.3-.2.4c-.1.1-.2.2-.4.2h-1.4c-.3 0-.7 0-1-.1-.3-.1-.7-.2-1-.4-.3-.2-.5-.4-.7-.7-.2-.3-.3-.6-.3-1V9.9v-.4c0-.2-.1-.3-.2-.5s-.3-.3-.4-.4c-.2-.1-.4-.1-.7-.1-.1 0-.2 0-.5.1-.2.3-.3.5-.5.8-.2.3-.3.5-.5.7 0 .8 0 1.5-.1 2.2 0 .7-.1 1.5-.1 2.1h1.4v1.1c-.5 0-.9.1-1.3 0-.4 0-.8 0-1.2-.1-.4 0-.8-.1-1.2-.1H37.3c-.1 0-.2 0-.3-.1-.1 0-.1-.1-.1-.2s-.1-.3-.1-.4v-.4c0-.1.1-.2.1-.2.2.1.4.2.6.1s.4-.2.5-.4c0-.1.1-.3.1-.7 0-.4 0-.9.1-1.6 0-.6.1-1.3.1-2.1s0-1.6.1-2.4c0-.8 0-1.5.1-2.3 0-.7.1-1.3.1-1.8v-.7c0-.2-.1-.4-.2-.6-.1-.2-.3-.3-.5-.4-.2-.1-.4 0-.6.1 0-.2-.1-.5-.1-.7 0-.2 0-.4-.1-.7 1 0 2 .1 3 .1.9 0 1.9.1 3 .1v.3c0 .1 0 .3.1.4v.4c0 .1 0 .2-.1.2-.1.1-.2.1-.3.1-.1 0-.2 0-.4-.1-.1-.1-.3-.1-.4-.2-.1-.1-.3-.1-.3-.1-.1.9-.1 1.9-.1 2.9s-.1 2-.1 3.1c.7-1.2 1.4-2.5 2-3.8.2-.3.3-.6.4-.9.1-.3.3-.6.5-.9.2-.3.4-.5.7-.7.3.3.6.2.9.1.3-.1.7-.1 1 0 .3.1.6.2.9.5.2.3.4.6.4 1s.1.8 0 1.1v.5c0 .2-.1.3-.2.4-.1.2-.2.3-.4.4-.2.1-.4.1-.5.2-.1 0-.3.1-.4.1h-.4c-.2-.3-.4-.4-.4-.6-.1-.2-.1-.4 0-.5.1-.2.2-.3.3-.3.1 0 .2-.1.4-.1.2-.1.3-.2.3-.3.1-.2.1-.3.1-.5 0-.3-.1-.5-.1-.7-.1-.2-.2-.3-.3-.3-.2 0-.3 0-.5.1s-.3.2-.5.4-.3.4-.4.6c-.1.2-.3.5-.4.7-.1.3-.3.6-.4.8-.2.2-.3.5-.4.8-.4.9-.8 1.7-1.2 2.5.3 0 .6-.1 1 0h1c.3 0 .7.1 1 .2.3.1.6.3.8.6.3.3.4.6.5 1 .1.4.1.8.2 1.1l.2 2.1c0 .2.1.5.1.7 0 .4.1.7.3.9zM71.7 13.9c.2.2.4.4.7.5.3.1.5 0 .8-.1 0 .2.1.3.1.6.1.2.1.4.1.6h-1.1s-.8 0-1.3.1h-2.3v-.2c0-.1.1-.2.2-.3.1-.1.2-.2.4-.3.2-.1.3-.1.6-.1.1 0 .1-.2.1-.7v-1.6c0-.6 0-1.2-.1-1.9s0-1.1 0-1.5V6.4c0-.7.1-1.5.1-2.2-.6 1.3-1.1 2.7-1.6 4.1-.5 1.5-1 3-1.5 4.4 0 0 .1.1.1.2-.2 0-.4 0-.7.1-.3.1-.5.1-.7.1-.5-1.9-1.1-3.7-1.6-5.5-.5-1.8-1.1-3.6-1.6-5.5-.1 1-.1 2-.1 3 0 1.1-.1 2.1-.1 3.2s0 2.1-.1 3.2c0 1-.1 2-.1 3h1.4v1.1c-.5 0-.9.1-1.3 0-.4 0-.8 0-1.2-.1-.4 0-.8-.1-1.2-.1H58c-.1 0-.2 0-.3-.1-.1 0-.1-.1-.1-.2s-.1-.3-.1-.4v-.4c0-.1.1-.2.1-.2.2.1.4.2.6.1s.4-.2.5-.4c0-.1.1-.3.1-.7 0-.4 0-.9.1-1.6 0-.6.1-1.3.1-2.1V7.2c0-.8 0-1.5.1-2.3 0-.7.1-1.3.1-1.8v-.7c0-.2-.1-.4-.2-.6-.1-.2-.3-.3-.5-.4-.2-.1-.4 0-.6.1 0-.2-.1-.5-.1-.7 0-.2 0-.4-.1-.7 1 0 2 .1 3 .1.9 0 1.9.1 3 .1 0 .3-.1.5-.4.7.3 1.3.6 2.6 1 3.9l1.2 3.9c.2-.6.4-1.3.6-1.9l.6-1.8c.3-.5.5-1.1.8-1.7.2-.6.4-1.3.6-2-.1 0-.3 0-.4-.1-.1 0-.2 0-.4-.1-.1 0-.1-.1-.1-.3 0-.1.1-.2.1-.3.1-.1.2-.1.3-.1h4.5c.1 0 .3.1.4.2.1.1.2.2.2.4s0 .3-.2.3c-.1-.1-.2-.1-.3-.1-.1 0-.2.1-.3.1-.2.4-.3.8-.4 1.3-.1.5-.1.9-.1 1.4-.2 2.8-.2 5.6 0 8.4 0 .3 0 .5.1.7-.1.3 0 .5.2.7zM81.7 12h-.4c0 .4 0 .9-.2 1.3-.1.4-.4.8-.7 1.1-.3.3-.7.6-1.1.8-.4.2-.9.3-1.3.4-.4.1-.8 0-1.2 0-.4-.1-.8-.2-1.1-.5-.2-.1-.3-.3-.5-.5s-.3-.4-.4-.6c-.2-.4-.3-.7-.4-1-.1-.3-.2-.6-.3-1-.1-.3-.1-.6-.1-1 0-.3 0-.7.1-1.1.1-.7.3-1.4.5-2 .3-.6.6-1.1.9-1.6s.8-.8 1.3-1.1c.5-.3 1-.4 1.5-.4.2 0 .4 0 .6.1.2.1.3.1.5.3.2.2.4.4.6.8.2.4.4.8.5 1.3h.4v.4l-1.7.3c-.2.1-.3.1-.4 0-.1 0-.1-.1-.2-.2v-.2h.4c.1-.1.2-.2.2-.4v-.5c0-.3-.1-.6-.3-.9l-.3-.3c-.1-.1-.2-.1-.4 0-.1 0-.3.1-.4.3-.1.2-.3.4-.4.6l-.3.6c-.1.2-.1.4-.1.5-.4 1.8-.5 3.6-.1 5.5.1.2.1.4.2.7l.3.6c.1.2.3.3.6.5.2.1.4.1.7.1.4-.1.7-.3 1-.7.2-.4.4-.8.5-1.2 0-.2.1-.4.1-.6v-.3h-.4c-.1 0-.1-.1-.1-.2s0-.2.1-.2h2.4v.2c-.5-.1-.5 0-.6.1z" rs_id="5570"></path><path d="M83.5 14.2c.2-4.3.3-8.5.2-12.8h-1.8V.9.4c.7 0 1.3 0 2-.1.7 0 1.3 0 2-.1.8-.2 1.6-.2 2.4-.1.8.1 1.6.3 2.4.5.7.3 1.4.7 1.9 1.2s.9 1.1 1.1 1.8c.3 1.3.4 2.5.3 3.8 0 1.2-.2 2.4-.3 3.6 0 .4-.1.8-.2 1.2-.1.4-.3.8-.5 1.1-.3.5-.8 1-1.3 1.3-.5.3-1.1.5-1.7.6-.5.1-.9.2-1.4.1-.5 0-.9 0-1.4-.1h-4.9c-.2-.4-.1-.8.2-1.1.2-.2.3-.2.5-.3.2.3.4.3.5.4zm5.9-12.3c-.4-.3-.8-.5-1.3-.6-.5-.1-1-.1-1.5-.1-.3 4.5-.2 9.1.4 13.6.2 0 .4 0 .5-.1.2 0 .4-.1.6-.1.3-.1.6-.2.9-.4.3-.2.6-.4.8-.7.2-.3.4-.6.5-1s.2-.7.2-1.1c.4-2.1.4-4.2.2-6.3-.1-.6-.2-1.2-.4-1.9 0-.4-.4-.9-.9-1.3zM102.4 9.7c-.6-.1-1.3-.1-2 0s-1.4.4-2 .8l-.2-1.4.9-.1c0-.4-.1-.7-.1-1 0-.2-.1-.5-.1-.9-.3 0-.6.1-.9.1-.3 0-.6.1-1 .1-.2.7-.3 1.3-.4 1.8-.1.5-.2 1.1-.4 1.6l.2-.1.7.6c-.4.2-.8.6-1.2 1.1-.4.5-.7 1-.9 1.5l-.9-.5c0-.1.1-.2.2-.4s.2-.3.2-.4c.1-.2.2-.5.3-1 .1-.4.2-.9.4-1.3.1-.5.2-.9.3-1.3.1-.4.2-.7.2-.9l.3-1.2.3-1.2c.2-.7.3-1.4.4-2.1.1-.7.2-1.4.3-2.2h-.6l.1-.8 4-.1.1.8h-.2-.2c.1.7.2 1.4.3 2l.3 1.8.3 1.8c.1.6.2 1.3.4 2h.6l.3.9zm-3.6-3.6c-.1-.7-.2-1.3-.3-2-.1-.6-.3-1.3-.4-2-.1.6-.2 1.3-.4 2.1-.1.7-.3 1.5-.5 2.2l1.6-.3z" rs_id="5571"></path><path d="M124.9 20.1c0-.3.1-.6.3-.8.2-.2.4-.3.7-.4.3-.1.5 0 .8.1.3.1.5.3.6.5.3.4.6.9.7 1.4.2.5.2 1 .2 1.5s-.1 1-.3 1.5c-.2.5-.4 1-.7 1.4-.6.9-1.4 1.6-2.4 2-1 .5-2 .7-3 .7-1.5 0-2.8-.3-3.9-1s-2.1-1.4-3-2.4c-.9-1-1.8-2.1-2.5-3.2-.8-1.2-1.5-2.3-2.3-3.5-1.1 1.2-2.4 2.2-3.9 3-1.5.8-3 1.1-4.5 1-1.1 0-2.1-.1-3-.5-.9-.3-1.6-.8-2.2-1.4-.6-.6-.9-1.3-1.1-2.2-.2-.8-.1-1.7.2-2.7.3-.9.7-1.6 1.3-2.2.6-.6 1.2-1.1 2-1.5.7-.4 1.5-.6 2.4-.7.8-.1 1.7 0 2.6.2v-5-4.6h-1.8V.8.3l3.7-.1c.8-.2 1.6-.2 2.4-.1.8.1 1.6.3 2.4.5.7.3 1.4.7 1.9 1.2s.9 1.1 1.1 1.8c.3 1.2.4 2.4.3 3.6-.1 1.2-.2 2.5-.4 3.7-.1 1-.4 2-.8 3-.5 1-1 2-1.7 2.9.3.4.6.8.8 1.2.3.4.5.8.8 1.2.5.8 1.1 1.6 1.7 2.5.6.8 1.3 1.6 2 2.4.7.7 1.5 1.3 2.4 1.8s1.8.7 2.9.8c1.1 0 2.1-.2 3-.7.9-.5 1.6-1.2 2.1-2.2.2-.4.3-.8.4-1.3.1-.5 0-.9-.1-1.3-.2.1-.4.2-.6.2-.2 0-.4 0-.6-.1-.2-.1-.4-.2-.5-.4s-.4-.5-.4-.8zm-22 .9c1.5-.4 2.8-1 3.7-1.8.9-.8 1.7-1.7 2.3-2.8-.2-.2-.3-.5-.6-.7-.6-.7-1.2-1.4-1.9-1.9 0 .6.1 1.2.1 1.8 0 .6.1 1.1.2 1.6v.1h-4.3c-.1-.2-.1-.4 0-.7 0-.2.1-.3.3-.5.3-.3.7-.4 1.1-.2l.1-3.5c-.5-.2-1-.3-1.5-.3s-1.1 0-1.6.1c-.6.1-1.1.3-1.6.6s-.9.7-1.3 1.1c-.4.4-.7.9-.9 1.5-.2.5-.3 1.1-.3 1.6 0 .7.2 1.3.6 1.8.4.5.9.9 1.4 1.4.2.2.5.3.8.5.3.1.7.2 1.1.3.4.1.8.1 1.2.1.3 0 .7 0 1.1-.1zm6.4-19.1c-.4-.3-.8-.5-1.2-.6-.5-.1-.9-.1-1.4-.1-.1 1.7-.2 3.4-.3 5.3-.1 1.9-.1 3.7 0 5.6.6.4 1.2.8 1.7 1.4.5.5 1 1.1 1.5 1.6.2-.6.4-1.2.6-1.9.2-.6.3-1.2.3-1.7.2-1.1.2-2.1.3-3.1 0-1 0-2.1-.1-3.1-.1-.6-.2-1.2-.4-1.9-.2-.6-.5-1.1-1-1.5z" rs_id="5572"></path><path d="M116.5 1.2h-1.8V.4c.5 0 .9 0 1.2-.1s.7 0 1.1 0h1.1s.8 0 1.3-.1c.9 0 1.8 0 2.8-.1.9 0 1.8 0 2.8-.1v3.6h-1.3c-.1 0-.1-.1 0-.1.1-.2.1-.4.1-.6s0-.4-.1-.6l-.3-.6c-.1-.2-.2-.3-.4-.4-.2-.1-.4-.2-.6-.2h-.7c-.3 0-.5.1-.8.1-.3.1-.5.2-.6.4-.1.2-.1.3-.1.3v.3c0 .7-.1 1.3-.1 2 0 .6-.1 1.3-.1 1.9v1c.6-.2 1.2-.3 1.9-.4.6-.1 1.2-.3 1.9-.4 0 .1.1.2.1.3V7c0 .2-.1.3-.1.4-.1.1-.1.2-.1.3-.1.1-.2.1-.4.2-.1 0-.3.1-.4.1-.5.1-.9.2-1.4.3-.5.1-.9.1-1.4.2 0 1-.1 2-.2 2.9-.1 1-.1 1.9-.2 2.9.8.2 1.5.3 2 .1.6-.2 1.2-.5 1.9-1 .2-.1.2-.3.2-.5v-.7c0-.2.1-.5.2-.6.1-.2.3-.3.7-.4.4 0 .6.1.7.4.1.3.2.7.2 1.1 0 .5 0 .9-.1 1.4-.1.5-.1.9 0 1.2h-1.4c-.4 0-.8 0-1.2.1-.4 0-.8 0-1.2.1h-1.3c-.9 0-1.7 0-2.5.1-.7.1-1.6.1-2.4.1-.2-.2-.2-.4-.2-.7 0-.2.1-.5.3-.6.2-.2.3-.3.6-.3.2-.1.5 0 .7.1.1-2.1.2-4.3.1-6.5-.7-2.2-.7-4.3-.5-6.5z" rs_id="5573"></path></g></svg>
+            </a>
+        </p>
+    </footer>
+
+    <script rs_id="5574">
+        var algolia_app_id      = '8BB87I11DE';
+        var algolia_search_key  = '8e1d446d61fce359f69cd7c8b86a50de';
+        var version             = '5.6';
+    </script>
+
+    <script id="search_suggestion_template" type="text/template" rs_id="5575">
+	<div class="autocomplete-wrapper">
+		{{#_highlightResult.h1}}
+		<div class="h1">
+			{{{ _highlightResult.h1.value }}}
+		</div>
+		{{/_highlightResult.h1}}
+
+		<div class="sub-section">
+			{{#_highlightResult.h2}}
+			<div class="h2">
+				<span class="hash">#</span> {{{ _highlightResult.h2.value }}}
+			</div>
+			{{/_highlightResult.h2}}
+
+			{{#_highlightResult.h3}}
+			<div class="h3">
+				> {{{ _highlightResult.h3.value }}}
+			</div>
+			{{/_highlightResult.h3}}
+
+			{{#_highlightResult.h4}}
+			<div class="h4">
+				> {{{ _highlightResult.h4.value }}}
+			</div>
+			{{/_highlightResult.h4}}
+		</div>
+
+		{{#_highlightResult.content}}
+		<div class="content">
+			{{{ _highlightResult.content.value }}}
+		</div>
+		{{/_highlightResult.content}}
+	</div>
+</script>
+
+<script id="search_empty_template" type="text/template" rs_id="5576">
+	<div class="autocomplete-wrapper empty">
+		<div class="h2">We didn't find any result for "{{query}}". Sorry!</div>
+	</div>
+</script>
+
+<script id="search_footer_template" type="text/template" rs_id="5577">
+	<div class="footer">
+		<a target="_blank" href="https://www.algolia.com/?utm_source=laravel&utm_medium=link&utm_campaign=laravel_documentation_search">
+			<img width="105" src="/assets/img/algolia-logo.svg">
+			<div style="clear: both"></div>
+		</a>
+	</div>
+</script>
+
+    <script src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/laravel-605edd931f.js.download" rs_id="5578"></script>
+    <script src="./Authentication - Laravel - The PHP Framework For Web Artisans_files/viewport-units-buggyfill.js.download" rs_id="5579"></script>
+    <script rs_id="5580">window.viewportUnitsBuggyfill.init();</script>
+    <script rs_id="5581">
+        var _gaq=[['_setAccount','UA-23865777-1'],['_trackPageview']];
+        (function(d,t){
+            var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)
+        }(document,'script'));
+    </script><p rs_id="5582" style="transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); margin: 0px;"></p>
+
+
+</div></div></body></html>
