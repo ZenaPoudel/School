@@ -49,22 +49,11 @@ Route::post('/viewTeacherBySearch','adminController@searchTeacher');
 Route::post('/viewStudentBySearch','adminController@searchStudent');
 Route::post('/addAttendance','attendanceController@Add');
 Route::get('/editAttendance','attendanceController@Edit');
-<<<<<<< HEAD
 Route::get('/viewStudent','adminController@viewStudent');
 Route::post('/addStudent','adminController@addStudent');
 Route::post('/updateStudent/{id}','adminController@updateStudent');
 Route::get('/editStudent/{id}','adminController@editStudent');
 Route::post('/showStudent','attendanceController@selectStudent');
-=======
-Route::get('/viewStudent','studentController@View');
-Route::post('/addStudent','studentController@add');
-Route::get('/editStudent','studentController@Edit');
-Route::post('/showStudent','attendanceController@selectStudent');
-Route::get('/events','eventController@event');
-//Route::get('/showStudent/{student_id}','attendanceController@selectStudent');
-//Route::get('/remarks','attendanceController@remarks');
-//test
->>>>>>> bef34bab95266233d4c78668cc80eaae6cf43d04
 Route::get('/test','StudentController@test');
 Route::get('/viewSchedule','ScheduleController@View');
 Route::post('/addSchedule','ScheduleController@Add');
@@ -75,7 +64,6 @@ Route::post('/addResult','ResultController@add');
 Route::post('/viewClassResult','ResultController@ViewByClass');
 Route::post('/viewStudentMarks','ResultController@marks');
 Route::get('/connect','connectionController@isConnect');
-<<<<<<< HEAD
 Route::post('/addTeacher','adminController@addTeacher');
 Route::get('/editTeacher/{id}','adminController@editTeacher');
 Route::post('/updateTeacher/{id}','adminController@updateTeacher');
@@ -87,8 +75,3 @@ Route::get('/logout', function(){
    Auth::logout();
    return Redirect::to('login');
 });
-=======
-Route::post('/loginUser','LoginController@login');
-Route::post('/provideAttendance','attendanceController@attendNum');
-Route::post('/deleteToken','LoginController@delete');
->>>>>>> bef34bab95266233d4c78668cc80eaae6cf43d04
