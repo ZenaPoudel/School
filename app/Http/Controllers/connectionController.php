@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 
 class connectionController extends Controller
 {
@@ -24,5 +25,7 @@ class connectionController extends Controller
 			return $response;
 
 	}
+
+	
 
 }

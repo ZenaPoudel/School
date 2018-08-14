@@ -12,6 +12,11 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+<<<<<<< HEAD
         
+=======
+
+        '/showStudent', '/viewClassSchedule','/loginUser','/provideAttendance', '/viewClassResult','/viewStudentMarks','/deleteToken','/addAttendance'
+>>>>>>> bef34bab95266233d4c78668cc80eaae6cf43d04
     ];
 }

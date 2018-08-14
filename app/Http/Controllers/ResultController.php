@@ -70,11 +70,11 @@ class ResultController extends Controller
             }
              $Percentage= ($ObtainMarks/$GrandTotal)*100;
         }
-        $std['Percentage']=$Percentage;
+        $std['Percentage']=$Percentage.'';
        // dd($ObtainMarks);
     //  $response = array_prepend($response, $std);
         }
-      return $response;
+      return array('student_list'=>$response);
     }
      public function marks(Request $request)
     {
@@ -86,6 +86,6 @@ class ResultController extends Controller
             $Subject= Subject::where(['id'=>$sub_id])->first(['sub_name']);
             $mark['subject']=$Subject->sub_name;
         }
-        return $response;
+        return array('marks_list'=>$response);
     }
 }

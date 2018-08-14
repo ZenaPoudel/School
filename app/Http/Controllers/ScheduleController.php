@@ -36,6 +36,7 @@ class ScheduleController extends Controller
     	//return($schedule->subjects);
     	 $response=array();
     	  $days=array();
+
     	 $schedules=array();
     	 $days=Schedule::select('day')->where('class_id',$request->post('class_id'))->where('section_id', $request->post('section_id'))->distinct('day')->get();
     	 $response['response']=$days;
